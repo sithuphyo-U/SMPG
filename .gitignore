@@ -1,0 +1,16 @@
+NY.Framework.Commons/bin/
+NY.Framework.Commons/obj/
+NY.Framework.Model/bin/
+NY.Framework.Model/obj/
+NY.Framework.Data/bin/
+NY.Framework.Data/obj/
+NY.Framework.Application/bin/
+NY.Framework.Application/obj/
+Web/bin/
+Web/obj/
+DXCWeb/bin/
+DXCWeb/obj/
+*.user
+*.suo
+*.vs
+Web/Properties/PublishProfiles/FolderProfile.pubxml
