@@ -158,7 +158,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseKestrel(opt =>
 {
-    opt.ListenAnyIP(8080);
+    opt.ListenAnyIP(5084);
 });
 
 ////sql server
