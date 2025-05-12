@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "ID73Te6VxoKyeAEA1pPTOGPh8jG6Pw38v4YsbIh9c1U=",
+  "Hash": "8wl/87QzeD9enc8y5TudUyiWZPmUWNkCxtfWI5nbRSg=",
   "Source": "DIS.Web",
   "BasePath": "_content/DIS.Web",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

@@ -11,3 +11,16 @@ C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.Infrastruture\obj\Debug\net
 C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.Infrastruture\obj\Debug\net8.0\refint\DIS.Infrastruture.dll
 C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.pdb
 C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.Infrastruture\obj\Debug\net8.0\ref\DIS.Infrastruture.dll
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.deps.json
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.dll
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.pdb
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.csproj.AssemblyReference.cache
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.GeneratedMSBuildEditorConfig.editorconfig
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.AssemblyInfoInputs.cache
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.AssemblyInfo.cs
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.csproj.CoreCompileInputs.cache
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.sourcelink.json
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.dll
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\refint\DIS.Infrastruture.dll
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.pdb
+D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\ref\DIS.Infrastruture.dll
