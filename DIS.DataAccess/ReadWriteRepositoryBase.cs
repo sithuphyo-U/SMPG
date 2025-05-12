@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMS.DataAccess
+namespace DIS.DataAccess
 {
     public class ReadWriteRepositoryBase<TEntity> : IReadWriteRepositoryBase<TEntity> where TEntity : BaseEntity
     {
