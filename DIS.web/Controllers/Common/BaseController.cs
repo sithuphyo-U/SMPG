@@ -12,7 +12,8 @@ using System.Text;
 
 namespace DIS.Web.Controllers.Common
 {
-    public abstract class BaseController : Controller
+    public abstract class BaseController : Microsoft.AspNetCore.Mvc.Controller
+
     {
 
         protected Logger logger;
@@ -92,63 +93,63 @@ namespace DIS.Web.Controllers.Common
                 }
                 return id;
             }
-            //protected void AuditLog(string controller, string table, string action)
-            //{
-            //    try
-            //    {
-            //        Task task = Task.Run(() =>
-            //        {
-            //            try
-            //            {
-            //                var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
-            //                Log log = new Log();
-            //                log.user_id = GetLoggedInUserId();
-            //                log.program_code = controller;
-            //                log.action = action;
-            //                log.timeaccessed = DateTime.Now;
-            //                log.deleted = false;
-            //                log.created_date = DateTime.Now;
-            //                using (var context = new AuditDbContext())
-            //                {
-            //                    context.Set<Log>().Add(log);
-            //                    context.Entry(log).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            //                    context.SaveChanges();
-            //                }
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //                logger.LogError(ex.Message);
-            //            }
+        //protected void AuditLog(string controller, string table, string action)
+        //{
+        //    try
+        //    {
+        //        Task task = Task.Run(() =>
+        //        {
+        //            try
+        //            {
+        //                var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+        //                Log log = new Log();
+        //                log.user_id = GetLoggedInUserId();
+        //                log.program_code = controller;
+        //                log.action = action;
+        //                log.timeaccessed = DateTime.Now;
+        //                log.deleted = false;
+        //                log.created_date = DateTime.Now;
+        //                using (var context = new AuditDbContext())
+        //                {
+        //                    context.Set<Log>().Add(log);
+        //                    context.Entry(log).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+        //                    context.SaveChanges();
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                logger.LogError(ex.Message);
+        //            }
 
-            //        });
-            //        task.Wait();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        logger.LogError(ex.Message);
-            //    }
-            //}
-          
-            //protected string CreateJWT(User user, string secret)
-            //{
-            //    var tokenHandler = new JwtSecurityTokenHandler();
-            //    var key = Encoding.ASCII.GetBytes(secret);
-            //    string id = user.id.ToString();
-            //    var tokenDescriptor = new SecurityTokenDescriptor
-            //    {
-            //        Subject = new ClaimsIdentity(new Claim[]
-            //        {
+        //        });
+        //        task.Wait();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.LogError(ex.Message);
+        //    }
+        //}
 
-            //        new Claim(ClaimTypes.Name, id),
-            //            // Add additional claims as needed
-            //        }),
-            //        Expires = DateTime.UtcNow.AddDays(1), // Token expiration time
-            //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            //    };
+        //protected string CreateJWT(User user, string secret)
+        //{
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var key = Encoding.ASCII.GetBytes(secret);
+        //    string id = user.id.ToString();
+        //    var tokenDescriptor = new SecurityTokenDescriptor
+        //    {
+        //        Subject = new ClaimsIdentity(new Claim[]
+        //        {
 
-            //    var token = tokenHandler.CreateToken(tokenDescriptor);
-            //    return tokenHandler.WriteToken(token);
-            //}
-        }
+        //        new Claim(ClaimTypes.Name, id),
+        //            // Add additional claims as needed
+        //        }),
+        //        Expires = DateTime.UtcNow.AddDays(1), // Token expiration time
+        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        //    };
+
+        //    var token = tokenHandler.CreateToken(tokenDescriptor);
+        //    return tokenHandler.WriteToken(token);
+        //}
+    }
     }
 

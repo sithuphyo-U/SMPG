@@ -1,6 +1,9 @@
 ﻿using DIS.DataAccess.Entity;
 using DIS.DataAccess.Interfaces;
 using DIS.Infrastructure.Utilities;
+using DIS.Web.Controllers.Common;
+using DIS.Web.Mappers;
+using DIS.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,7 +70,7 @@ namespace DIS.Web.Controller
                         result = _roleRepo.Save(data);
                         if (result.success)
                         {
-                            AuditLog(nameof(RoleController), nameof(Role), Constants.UpdateAction);
+                            //AuditLog(nameof(RoleController), nameof(Role), Constants.UpdateAction);
                         }
                     }
                     else
@@ -85,7 +88,7 @@ namespace DIS.Web.Controller
                         result = _roleRepo.Save(data);
                         if (result.success)
                         {
-                            AuditLog(nameof(RoleController), nameof(Role), Constants.CreateAction);
+                            //AuditLog(nameof(RoleController), nameof(Role), Constants.CreateAction);
                         }
                     }
                     else
@@ -131,7 +134,7 @@ namespace DIS.Web.Controller
                     result = _roleRepo.Remove(data);
                     if (result.success)
                     {
-                        AuditLog(nameof(RoleController), nameof(Role), Constants.DeleteAction);
+                        //AuditLog(nameof(RoleController), nameof(Role), Constants.DeleteAction);
                     }
                 }
             }
