@@ -185,8 +185,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
-        Title = "Document Management System",
-        Version = "v1",
+        Title = "Disaster Information System",
+        
     });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -239,7 +239,7 @@ builder.Services.AddCors(options =>
 });
 builder.Logging.AddLog4Net();
 builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\Keys"))
-    .SetApplicationName("DMS.Web");
+    .SetApplicationName("DIS.Web");
 var app = builder.Build();
 
 // Configure the swagger page 
