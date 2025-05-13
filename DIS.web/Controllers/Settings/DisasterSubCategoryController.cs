@@ -2,9 +2,11 @@
 using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
+using DMS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DIS.Web.Controllers.Settings
@@ -53,7 +55,8 @@ namespace DIS.Web.Controllers.Settings
         private DisasterSubCategoryViewModel GetRequestParameter()
         {
             DisasterSubCategoryViewModel vm = new DisasterSubCategoryViewModel();
-            vm.name = Request.Query["name"].ToString();
+            vm.name = GetRequestParameter<string>("search[name]");
+            vm.category_id = GetRequestParameter<int>("search[category_id]");
             return vm;
         }
         [HttpPost]
@@ -84,8 +87,11 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     DisasterSubCategory? data = new DisasterSubCategory();
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = _repository.Save(data);
+                    if (!isDuplicate(data, vm))
+                    {
+                        data = _mapper.MapViewModelToModel(data, vm);
+                        result = _repository.Save(data);
+                    }
 
                 }
 
@@ -169,6 +175,38 @@ namespace DIS.Web.Controllers.Settings
             return duplicate;
 
 
+        }
+        [HttpGet]
+        [Route("ExportExcel")]
+        public IActionResult ExportExcel()
+        {
+            PagedResult<DisasterSubCategoryViewModel> list = GetAllData();
+            const string contentType = "application/octet-stream";
+            HttpContext.Response.ContentType = contentType;
+            HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
+            NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
+            excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
+            excel.AddColumn("အမျိူးအစား", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("အမျိူးအစားခွဲ", typeof(string), NPOIExcelColumnWidth.M1);
+            int count = 0;
+            foreach (var item in list.data)
+            {
+                count++;
+                excel.AddRow();
+                excel.SetData(0,MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
+                excel.SetData(1,item.category_name);
+                excel.SetData(2, item.name);
+                
+
+
+            }
+            byte[] bytes = excel.Generate();
+            var fileContentResult = new FileContentResult(bytes, contentType)
+            {
+                FileDownloadName = "Excel.xls"
+            };
+            return fileContentResult;
         }
     }
 }

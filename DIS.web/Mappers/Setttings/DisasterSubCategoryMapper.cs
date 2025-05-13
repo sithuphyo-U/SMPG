@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 
 namespace DIS.Web.Mappers.Setttings
@@ -8,9 +9,13 @@ namespace DIS.Web.Mappers.Setttings
     {
         public QueryOptions<DisasterSubCategory> PrepareQueryOptionForRepository(QueryOptions<DisasterSubCategory> options, DisasterSubCategoryViewModel vm)
         {
+            if (vm.category_id > 0)
+            {
+                options.FilterBy = ( x => x.disaster_category_id == vm.category_id );
+            }
             if (!string.IsNullOrEmpty(vm.name))
             {
-                options.FilterBy = (x => x.name.Contains(vm.name));
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
             }
             if (options.SortColumnsName != null)
             {

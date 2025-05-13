@@ -54,7 +54,8 @@ namespace DIS.Web.Controllers.Settings
         private DisasterCategoryViewModel GetRequestParameter()
         {
             DisasterCategoryViewModel vm = new DisasterCategoryViewModel();
-            vm.name = Request.Query["name"].ToString();
+            vm.name = Request.Query["search[name]"].ToString();
+
             return vm;
         }
 
@@ -86,8 +87,15 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     DisasterCategory? data = new DisasterCategory();
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = _repository.Save(data);
+                    if (!isDuplicate(data, vm))
+                    {
+                        data = _mapper.MapViewModelToModel(data, vm);
+                        result = _repository.Save(data);
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
 
                 }
 
