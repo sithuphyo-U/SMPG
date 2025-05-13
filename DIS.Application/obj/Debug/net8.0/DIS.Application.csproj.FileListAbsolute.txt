@@ -34,3 +34,21 @@ D:\2025\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.dll
 D:\2025\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\refint\DIS.Application.dll
 D:\2025\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.pdb
 D:\2025\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\ref\DIS.Application.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.Application.deps.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.Application.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.Application.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.DataAccess.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.DataAccess.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\bin\Debug\net8.0\DIS.Infrastruture.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.csproj.AssemblyReference.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.AssemblyInfoInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.AssemblyInfo.cs
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.csproj.CoreCompileInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.sourcelink.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Appl.BFA5575F.Up2Date
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\refint\DIS.Application.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\DIS.Application.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\obj\Debug\net8.0\ref\DIS.Application.dll

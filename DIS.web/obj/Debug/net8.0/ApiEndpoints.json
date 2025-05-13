@@ -1,1 +1,176 @@
-[]
+[
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "Get",
+    "RelativePath": "api/CountryType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "Delete",
+    "RelativePath": "api/CountryType/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "GetById",
+    "RelativePath": "api/CountryType/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/CountryType/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.CountryTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterCategoryController",
+    "Method": "Get",
+    "RelativePath": "api/DisasterCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterCategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/DisasterCategory/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterCategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/DisasterCategory/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterCategoryController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/DisasterCategory/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.DisasterCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controller.RoleController",
+    "Method": "Get",
+    "RelativePath": "api/Role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controller.RoleController",
+    "Method": "Delete",
+    "RelativePath": "api/Role/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controller.RoleController",
+    "Method": "GetById",
+    "RelativePath": "api/Role/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controller.RoleController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/Role/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.RoleViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

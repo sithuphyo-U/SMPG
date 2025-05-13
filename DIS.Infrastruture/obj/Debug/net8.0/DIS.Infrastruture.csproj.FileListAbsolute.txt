@@ -24,3 +24,16 @@ D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.dll
 D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\refint\DIS.Infrastruture.dll
 D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.pdb
 D:\2025\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\ref\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.deps.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\bin\Debug\net8.0\DIS.Infrastruture.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.csproj.AssemblyReference.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.GeneratedMSBuildEditorConfig.editorconfig
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.AssemblyInfoInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.AssemblyInfo.cs
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.csproj.CoreCompileInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.sourcelink.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\refint\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\DIS.Infrastruture.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Infrastruture\obj\Debug\net8.0\ref\DIS.Infrastruture.dll

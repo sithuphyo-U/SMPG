@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\2025\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {}
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {}
   },
   "projects": {
-    "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
         "projectName": "DIS.Application",
-        "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
-        "packagesPath": "C:\\Users\\zuzuz\\.nuget\\packages\\",
-        "outputPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\obj\\",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zuzuz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,18 +26,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
               },
-              "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
               }
             }
           }
@@ -51,7 +50,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -78,24 +78,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
         "projectName": "DIS.DataAccess",
-        "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\zuzuz\\.nuget\\packages\\",
-        "outputPath": "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\obj\\",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zuzuz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -104,15 +104,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
               }
             }
           }
@@ -126,7 +125,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -167,24 +167,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
         "projectName": "DIS.Infrastruture",
-        "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
-        "packagesPath": "C:\\Users\\zuzuz\\.nuget\\packages\\",
-        "outputPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\obj\\",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zuzuz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -193,7 +193,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -211,7 +210,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -266,24 +266,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\2025\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2025\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
         "projectName": "DIS.Web",
-        "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
-        "packagesPath": "C:\\Users\\zuzuz\\.nuget\\packages\\",
-        "outputPath": "D:\\2025\\DIS\\DIS_BE\\DIS.web\\obj\\",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zuzuz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -292,21 +292,20 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj"
               },
-              "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
               },
-              "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
-                "projectPath": "D:\\2025\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
               }
             }
           }
@@ -320,7 +319,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -358,7 +358,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
