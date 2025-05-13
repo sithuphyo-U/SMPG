@@ -10,5 +10,6 @@ namespace DIS.DataAccess.Interfaces.Settings
 {
     public interface IDisasterCategoryRepository : IReadWriteRepositoryBase<DisasterCategory>
     {
+        DisasterCategory? FindByName(string name);
     }
 }
