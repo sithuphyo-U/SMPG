@@ -11,7 +11,7 @@ namespace DIS.Web.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   
     public class RoleController : BaseController
     {
         IRoleRepository _roleRepo;
