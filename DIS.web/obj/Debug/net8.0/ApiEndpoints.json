@@ -1,5 +1,63 @@
 [
   {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "Get",
+    "RelativePath": "api/Country",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "Delete",
+    "RelativePath": "api/Country/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "GetById",
+    "RelativePath": "api/Country/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/Country/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.CountryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
     "Method": "Get",
     "RelativePath": "api/CountryType",
@@ -116,6 +174,224 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+    "Method": "Get",
+    "RelativePath": "api/DisasterSubCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/DisasterSubCategory/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/DisasterSubCategory/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/DisasterSubCategory/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.DisasterSubCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "Get",
+    "RelativePath": "api/District",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "Delete",
+    "RelativePath": "api/District/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "GetById",
+    "RelativePath": "api/District/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/District/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.DistrictViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetCountryList",
+    "RelativePath": "api/DropDown/GetCountryList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetCountryTypeList",
+    "RelativePath": "api/DropDown/GetCountryTypeList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetDisasterCategoryList",
+    "RelativePath": "api/DropDown/GetDisasterCategoryList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetDistrictList",
+    "RelativePath": "api/DropDown/GetDistrictList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetStateDivisionList",
+    "RelativePath": "api/DropDown/GetStateDivisionList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetTownshipList",
+    "RelativePath": "api/DropDown/GetTownshipList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "Get",
+    "RelativePath": "api/ProgramCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "GetByRole",
+    "RelativePath": "api/ProgramCode/get_by_role_id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "SavePermission",
+    "RelativePath": "api/ProgramCode/save_permission",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vmList",
+        "Type": "System.Collections.Generic.List\u00601[[DIS.Web.ViewModels.PermissionViewModel, DIS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DIS.Web.Controller.RoleController",
     "Method": "Get",
     "RelativePath": "api/Role",
@@ -168,6 +444,122 @@
       {
         "Name": "vm",
         "Type": "DIS.Web.ViewModels.RoleViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "Get",
+    "RelativePath": "api/StateDivision",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "Delete",
+    "RelativePath": "api/StateDivision/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "GetById",
+    "RelativePath": "api/StateDivision/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/StateDivision/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.StateDivisionViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "Get",
+    "RelativePath": "api/Township",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "Delete",
+    "RelativePath": "api/Township/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "GetById",
+    "RelativePath": "api/Township/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/Township/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.TownshipViewModel",
         "IsRequired": true
       }
     ],

@@ -12,5 +12,6 @@ namespace DIS.DataAccess.Entity.Settings
     public class CountryType :BaseEntity
     {
         public string? name {  get; set; } = string.Empty;
+
     }
 }
