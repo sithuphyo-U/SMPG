@@ -1,8 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
-using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Web.Controllers.Common;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace DIS.Web.Controllers.DropDown

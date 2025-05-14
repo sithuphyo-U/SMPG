@@ -16,7 +16,7 @@ namespace DIS.DataAccess.Repositories.Settings
         }
         public DisasterCategory? FindByName(string name)
         {
-            return CustomQuery().Where(x=>x.name == name && x.deleted == false).FirstOrDefault();
+            return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
     }
 }
