@@ -86,6 +86,7 @@ namespace DIS.Web.Controllers.Settings
                 }
                 else
                 {
+                    //comment
                     DisasterSubCategory? data = new DisasterSubCategory();
                     if (!isDuplicate(data, vm))
                     {
