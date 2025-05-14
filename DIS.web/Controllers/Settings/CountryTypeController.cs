@@ -50,9 +50,11 @@ namespace DIS.Web.Controllers.Settings
         private CountryTypeViewModel GetRequestParameter()
         {
             CountryTypeViewModel vm = new CountryTypeViewModel();
-            vm.name = Request.Query["name"].ToString();
+            vm.name = Request.Query["search[name]"].ToString();
+
             return vm;
         }
+
 
         [HttpPost]
         [Route("SaveOrUpdate")]

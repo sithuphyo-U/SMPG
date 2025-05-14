@@ -1,14 +1,15 @@
-﻿using DIS.DataAccess;
+﻿using Azure.Core;
+using DIS.DataAccess.Entity;
+using DIS.DataAccess;
 using DIS.Infrastructure.Common;
-using DIS.Infrastructure.Enumerations;
-using DIS.Infrastructure.Logging;
 using DIS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using NPOI.SS.Formula.Functions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using DIS.Infrastructure.Enumerations;
+using DIS.Infrastructure.Logging;
 
 namespace DIS.Web.Controllers.Common
 {
@@ -93,42 +94,42 @@ namespace DIS.Web.Controllers.Common
                 }
                 return id;
             }
-        //protected void AuditLog(string controller, string table, string action)
-        //{
-        //    try
-        //    {
-        //        Task task = Task.Run(() =>
-        //        {
-        //            try
-        //            {
-        //                var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
-        //                Log log = new Log();
-        //                log.user_id = GetLoggedInUserId();
-        //                log.program_code = controller;
-        //                log.action = action;
-        //                log.timeaccessed = DateTime.Now;
-        //                log.deleted = false;
-        //                log.created_date = DateTime.Now;
-        //                using (var context = new AuditDbContext())
-        //                {
-        //                    context.Set<Log>().Add(log);
-        //                    context.Entry(log).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-        //                    context.SaveChanges();
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                logger.LogError(ex.Message);
-        //            }
+        protected void AuditLog(string controller, string table, string action)
+        {
+            try
+            {
+                Task task = Task.Run(() =>
+                {
+                    try
+                    {
+                        var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+                        Log log = new Log();
+                        log.user_id = GetLoggedInUserId();
+                        log.program_code = controller;
+                        log.action = action;
+                        log.timeaccessed = DateTime.Now;
+                        log.deleted = false;
+                        log.created_date = DateTime.Now;
+                        using (var context = new AuditDbContext())
+                        {
+                            context.Set<Log>().Add(log);
+                            context.Entry(log).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex.Message);
+                    }
 
-        //        });
-        //        task.Wait();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex.Message);
-        //    }
-        //}
+                });
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+        }
 
         //protected string CreateJWT(User user, string secret)
         //{
