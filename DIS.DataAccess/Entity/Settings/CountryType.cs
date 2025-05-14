@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DIS.DataAccess.Entity
+namespace DIS.DataAccess.Entity.Settings
 {
-    [Table("Role")]
-    public class Role : BaseEntity
+    [Table("country_type")]
+    public class CountryType :BaseEntity
     {
-        public string? name { get; set; }
-        public string? description { get; set; }
-       
+        public string? name {  get; set; } = string.Empty;
+
     }
 }
