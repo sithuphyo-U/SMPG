@@ -1,4 +1,6 @@
-﻿using DIS.DataAccess.Entity.Settings;
+﻿using DIS.DataAccess.Entity;
+using DIS.DataAccess.Entity.Settings;
+using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Web.Controllers.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +18,9 @@ namespace DIS.Web.Controllers.DropDown
         IStateDivisionRepository stateDivisionRepository;
         IDistrictRepository districtRepository;
         ITownshipRepository townshipRepository;
+        IRoleRepository _roleRepo;
 
-        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository)
+        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IRoleRepository roleRepository)
 
             : base(typeof(DropDownController))
         {
@@ -27,6 +30,7 @@ namespace DIS.Web.Controllers.DropDown
             stateDivisionRepository = stateDivisionRepository;
             districtRepository = districtRepository;
             townshipRepository = townshipRepository;
+            _roleRepo = roleRepository;
         }
 
         [HttpGet]
@@ -130,6 +134,22 @@ namespace DIS.Web.Controllers.DropDown
 
             }
             return Json(townshiplist);
+        }
+        [HttpGet]
+        [Route("GetRoleList")]
+
+        public JsonResult GetRoleList()
+        {
+            List<Role> rolelist = new List<Role>();
+            try
+            {
+                rolelist = _roleRepo.Get();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(rolelist);
         }
 
     }
