@@ -5,7 +5,6 @@ using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using NPOI.SS.Formula.Functions;
 using System.Linq.Expressions;
 
@@ -24,6 +23,7 @@ namespace DIS.Web.Controllers.Settings
             _repository = repository;
             _mapper = new DisasterCategoryMapper();
         }
+
         [HttpGet]
         public JsonResult Get()
         {
@@ -59,6 +59,7 @@ namespace DIS.Web.Controllers.Settings
             return vm;
         }
 
+
         [HttpPost]
         [Route("SaveOrUpdate")]
         public IActionResult SaveOrUpdate(DisasterCategoryViewModel vm)
@@ -75,7 +76,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
-
+                            //AuditLog(nameof(PositionController), nameof(Position), Constants.UpdateAction);
                         }
                     }
                     else
@@ -109,6 +110,22 @@ namespace DIS.Web.Controllers.Settings
             }
             return Json(result);
         }
+        [HttpGet]
+        [Route("getbyid/")]
+        public JsonResult GetById(int id)
+        {
+            DisasterCategoryViewModel vm = new DisasterCategoryViewModel();
+            try
+            {
+                DisasterCategory? data = _repository.Get(id);
+                vm = _mapper.MapModelToViewModel(data, vm);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+            return Json(vm);
+        }
         [HttpDelete]
         [Route("delete/")]
         public JsonResult Delete(int id)
@@ -125,35 +142,19 @@ namespace DIS.Web.Controllers.Settings
 
                     }
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
             return Json(result);
         }
-        [HttpGet]
-        [Route("getbyid/")]
-        public JsonResult GetById(int id)
-        {
-            DisasterCategoryViewModel vm = new DisasterCategoryViewModel();
-            try
-            {
-                DisasterCategory? data = _repository.Get(id);
-                vm = _mapper.MapModelToViewModel(data, vm);
-            }
-            catch(Exception ex)
-            {
-                logger.LogError(ex.Message);
-            }
-            return Json(vm);
-        }
-        
-        protected bool isDuplicate(DisasterCategory data,DisasterCategoryViewModel vm)
+        protected bool isDuplicate(DisasterCategory data, DisasterCategoryViewModel vm)
         {
             bool duplicate = false;
             if (data.id > 0)
             {
-                if(vm.name == data.name)
+                if (vm.name == data.name)
                 {
                     duplicate = false;
 
@@ -161,7 +162,7 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     DisasterCategory? dc = _repository.FindByName(vm.name);
-                    if(dc!=null)
+                    if (dc != null)
                     {
                         duplicate = true;
                     }
@@ -170,7 +171,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 DisasterCategory? dc = _repository.FindByName(vm.name);
-                if(dc!=null)
+                if (dc != null)
                 {
                     duplicate = true;
                 }
@@ -179,6 +180,5 @@ namespace DIS.Web.Controllers.Settings
 
 
         }
-
     }
 }

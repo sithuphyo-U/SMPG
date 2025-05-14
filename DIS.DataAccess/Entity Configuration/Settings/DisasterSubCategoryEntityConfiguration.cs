@@ -1,6 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace DIS.DataAccess.Entity_Configuration.Settings
     {
         public void Configure(EntityTypeBuilder<DisasterSubCategory> builder)
         {
-            
+
         }
     }
 }
