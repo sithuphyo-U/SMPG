@@ -1,4 +1,6 @@
-﻿using DIS.DataAccess.Entity.Settings;
+﻿using DIS.DataAccess.Entity;
+using DIS.DataAccess.Entity.Settings;
+using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Web.Controllers.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +13,29 @@ namespace DIS.Web.Controllers.DropDown
     public class DropDownController : BaseController
     {
         IDisasterCategoryRepository _disasterCategoryRepository;
+        ICountryTypeRepository countryTypeRepository;
+        ICountryRepository countryRepository;
+        IStateDivisionRepository stateDivisionRepository;
+        IDistrictRepository districtRepository;
+        ITownshipRepository townshipRepository;
+        IRoleRepository _roleRepo;
         ICountryTypeRepository _countryTypeRepository;
         ICountryRepository _countryRepository;
         IStateDivisionRepository _stateDivisionRepository;
         IDistrictRepository _districtRepository;
         ITownshipRepository _townshipRepository;
 
-        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository)
+        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IRoleRepository roleRepository)
 
             : base(typeof(DropDownController))
         {
             _disasterCategoryRepository = disasterCategoryRepository;
+            countryTypeRepository = countryTypeRepository;
+          countryRepository = countryRepository;
+            stateDivisionRepository = stateDivisionRepository;
+            districtRepository = districtRepository;
+            townshipRepository = townshipRepository;
+            _roleRepo = roleRepository;
             _countryTypeRepository = countryTypeRepository;
           _countryRepository = countryRepository;
             _stateDivisionRepository = stateDivisionRepository;
@@ -130,6 +144,22 @@ namespace DIS.Web.Controllers.DropDown
 
             }
             return Json(townshiplist);
+        }
+        [HttpGet]
+        [Route("GetRoleList")]
+
+        public JsonResult GetRoleList()
+        {
+            List<Role> rolelist = new List<Role>();
+            try
+            {
+                rolelist = _roleRepo.Get();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(rolelist);
         }
 
     }
