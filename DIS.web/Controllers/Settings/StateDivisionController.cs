@@ -17,10 +17,11 @@ namespace DIS.Web.Controllers.Settings
     public class StateDivisionController : BaseController
     {
         IStateDivisionRepository _repository;
+        
         StateDivisionMapper _mapper;
-        public StateDivisionController(IStateDivisionRepository _repository) : base(typeof(StateDivisionController))
+        public StateDivisionController(IStateDivisionRepository repository) : base(typeof(StateDivisionController))
         {
-            _repository = _repository;
+            _repository = repository;
             _mapper = new StateDivisionMapper();
         }
         [HttpGet]
@@ -53,9 +54,11 @@ namespace DIS.Web.Controllers.Settings
         private StateDivisionViewModel GetRequestParameter()
         {
             StateDivisionViewModel vm = new StateDivisionViewModel();
-            vm.name = Request.Query["name"].ToString();
+            vm.name = Request.Query["search[name]"].ToString();
+
             return vm;
         }
+
         [HttpPost]
         [Route("SaveOrUpdate")]
         public IActionResult SaveOrUpdate(StateDivisionViewModel vm)
