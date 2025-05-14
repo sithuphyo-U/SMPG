@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\DIS.Web.props" />
-</Project>
