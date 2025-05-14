@@ -86,11 +86,16 @@ namespace DIS.Web.Controllers.Settings
                 }
                 else
                 {
+                    //comment
                     DisasterSubCategory? data = new DisasterSubCategory();
                     if (!isDuplicate(data, vm))
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
                     }
 
                 }
