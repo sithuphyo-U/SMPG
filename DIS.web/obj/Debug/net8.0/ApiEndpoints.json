@@ -1,5 +1,124 @@
 [
   {
+<<<<<<< HEAD
+=======
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "Get",
+    "RelativePath": "api/Country",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "Delete",
+    "RelativePath": "api/Country/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "GetById",
+    "RelativePath": "api/Country/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/Country/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.CountryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "Get",
+    "RelativePath": "api/CountryType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "Delete",
+    "RelativePath": "api/CountryType/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "GetById",
+    "RelativePath": "api/CountryType/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.CountryTypeController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/CountryType/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.CountryTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "ContainingType": "DIS.Web.Controllers.Settings.DisasterCategoryController",
     "Method": "Get",
     "RelativePath": "api/DisasterCategory",
@@ -85,6 +204,7 @@
   },
   {
     "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+<<<<<<< HEAD
     "Method": "ExportExcel",
     "RelativePath": "api/DisasterSubCategory/ExportExcel",
     "HttpMethod": "GET",
@@ -95,6 +215,8 @@
   },
   {
     "ContainingType": "DIS.Web.Controllers.Settings.DisasterSubCategoryController",
+=======
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "Method": "GetById",
     "RelativePath": "api/DisasterSubCategory/getbyid",
     "HttpMethod": "GET",
@@ -126,6 +248,87 @@
     "ReturnTypes": []
   },
   {
+<<<<<<< HEAD
+=======
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "Get",
+    "RelativePath": "api/District",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "Delete",
+    "RelativePath": "api/District/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "GetById",
+    "RelativePath": "api/District/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.DistrictController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/District/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.DistrictViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetCountryList",
+    "RelativePath": "api/DropDown/GetCountryList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetCountryTypeList",
+    "RelativePath": "api/DropDown/GetCountryTypeList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
     "Method": "GetDisasterCategoryList",
     "RelativePath": "api/DropDown/GetDisasterCategoryList",
@@ -136,6 +339,81 @@
     "ReturnTypes": []
   },
   {
+<<<<<<< HEAD
+=======
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetDistrictList",
+    "RelativePath": "api/DropDown/GetDistrictList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetStateDivisionList",
+    "RelativePath": "api/DropDown/GetStateDivisionList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.DropDown.DropDownController",
+    "Method": "GetTownshipList",
+    "RelativePath": "api/DropDown/GetTownshipList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "Get",
+    "RelativePath": "api/ProgramCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "GetByRole",
+    "RelativePath": "api/ProgramCode/get_by_role_id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.ProgramCodeController",
+    "Method": "SavePermission",
+    "RelativePath": "api/ProgramCode/save_permission",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vmList",
+        "Type": "System.Collections.Generic.List\u00601[[DIS.Web.ViewModels.PermissionViewModel, DIS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "ContainingType": "DIS.Web.Controller.RoleController",
     "Method": "Get",
     "RelativePath": "api/Role",
@@ -192,5 +470,124 @@
       }
     ],
     "ReturnTypes": []
+<<<<<<< HEAD
+=======
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "Get",
+    "RelativePath": "api/StateDivision",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "Delete",
+    "RelativePath": "api/StateDivision/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "GetById",
+    "RelativePath": "api/StateDivision/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.StateDivisionController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/StateDivision/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.StateDivisionViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "Get",
+    "RelativePath": "api/Township",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "Delete",
+    "RelativePath": "api/Township/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "GetById",
+    "RelativePath": "api/Township/getbyid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DIS.Web.Controllers.Settings.TownshipController",
+    "Method": "SaveOrUpdate",
+    "RelativePath": "api/Township/SaveOrUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vm",
+        "Type": "DIS.Web.ViewModels.TownshipViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
   }
 ]

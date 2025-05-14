@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.deps.json
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.runtimeconfig.json
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.dll
@@ -16,3 +17,59 @@ C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\ne
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.pdb
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.genruntimeconfig.cache
 C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\ref\DIS.DataAccess.dll
+=======
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.deps.json
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.runtimeconfig.json
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.dll
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.pdb
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.dll
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.pdb
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfo.cs
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.sourcelink.json
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.Data.9A0E3D8B.Up2Date
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.dll
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\refint\DIS.DataAccess.dll
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.pdb
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.genruntimeconfig.cache
+C:\Users\Acer\Desktop\Github\DIS.Backend\DIS.web\DIS.DataAccess\obj\Debug\net8.0\ref\DIS.DataAccess.dll
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.deps.json
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.runtimeconfig.json
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.dll
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.pdb
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.dll
+D:\2025\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.pdb
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.AssemblyReference.cache
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfoInputs.cache
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfo.cs
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.CoreCompileInputs.cache
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.sourcelink.json
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.Data.9A0E3D8B.Up2Date
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.dll
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\refint\DIS.DataAccess.dll
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.pdb
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.genruntimeconfig.cache
+D:\2025\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\ref\DIS.DataAccess.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.deps.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.runtimeconfig.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.DataAccess.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\bin\Debug\net8.0\DIS.Infrastruture.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.AssemblyReference.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfoInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.AssemblyInfo.cs
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.csproj.CoreCompileInputs.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.sourcelink.json
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.Data.9A0E3D8B.Up2Date
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\refint\DIS.DataAccess.dll
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.pdb
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\DIS.DataAccess.genruntimeconfig.cache
+C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.DataAccess\obj\Debug\net8.0\ref\DIS.DataAccess.dll
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478

@@ -4,6 +4,183 @@
     "title": "Disaster Information System"
   },
   "paths": {
+<<<<<<< HEAD
+=======
+    "/api/Country": {
+      "get": {
+        "tags": [
+          "Country"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Country/SaveOrUpdate": {
+      "post": {
+        "tags": [
+          "Country"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Country/delete": {
+      "delete": {
+        "tags": [
+          "Country"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Country/getbyid": {
+      "get": {
+        "tags": [
+          "Country"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CountryType": {
+      "get": {
+        "tags": [
+          "CountryType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CountryType/SaveOrUpdate": {
+      "post": {
+        "tags": [
+          "CountryType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryTypeViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryTypeViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryTypeViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CountryType/delete": {
+      "delete": {
+        "tags": [
+          "CountryType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CountryType/getbyid": {
+      "get": {
+        "tags": [
+          "CountryType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "/api/DisasterCategory": {
       "get": {
         "tags": [
@@ -47,8 +224,13 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/DisasterCategory/getbyid": {
       "get": {
+=======
+    "/api/DisasterCategory/delete": {
+      "delete": {
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         "tags": [
           "DisasterCategory"
         ],
@@ -69,8 +251,13 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/DisasterCategory/delete": {
       "delete": {
+=======
+    "/api/DisasterCategory/getbyid": {
+      "get": {
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         "tags": [
           "DisasterCategory"
         ],
@@ -178,10 +365,92 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/DisasterSubCategory/ExportExcel": {
       "get": {
         "tags": [
           "DisasterSubCategory"
+=======
+    "/api/District": {
+      "get": {
+        "tags": [
+          "District"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/District/SaveOrUpdate": {
+      "post": {
+        "tags": [
+          "District"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistrictViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistrictViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistrictViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/District/delete": {
+      "delete": {
+        "tags": [
+          "District"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/District/getbyid": {
+      "get": {
+        "tags": [
+          "District"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         ],
         "responses": {
           "200": {
@@ -202,6 +471,143 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "/api/DropDown/GetCountryTypeList": {
+      "get": {
+        "tags": [
+          "DropDown"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DropDown/GetCountryList": {
+      "get": {
+        "tags": [
+          "DropDown"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DropDown/GetStateDivisionList": {
+      "get": {
+        "tags": [
+          "DropDown"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DropDown/GetDistrictList": {
+      "get": {
+        "tags": [
+          "DropDown"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DropDown/GetTownshipList": {
+      "get": {
+        "tags": [
+          "DropDown"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProgramCode": {
+      "get": {
+        "tags": [
+          "ProgramCode"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProgramCode/get_by_role_id": {
+      "get": {
+        "tags": [
+          "ProgramCode"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProgramCode/save_permission": {
+      "post": {
+        "tags": [
+          "ProgramCode"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PermissionViewModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PermissionViewModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PermissionViewModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     "/api/Role": {
       "get": {
         "tags": [
@@ -288,10 +694,226 @@
           }
         }
       }
+<<<<<<< HEAD
+=======
+    },
+    "/api/StateDivision": {
+      "get": {
+        "tags": [
+          "StateDivision"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StateDivision/SaveOrUpdate": {
+      "post": {
+        "tags": [
+          "StateDivision"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StateDivisionViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StateDivisionViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StateDivisionViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StateDivision/delete": {
+      "delete": {
+        "tags": [
+          "StateDivision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StateDivision/getbyid": {
+      "get": {
+        "tags": [
+          "StateDivision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Township": {
+      "get": {
+        "tags": [
+          "Township"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Township/SaveOrUpdate": {
+      "post": {
+        "tags": [
+          "Township"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TownshipViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TownshipViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TownshipViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Township/delete": {
+      "delete": {
+        "tags": [
+          "Township"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Township/getbyid": {
+      "get": {
+        "tags": [
+          "Township"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
     }
   },
   "components": {
     "schemas": {
+<<<<<<< HEAD
+=======
+      "CountryTypeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CountryViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_type_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_type_name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
       "DisasterCategoryViewModel": {
         "type": "object",
         "properties": {
@@ -328,6 +950,87 @@
         },
         "additionalProperties": false
       },
+<<<<<<< HEAD
+=======
+      "DistrictViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_type_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_type_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "state_division_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "state_division_name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PermissionViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "program_code_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "program_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "role_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "role_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "read": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "write": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "delete": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
       "RoleViewModel": {
         "type": "object",
         "properties": {
@@ -345,6 +1048,85 @@
           }
         },
         "additionalProperties": false
+<<<<<<< HEAD
+=======
+      },
+      "StateDivisionViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_type_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_type_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TownshipViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_type_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_type_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "state_division_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "state_division_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "district_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "district_name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
       }
     },
     "securitySchemes": {

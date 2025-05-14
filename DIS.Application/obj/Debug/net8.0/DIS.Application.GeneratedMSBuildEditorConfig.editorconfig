@@ -8,7 +8,11 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DIS.Application
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Acer\Desktop\Github\DIS\DIS.Backend\DIS.web\DIS.Application\
+=======
+build_property.ProjectDir = C:\NWAY ZIN WIN\DIS\DIS_BE\DIS.Application\
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 8.0

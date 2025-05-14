@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.web\\DIS.Web.csproj": {}
   },
   "projects": {
@@ -19,6 +20,25 @@
         ],
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {}
+  },
+  "projects": {
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
+        "projectName": "DIS.Application",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,18 +47,29 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
               "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.DataAccess\\DIS.DataAccess.csproj": {
                 "projectPath": "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.DataAccess\\DIS.DataAccess.csproj"
               },
               "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
                 "projectPath": "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+=======
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
+              },
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
               }
             }
           }
@@ -51,7 +82,11 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "all"
+=======
+          "auditMode": "direct"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -80,6 +115,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
@@ -99,6 +135,26 @@
         ],
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
+        "projectName": "DIS.DataAccess",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -107,15 +163,23 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
               "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
                 "projectPath": "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+=======
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
               }
             }
           }
@@ -128,7 +192,11 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "all"
+=======
+          "auditMode": "direct"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -171,6 +239,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
@@ -190,6 +259,26 @@
         ],
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
+        "projectName": "DIS.Infrastruture",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -198,7 +287,10 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -215,7 +307,11 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "all"
+=======
+          "auditMode": "direct"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -272,6 +368,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
@@ -291,6 +388,26 @@
         ],
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
+        "projectName": "DIS.Web",
+        "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\DIS.Web.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.web\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -299,13 +416,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
               "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Application\\DIS.Application.csproj": {
                 "projectPath": "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Application\\DIS.Application.csproj"
               },
@@ -314,6 +435,16 @@
               },
               "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
                 "projectPath": "C:\\Users\\Acer\\Desktop\\Github\\DIS\\DIS.Backend\\DIS.web\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+=======
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Application\\DIS.Application.csproj"
+              },
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.DataAccess\\DIS.DataAccess.csproj"
+              },
+              "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj": {
+                "projectPath": "C:\\NWAY ZIN WIN\\DIS\\DIS_BE\\DIS.Infrastruture\\DIS.Infrastruture.csproj"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
               }
             }
           }
@@ -326,7 +457,11 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "all"
+=======
+          "auditMode": "direct"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -366,7 +501,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+>>>>>>> c7151115d56062e9ca6ac6cf36b93e9dee4bd478
         }
       }
     }
