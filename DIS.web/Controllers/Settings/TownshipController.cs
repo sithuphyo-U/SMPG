@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
+using DIS.DataAccess.Repositories.Settings;
 using DIS.Infrastructure.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
@@ -49,9 +50,11 @@ namespace DIS.Web.Controllers.Settings
         private TownshipViewModel GetRequestParameter()
         {
             TownshipViewModel vm = new TownshipViewModel();
-            vm.name = Request.Query["name"].ToString();
+            vm.name = Request.Query["search[name]"].ToString();
+
             return vm;
         }
+
         [HttpPost]
         [Route("SaveOrUpdate")]
         public IActionResult SaveOrUpdate(TownshipViewModel vm)

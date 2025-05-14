@@ -19,6 +19,11 @@ namespace DIS.Web.Controllers.DropDown
         IDistrictRepository districtRepository;
         ITownshipRepository townshipRepository;
         IRoleRepository _roleRepo;
+        ICountryTypeRepository _countryTypeRepository;
+        ICountryRepository _countryRepository;
+        IStateDivisionRepository _stateDivisionRepository;
+        IDistrictRepository _districtRepository;
+        ITownshipRepository _townshipRepository;
 
         public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IRoleRepository roleRepository)
 
@@ -31,6 +36,11 @@ namespace DIS.Web.Controllers.DropDown
             districtRepository = districtRepository;
             townshipRepository = townshipRepository;
             _roleRepo = roleRepository;
+            _countryTypeRepository = countryTypeRepository;
+          _countryRepository = countryRepository;
+            _stateDivisionRepository = stateDivisionRepository;
+            _districtRepository = districtRepository;
+            _townshipRepository = townshipRepository;
         }
 
         [HttpGet]
@@ -59,7 +69,7 @@ namespace DIS.Web.Controllers.DropDown
             List<CountryType> countrytypelist = new List<CountryType>();
             try
             {
-                countrytypelist = countryTypeRepository.Get();
+                countrytypelist = _countryTypeRepository.Get();
             }
             catch (Exception ex)
             {
@@ -76,7 +86,7 @@ namespace DIS.Web.Controllers.DropDown
             List<Country> countrylist = new List<Country>();
             try
             {
-                countrylist = countryRepository.Get();
+                countrylist = _countryRepository.Get();
             }
             catch (Exception ex)
             {
@@ -93,7 +103,7 @@ namespace DIS.Web.Controllers.DropDown
             List<StateDivision> statedivisionlist = new List<StateDivision>();
             try
             {
-                statedivisionlist = stateDivisionRepository.Get();
+                statedivisionlist = _stateDivisionRepository.Get();
             }
             catch (Exception ex)
             {
@@ -110,7 +120,7 @@ namespace DIS.Web.Controllers.DropDown
             List<District> districtlist = new List<District>();
             try
             {
-                districtlist = districtRepository.Get();
+                districtlist = _districtRepository.Get();
             }
             catch (Exception ex)
             {
@@ -127,7 +137,7 @@ namespace DIS.Web.Controllers.DropDown
             List<Township> townshiplist = new List<Township>();
             try
             {
-                townshiplist = townshipRepository.Get();
+                townshiplist = _townshipRepository.Get();
             }
             catch (Exception ex)
             {
