@@ -92,6 +92,10 @@ namespace DIS.Web.Controllers.Settings
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                     }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
 
                 }
 
