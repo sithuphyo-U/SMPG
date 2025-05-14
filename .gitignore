@@ -14,3 +14,11 @@ DXCWeb/obj/
 *.suo
 *.vs
 Web/Properties/PublishProfiles/FolderProfile.pubxml
+DIS.web/bin/Debug/net8.0/DIS.DataAccess.dll
+DIS.web/bin/Debug/net8.0/DIS.DataAccess.dll
+DIS.web/bin/Debug/net8.0/DIS.DataAccess.pdb
+DIS.web/bin/Debug/net8.0/DIS.Infrastruture.dll
+DIS.web/bin/Debug/net8.0/DIS.Infrastruture.pdb
+DIS.web/bin/Debug/net8.0/DIS.Web.dll
+DIS.web/bin/Debug/net8.0/DIS.Web.exe
+DIS.web/bin/Debug/net8.0/DIS.Web.pdb
