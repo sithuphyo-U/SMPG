@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Entity
 {
-    [Table("role")]
+    [Table("Role")]
     public class Role : BaseEntity
     {
         public string? name { get; set; }
