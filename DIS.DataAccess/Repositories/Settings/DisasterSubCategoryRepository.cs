@@ -1,6 +1,5 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Repositories.Settings
 {
-    public class DisasterCategoryRepository : ReadWriteRepositoryBase<DisasterCategory>, IDisasterCategoryRepository
+    public class DisasterSubCategoryRepository : ReadWriteRepositoryBase<DisasterSubCategory>, IDisasterSubCategoryRepository
     {
-        public DisasterCategoryRepository(IDbContext context) : base(context)
+        public DisasterSubCategoryRepository(IDbContext context) : base(context)
         {
         }
-        public DisasterCategory? FindByName(string name)
+
+        public DisasterSubCategory? FindByName(string name)
         {
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
