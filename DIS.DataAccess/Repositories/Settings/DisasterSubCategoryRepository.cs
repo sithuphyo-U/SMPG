@@ -18,5 +18,10 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
+
+        public List<DisasterSubCategory>? GetSubCategorybyCategory(int id)
+        {
+            return CustomQuery().Where(x => x.disaster_category_id == id).ToList();
+        }
     }
 }
