@@ -13,6 +13,7 @@ namespace DIS.Web.Controllers.DropDown
     public class DropDownController : BaseController
     {
         IDisasterCategoryRepository _disasterCategoryRepository;
+        IDisasterSubCategoryRepository _subCategoryRepository;
         ICountryTypeRepository countryTypeRepository;
         ICountryRepository countryRepository;
         IStateDivisionRepository stateDivisionRepository;
@@ -25,11 +26,12 @@ namespace DIS.Web.Controllers.DropDown
         IDistrictRepository _districtRepository;
         ITownshipRepository _townshipRepository;
 
-        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IRoleRepository roleRepository)
+        public DropDownController(IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository subCategoryRepository, ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IRoleRepository roleRepository)
 
             : base(typeof(DropDownController))
         {
             _disasterCategoryRepository = disasterCategoryRepository;
+            _subCategoryRepository = subCategoryRepository;
             countryTypeRepository = countryTypeRepository;
           countryRepository = countryRepository;
             stateDivisionRepository = stateDivisionRepository;
@@ -160,6 +162,13 @@ namespace DIS.Web.Controllers.DropDown
 
             }
             return Json(rolelist);
+        }
+        [HttpGet]
+        [Route("GetSubCategoryById")]
+        public JsonResult GetSubCategoryById(int id)
+        {
+            List<DisasterSubCategory> subdata = _subCategoryRepository.GetSubCategorybyCategory(id);
+            return Json(subdata);
         }
 
     }
