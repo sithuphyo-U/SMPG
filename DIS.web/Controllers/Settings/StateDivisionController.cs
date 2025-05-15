@@ -194,14 +194,13 @@ namespace DIS.Web.Controllers.Settings
             int count = 0;
             foreach (var item in list.data)
             {
+
                 count++;
                 excel.AddRow();
                 excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
                 excel.SetData(1, item.country_type_name);
                 excel.SetData(2, item.country_name);
                 excel.SetData(3, item.name);
-
-
 
             }
             byte[] bytes = excel.Generate();
