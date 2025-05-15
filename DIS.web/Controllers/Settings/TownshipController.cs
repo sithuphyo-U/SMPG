@@ -50,8 +50,11 @@ namespace DIS.Web.Controllers.Settings
         private TownshipViewModel GetRequestParameter()
         {
             TownshipViewModel vm = new TownshipViewModel();
-            vm.name = Request.Query["search[name]"].ToString();
-
+            vm.name = GetRequestParameter<string>("search[name]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            vm.country_id = GetRequestParameter<int>("search[country_id]");
+            vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
+            vm.district_id = GetRequestParameter<int>("search[district_id]");
             return vm;
         }
 
