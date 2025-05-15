@@ -131,26 +131,26 @@ namespace DIS.Web.Controllers.Common
             }
         }
 
-        //protected string CreateJWT(User user, string secret)
-        //{
-        //    var tokenHandler = new JwtSecurityTokenHandler();
-        //    var key = Encoding.ASCII.GetBytes(secret);
-        //    string id = user.id.ToString();
-        //    var tokenDescriptor = new SecurityTokenDescriptor
-        //    {
-        //        Subject = new ClaimsIdentity(new Claim[]
-        //        {
+        protected string CreateJWT(User user, string secret)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+            string id = user.id.ToString();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
 
-        //        new Claim(ClaimTypes.Name, id),
-        //            // Add additional claims as needed
-        //        }),
-        //        Expires = DateTime.UtcNow.AddDays(1), // Token expiration time
-        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        //    };
+                new Claim(ClaimTypes.Name, id),
+                    // Add additional claims as needed
+                }),
+                Expires = DateTime.UtcNow.AddDays(1), // Token expiration time
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
 
-        //    var token = tokenHandler.CreateToken(tokenDescriptor);
-        //    return tokenHandler.WriteToken(token);
-        //}
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
     }
     }
 
