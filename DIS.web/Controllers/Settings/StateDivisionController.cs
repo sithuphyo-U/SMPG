@@ -54,8 +54,10 @@ namespace DIS.Web.Controllers.Settings
         private StateDivisionViewModel GetRequestParameter()
         {
             StateDivisionViewModel vm = new StateDivisionViewModel();
-            vm.name = Request.Query["search[name]"].ToString();
-
+            vm.name = GetRequestParameter<string>("search[name]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            vm.country_id = GetRequestParameter<int>("search[country_id]");
+          
             return vm;
         }
 

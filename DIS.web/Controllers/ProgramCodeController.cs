@@ -39,7 +39,9 @@ namespace DIS.Web.Controllers
                 logger.LogError(ex.Message);
             }
             return Json(vmList);
+
         }
+
 
         [HttpGet]
         [Route("get_by_role_id")]

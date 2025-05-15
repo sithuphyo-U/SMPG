@@ -51,8 +51,9 @@ namespace DIS.Web.Controllers.Settings
         private CountryViewModel GetRequestParameter()
         {
             CountryViewModel vm = new CountryViewModel();
-            vm.name = Request.Query["search[name]"].ToString();
-
+           
+            vm.name = GetRequestParameter<string>("search[name]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             return vm;
         }
 

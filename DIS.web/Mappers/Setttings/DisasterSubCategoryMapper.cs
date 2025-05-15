@@ -19,6 +19,8 @@ namespace DIS.Web.Mappers.Setttings
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
             }
+
+
             if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<DisasterSubCategory, object>>();

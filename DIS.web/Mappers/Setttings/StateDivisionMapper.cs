@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 
 namespace DIS.Web.Mappers.Setttings
@@ -8,16 +9,39 @@ namespace DIS.Web.Mappers.Setttings
     {
         public QueryOptions<StateDivision> PrepareQueryOptionForRepository(QueryOptions<StateDivision> options, StateDivisionViewModel vm)
         {
+            if (vm.country_type_id > 0)
+            {
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_type_id == vm.country_type_id);
+            }
+            if (vm.country_id > 0)
+            {
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_id == vm.country_id);
+            }
             if (!string.IsNullOrEmpty(vm.name))
             {
-                options.FilterBy = (x => x.name.Contains(vm.name));
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.name.Contains(vm.name));
             }
+
+
+
+
+
+
+
             if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<StateDivision, object>>();
                 if (options.SortColumnName == "name")
                 {
                     options.SortBy.Add((x => x.name));
+                }
+                else if (options.SortColumnName == "country_type_name")
+                {
+                    options.SortBy.Add((x => x.CountryType.name));
+                }
+                else if (options.SortColumnName == "country_name")
+                {
+                    options.SortBy.Add((x => x.Country.name));
                 }
                 else
                 {

@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 
 namespace DIS.Web.Mappers.Setttings
@@ -9,16 +10,27 @@ namespace DIS.Web.Mappers.Setttings
 
         public QueryOptions<Country> PrepareQueryOptionForRepository(QueryOptions<Country> options, CountryViewModel vm)
         {
+            if (vm.country_type_id > 0)
+            {
+                options.FilterBy = (x => x.country_type_id == vm.country_type_id);
+            }
             if (!string.IsNullOrEmpty(vm.name))
             {
-                options.FilterBy = (x => x.name.Contains(vm.name));
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
             }
+
+
+
             if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<Country, object>>();
                 if (options.SortColumnName == "name")
                 {
                     options.SortBy.Add((x => x.name));
+                }
+                else if (options.SortColumnName == "country_type_name")
+                {
+                    options.SortBy.Add((x => x.CountryType.name));
                 }
                 else
                 {
