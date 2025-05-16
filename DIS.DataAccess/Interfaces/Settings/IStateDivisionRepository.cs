@@ -11,5 +11,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     public interface IStateDivisionRepository : IReadWriteRepositoryBase<StateDivision>
     {
         StateDivision? FindByName(string name);
+         List<StateDivision>? GetStateDivisionbyCountry(int id);
     }
 }

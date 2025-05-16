@@ -18,5 +18,11 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
+
+
+        public List<Township>? GetTownshipByDistrict(int id)
+        {
+            return CustomQuery().Where(x => x.district_id == id).ToList();
+        }
     }
 }

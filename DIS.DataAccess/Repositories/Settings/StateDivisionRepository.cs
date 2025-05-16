@@ -18,5 +18,10 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
+
+        public List<StateDivision>? GetStateDivisionbyCountry(int id)
+        {
+            return CustomQuery().Where(x => x.country_id == id).ToList();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     public interface IDistrictRepository :IReadWriteRepositoryBase<District>
     {
         District? FindByName(string name);
+        List<District>? GetDistrictByStateDivision(int id);
     }
 }

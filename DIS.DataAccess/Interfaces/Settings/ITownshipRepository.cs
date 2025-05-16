@@ -11,5 +11,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     public interface ITownshipRepository :IReadWriteRepositoryBase<Township>
     {
         Township? FindByName(string name);
+        List<Township>? GetTownshipByDistrict(int id);
     }
 }

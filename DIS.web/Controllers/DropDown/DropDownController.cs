@@ -171,5 +171,43 @@ namespace DIS.Web.Controllers.DropDown
             return Json(subdata);
         }
 
+        [HttpGet]
+        [Route("GetCountryById")]
+        public JsonResult GetCountryById(int id)
+        {
+            List<Country> subdata = _countryRepository.GetCountrybyCountryType(id);
+            return Json(subdata);
+        }
+
+
+        [HttpGet]
+        [Route("GetStateDivisionById")]
+        public JsonResult GetStateDivisionById(int id)
+        {
+            List<StateDivision> subdata = _stateDivisionRepository.GetStateDivisionbyCountry(id);
+            return Json(subdata);
+        }
+
+
+        [HttpGet]
+        [Route("GetDistrictById")]
+        public JsonResult GetDistrictById(int id)
+        {
+            List<District> subdata = _districtRepository.GetDistrictByStateDivision(id);
+            return Json(subdata);
+        }
+
+
+        [HttpGet]
+        [Route("GetTownshipById")]
+        public JsonResult GetTownshipById(int id)
+        {
+            List<Township> subdata = _townshipRepository.GetTownshipByDistrict(id);
+            return Json(subdata);
+        }
+
+
+        
+
     }
 }

@@ -18,6 +18,9 @@ namespace DIS.DataAccess.Repositories.Settings
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
         }
 
-      
+        public List<Country>? GetCountrybyCountryType(int id)
+        {
+            return CustomQuery().Where(x => x.country_type_id == id).ToList();
+        }
     }
 }
