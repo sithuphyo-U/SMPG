@@ -90,9 +90,14 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     StateDivision? data = new StateDivision();
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = _repository.Save(data);
-
+                    if(!isDuplicate(data, vm))
+                   { data = _mapper.MapViewModelToModel(data, vm);
+                        result = _repository.Save(data);
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }

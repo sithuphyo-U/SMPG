@@ -1,31 +1,49 @@
-﻿using DIS.DataAccess.Entity.Settings;
+﻿using DIS.DataAccess.Entity;
+using DIS.DataAccess.Entity.Settings;
+using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
-using DIS.DataAccess.Repositories.Settings;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.Controllers.Common;
-using DIS.Web.Mappers.Setttings;
+using DIS.Web.Mappers;
 using DIS.Web.ViewModels;
 using DMS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DIS.Web.Controllers.Settings
+namespace DIS.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TownshipController : BaseController
+    public class DisasterInfoController : BaseController
     {
-        ITownshipRepository _repository;
-        TownshipMapper _mapper;
-        public TownshipController(ITownshipRepository townshipRepository) : base(typeof(TownshipController))
+        IDisasterInfoRepository _repository;
+        ICountryTypeRepository _countrytyperepo;
+        ICountryRepository _countryrepo;
+        IStateDivisionRepository _statedivisionrepo;
+        IDistrictRepository _districtrepo;
+        ITownshipRepository _townshiprepo;
+        IDisasterCategoryRepository _disastercategoryrepo;
+        IDisasterSubCategoryRepository _disastersubcategoryrepo;
+        DisasterInfoMapper _mapper;
+
+        public DisasterInfoController(ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository disasterSubCategoryRepository, IDisasterInfoRepository disasterInfoRepository) : base(typeof(DisasterInfoController))
         {
-            _repository = townshipRepository;
-            _mapper = new TownshipMapper();
+            _repository = disasterInfoRepository;
+            _countrytyperepo = countryTypeRepository;
+            _countryrepo = countryRepository;
+            _statedivisionrepo = stateDivisionRepository;
+            _districtrepo = districtRepository;
+            _townshiprepo = townshipRepository;
+            _disastercategoryrepo = disasterCategoryRepository;
+            _disastersubcategoryrepo = disasterSubCategoryRepository;
+            _mapper = new DisasterInfoMapper();
         }
+
         [HttpGet]
         public JsonResult Get()
         {
-            PagedResult<TownshipViewModel> list = new PagedResult<TownshipViewModel>();
+            PagedResult <DisasterInfoViewModel> list = new PagedResult<DisasterInfoViewModel>();
             try
             {
                 list = GetAllData();
@@ -39,37 +57,44 @@ namespace DIS.Web.Controllers.Settings
             }
             return Json(list);
         }
-        private PagedResult<TownshipViewModel> GetAllData()
+
+        private PagedResult<DisasterInfoViewModel> GetAllData()
         {
-            QueryOptions<Township> queryOptions = GetQueryOptions<Township>();
-            TownshipViewModel vm = GetRequestParameter();
+
+            QueryOptions<DisasterInfo> queryOptions = GetQueryOptions<DisasterInfo>();
+            DisasterInfoViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
-            PagedResult<Township> list = _repository.GetPagedResults(queryOptions);
-            PagedResult<TownshipViewModel> vmList = _mapper.MapModelToListViewModel(list);
+            PagedResult<DisasterInfo> list = _repository.GetPagedResults(queryOptions);
+            PagedResult<DisasterInfoViewModel> vmList = _mapper.MapModelToListViewModel(list);
             return vmList;
 
+
         }
-        private TownshipViewModel GetRequestParameter()
+
+        private DisasterInfoViewModel GetRequestParameter()
         {
-            TownshipViewModel vm = new TownshipViewModel();
-            vm.name = GetRequestParameter<string>("search[name]");
+            DisasterInfoViewModel vm = new DisasterInfoViewModel();
+            vm.title = GetRequestParameter<string>("search[title]");
             vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
             vm.district_id = GetRequestParameter<int>("search[district_id]");
+            vm.disasterCategory_id = GetRequestParameter<int>("search[disasterCategory_id]");
+            vm.subCategory_id = GetRequestParameter<int>("search[subCategory_id]");
             return vm;
         }
 
+
         [HttpPost]
         [Route("SaveOrUpdate")]
-        public IActionResult SaveOrUpdate(TownshipViewModel vm)
+        public IActionResult SaveOrUpdate(DisasterInfoViewModel vm)
         {
-            CommandResult<Township> result = new CommandResult<Township>();
+            CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
             try
             {
                 if (vm.id > 0)
                 {
-                    Township? data = _repository.Get(vm.id);
+                    DisasterInfo? data = _repository.Get(vm.id);
                     if (!isDuplicate(data, vm))
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
@@ -87,9 +112,10 @@ namespace DIS.Web.Controllers.Settings
                 }
                 else
                 {
-                    Township? data = new Township();
-                    if(!isDuplicate(data,vm))
-                    {data = _mapper.MapViewModelToModel(data, vm);
+                    DisasterInfo? data = new DisasterInfo();
+                    if (!isDuplicate(data, vm))
+                    {
+                        data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                     }
                     else
@@ -107,15 +133,49 @@ namespace DIS.Web.Controllers.Settings
 
             }
             return Json(result);
+
         }
+
+        protected bool isDuplicate(DisasterInfo data, DisasterInfoViewModel vm)
+        {
+            bool duplicate = false;
+            if (data.id > 0)
+            {
+                if (vm.title == data.title)
+                {
+                    duplicate = false;
+
+                }
+                else
+                {
+                    DisasterInfo? dc = _repository.FindByTitle(vm.title);
+                    if (dc != null)
+                    {
+                        duplicate = true;
+                    }
+                }
+            }
+            else
+            {
+                DisasterInfo? dc = _repository.FindByTitle(vm.title);
+                if (dc != null)
+                {
+                    duplicate = true;
+                }
+            }
+            return duplicate;
+
+
+        }
+
         [HttpDelete]
         [Route("delete/")]
         public JsonResult Delete(int id)
         {
-            CommandResult<Township> result = new CommandResult<Township>();
+            CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
             try
             {
-                Township? data = _repository.Get(id);
+                DisasterInfo? data = _repository.Get(id);
                 if (data != null)
                 {
                     result = _repository.Remove(data);
@@ -135,10 +195,10 @@ namespace DIS.Web.Controllers.Settings
         [Route("getbyid/")]
         public JsonResult GetById(int id)
         {
-            TownshipViewModel vm = new TownshipViewModel();
+            DisasterInfoViewModel vm = new DisasterInfoViewModel();
             try
             {
-                Township? data = _repository.Get(id);
+                DisasterInfo? data = _repository.Get(id);
                 vm = _mapper.MapModelToViewModel(data, vm);
             }
             catch (Exception ex)
@@ -148,44 +208,12 @@ namespace DIS.Web.Controllers.Settings
             return Json(vm);
         }
 
-        protected bool isDuplicate(Township data, TownshipViewModel vm)
-        {
-            bool duplicate = false;
-            if (data.id > 0)
-            {
-                if (vm.name == data.name)
-                {
-                    duplicate = false;
 
-                }
-                else
-                {
-                    Township? dc = _repository.FindByName(vm.name);
-                    if (dc != null)
-                    {
-                        duplicate = true;
-                    }
-                }
-            }
-            else
-            {
-                Township? dc = _repository.FindByName(vm.name);
-                if (dc != null)
-                {
-                    duplicate = true;
-                }
-            }
-            return duplicate;
-
-
-        }
-        
-        
         [HttpGet]
         [Route("ExportExcel")]
         public IActionResult ExportExcel()
         {
-            PagedResult<TownshipViewModel> list = GetAllData();
+            PagedResult<DisasterInfoViewModel> list = GetAllData();
             const string contentType = "application/octet-stream";
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
@@ -197,6 +225,12 @@ namespace DIS.Web.Controllers.Settings
             excel.AddColumn("တိုင်းဒေသကြီး/ပြည်နယ်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစားခွဲအမည်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("‌ေသတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
+            //excel.AddColumn("အကြောင်းအရာ", typeof(string), NPOIExcelColumnWidth.M1);
+            //excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
+            //excel.AddColumn("အချိန်", typeof(string), NPOIExcelColumnWidth.M1);
             int count = 0;
             foreach (var item in list.data)
             {
@@ -207,7 +241,9 @@ namespace DIS.Web.Controllers.Settings
                 excel.SetData(2, item.country_name);
                 excel.SetData(3, item.state_division_name);
                 excel.SetData(4, item.district_name);
-                excel.SetData(5, item.name);
+                excel.SetData(5, item.disasterCategory_name);
+                excel.SetData(6, item.subCategory_name);
+                excel.SetData(7, item.title);
 
 
 
@@ -220,5 +256,8 @@ namespace DIS.Web.Controllers.Settings
             return fileContentResult;
         }
 
+
+
     }
 }
+

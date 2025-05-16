@@ -89,9 +89,14 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     District? data = new District();
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = districtRepository.Save(data);
-
+                    if(!isDuplicate(data, vm))
+                    {data = _mapper.MapViewModelToModel(data, vm);
+                        result = districtRepository.Save(data);
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }

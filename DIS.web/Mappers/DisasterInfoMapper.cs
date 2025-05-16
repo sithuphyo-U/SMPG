@@ -1,13 +1,15 @@
-﻿using DIS.DataAccess.Entity.Settings;
+﻿using DIS.DataAccess.Entity;
+using DIS.DataAccess.Entity.Settings;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 
-namespace DIS.Web.Mappers.Setttings
+namespace DIS.Web.Mappers
 {
-    public class TownshipMapper
+    public class DisasterInfoMapper
     {
-        public QueryOptions<Township> PrepareQueryOptionForRepository(QueryOptions<Township> options, TownshipViewModel vm)
+
+        public QueryOptions<DisasterInfo> PrepareQueryOptionForRepository(QueryOptions<DisasterInfo> options, DisasterInfoViewModel vm)
         {
             if (vm.country_type_id > 0)
             {
@@ -25,9 +27,9 @@ namespace DIS.Web.Mappers.Setttings
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.district_id == vm.district_id);
             }
-            if (!string.IsNullOrEmpty(vm.name))
+            if (!string.IsNullOrEmpty(vm.title))
             {
-                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.name.Contains(vm.name));
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.title.Contains(vm.title));
             }
 
 
@@ -35,10 +37,10 @@ namespace DIS.Web.Mappers.Setttings
 
             if (options.SortColumnsName != null)
             {
-                options.SortBy = new List<Func<Township, object>>();
-                if (options.SortColumnName == "name")
+                options.SortBy = new List<Func<DisasterInfo, object>>();
+                if (options.SortColumnName == "title")
                 {
-                    options.SortBy.Add((x => x.name));
+                    options.SortBy.Add((x => x.title));
                 }
                 else if (options.SortColumnName == "country_type_name")
                 {
@@ -68,12 +70,12 @@ namespace DIS.Web.Mappers.Setttings
             }
             return options;
         }
-        public Township? MapViewModelToModel(Township? data, TownshipViewModel vm)
+        public DisasterInfo? MapViewModelToModel(DisasterInfo? data, DisasterInfoViewModel vm)
         {
             if (data != null)
             {
 
-                data.name = vm.name;
+                data.title = vm.title;
 
                 if (vm.country_type_id > 0)
                 {
@@ -95,12 +97,12 @@ namespace DIS.Web.Mappers.Setttings
             }
             return data;
         }
-        public TownshipViewModel? MapModelToViewModel(Township data, TownshipViewModel vm)
+        public DisasterInfoViewModel? MapModelToViewModel(DisasterInfo data, DisasterInfoViewModel vm)
         {
             if (data != null)
             {
                 vm.id = data.id;
-                vm.name = data.name;
+                vm.title = data.title;
                 if (data.CountryType != null)
                 {
                     vm.country_type_id = data.country_type_id;
@@ -125,14 +127,14 @@ namespace DIS.Web.Mappers.Setttings
             }
             return vm;
         }
-        public PagedResult<TownshipViewModel> MapModelToListViewModel(PagedResult<Township> list)
+        public PagedResult<DisasterInfoViewModel> MapModelToListViewModel(PagedResult<DisasterInfo> list)
         {
-            PagedResult<TownshipViewModel> vmList = new PagedResult<TownshipViewModel>();
+            PagedResult<DisasterInfoViewModel> vmList = new PagedResult<DisasterInfoViewModel>();
             foreach (var data in list.data)
             {
-                TownshipViewModel vm = new TownshipViewModel();
+                DisasterInfoViewModel vm = new DisasterInfoViewModel();
                 vm.id = data.id;
-                vm.name = data.name;
+                vm.title = data.title;
                 if (data.CountryType != null)
                 {
                     vm.country_type_name = data.CountryType.name;
@@ -156,4 +158,5 @@ namespace DIS.Web.Mappers.Setttings
         }
 
     }
+
 }

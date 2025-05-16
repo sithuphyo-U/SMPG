@@ -84,9 +84,14 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     CountryType? data = new CountryType();
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = _countryTypeRepository.Save(data);
-
+                    if (!isDuplicate(data, vm))
+                     {   data = _mapper.MapViewModelToModel(data, vm);
+                        result = _countryTypeRepository.Save(data);
+}
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }
