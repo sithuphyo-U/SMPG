@@ -176,7 +176,7 @@ namespace DIS.Web.Controllers.Settings
                 _userRepo.Save(user);
 
                 result.success = true;
-                result.messages.Add("Password Reseted!");
+                result.messages.Add("Password changed successfully");
             }
 
 
