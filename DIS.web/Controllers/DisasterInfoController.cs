@@ -1,4 +1,6 @@
-﻿using DIS.DataAccess.Entity;
+﻿using DIS.Application.Service;
+using DIS.Application;
+using DIS.DataAccess.Entity;
 using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
@@ -10,6 +12,8 @@ using DIS.Web.ViewModels;
 using DMS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using DIS.Application.Services;
 
 namespace DIS.Web.Controllers
 {
@@ -25,9 +29,13 @@ namespace DIS.Web.Controllers
         ITownshipRepository _townshiprepo;
         IDisasterCategoryRepository _disastercategoryrepo;
         IDisasterSubCategoryRepository _disastersubcategoryrepo;
+        IFile_TBRepository _TBRepository;
+        IDisasterInfoFileRepository _disasterInfoFileRepo;
+        DisasterInfoFileService _dsInfoFileService;
         DisasterInfoMapper _mapper;
+        FileService fileService;
 
-        public DisasterInfoController(ICountryTypeRepository countryTypeRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository disasterSubCategoryRepository, IDisasterInfoRepository disasterInfoRepository) : base(typeof(DisasterInfoController))
+        public DisasterInfoController(ICountryTypeRepository countryTypeRepository, IDisasterInfoFileRepository disasterInfoFileRepo, FileService _fileService, IFile_TBRepository TBRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository disasterSubCategoryRepository, IDisasterInfoRepository disasterInfoRepository, DisasterInfoFileService dsInfoFileService) : base(typeof(DisasterInfoController))
         {
             _repository = disasterInfoRepository;
             _countrytyperepo = countryTypeRepository;
@@ -37,7 +45,11 @@ namespace DIS.Web.Controllers
             _townshiprepo = townshipRepository;
             _disastercategoryrepo = disasterCategoryRepository;
             _disastersubcategoryrepo = disasterSubCategoryRepository;
+            _TBRepository = TBRepository;
+            _disasterInfoFileRepo = disasterInfoFileRepo;
             _mapper = new DisasterInfoMapper();
+            _dsInfoFileService = dsInfoFileService;
+            fileService = _fileService;
         }
 
         [HttpGet]
@@ -65,11 +77,13 @@ namespace DIS.Web.Controllers
             DisasterInfoViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
             PagedResult<DisasterInfo> list = _repository.GetPagedResults(queryOptions);
-            PagedResult<DisasterInfoViewModel> vmList = _mapper.MapModelToListViewModel(list);
+            PagedResult<DisasterInfoViewModel> vmList = _mapper.MapModelToListViewModel(list, _disasterInfoFileRepo);
+          
             return vmList;
 
 
         }
+
 
         private DisasterInfoViewModel GetRequestParameter()
         {
@@ -79,15 +93,14 @@ namespace DIS.Web.Controllers
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
             vm.district_id = GetRequestParameter<int>("search[district_id]");
-            vm.disasterCategory_id = GetRequestParameter<int>("search[disasterCategory_id]");
-            vm.subCategory_id = GetRequestParameter<int>("search[subCategory_id]");
+            vm.disaster_category_id = GetRequestParameter<int>("search[disasterCategory_id]");
+            vm.subcategory_id = GetRequestParameter<int>("search[subCategory_id]");
             return vm;
         }
-
-
-        [HttpPost]
+     
+    [HttpPost]
         [Route("SaveOrUpdate")]
-        public IActionResult SaveOrUpdate(DisasterInfoViewModel vm)
+        public IActionResult SaveOrUpdate([FromForm] DisasterInfoViewModel vm)
         {
             CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
             try
@@ -101,6 +114,7 @@ namespace DIS.Web.Controllers
                         result = _repository.Save(data);
                         if (result.success)
                         {
+                            
 
                         }
                     }
@@ -113,11 +127,40 @@ namespace DIS.Web.Controllers
                 else
                 {
                     DisasterInfo? data = new DisasterInfo();
-                    if (!isDuplicate(data, vm))
-                    {
+                    
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
-                    }
+                        if (result.success)
+                        {
+                            if (vm.file_list != null && vm.file_list.Count > 0)
+                            {
+                                foreach (var f in vm.file_list)
+                                {
+                                    if (f.ContentType == "application/pdf")
+                                    {
+                                    Guid guId = Guid.NewGuid();
+                                    File_TB entity = new File_TB();
+                                    entity.file_name = guId.ToString();
+                                    entity.file_type = f.ContentType;
+                                    entity.originalfile_name = f.FileName;
+                                    entity.disastercategory_id = data.id;
+                                   
+                                    entity.path = "/DisasterInfoFile";
+                                    
+                                    var returndata = _dsInfoFileService.SaveorUpdate(entity);
+                                    if (returndata != null)
+                                    {
+                                        fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
+                                    }
+
+
+
+
+                                }
+                                }
+                            }
+                        }
+                    
                     else
                     {
                         result.messages.Add(Constants.DuplicateMessage);
@@ -135,6 +178,18 @@ namespace DIS.Web.Controllers
             return Json(result);
 
         }
+        [HttpGet("view-pdf/{fileName}")]
+        public IActionResult ViewPdf(string fileName)
+        {
+            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/pdf");
+        }
+
 
         protected bool isDuplicate(DisasterInfo data, DisasterInfoViewModel vm)
         {

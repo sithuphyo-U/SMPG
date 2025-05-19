@@ -13,7 +13,7 @@ namespace DIS.DataAccess.Entity
     public class DisasterInfo :BaseEntity
     {
         public DateTime date { get; set; }
-        public TimeOnly time {  get; set; }
+        public string? time {  get; set; }
         public string title { get; set; }
         public string details { get; set; }
         public int remark { get; set; }
@@ -39,6 +39,6 @@ namespace DIS.DataAccess.Entity
         public int subCategory_id { get; set; }
         [ForeignKey("subCategory_id")]
         public virtual DisasterSubCategory SubCategory { get; set; }
-
+      
     }
 }

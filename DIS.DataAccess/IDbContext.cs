@@ -17,5 +17,6 @@ namespace DIS.DataAccess
         void SetModifedState<TEntity>(TEntity entity) where TEntity : class;
         void SetDeletedState<TEntity>(TEntity entity) where TEntity : class;
         int SaveChanges();
+        void Dispose();
     }
 }
