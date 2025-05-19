@@ -69,7 +69,7 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     Country? data = countryRepository.Get(vm.id);
-                    if (!isDuplicate(data, vm))
+                    if (!isDuplicate(data,vm))
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = countryRepository.Save(data);
@@ -153,10 +153,10 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name)
+                if (vm.name == data.name && vm.country_type_id == data.country_type_id)
                 {
                     duplicate = false;
-
+                    
                 }
                 else
                 {
@@ -170,8 +170,9 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 Country? dc = countryRepository.FindByName(vm.name);
-                if (dc != null)
-                {
+
+                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id)
+                { 
                     duplicate = true;
                 }
             }

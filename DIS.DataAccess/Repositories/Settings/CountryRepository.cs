@@ -13,9 +13,11 @@ namespace DIS.DataAccess.Repositories.Settings
         public CountryRepository(IDbContext context) : base(context)
         {
         }
+       
         public Country? FindByName(string name)
         {
             return CustomQuery().Where(x => x.name == name).FirstOrDefault();
+
         }
 
         public List<Country>? GetCountrybyCountryType(int id)
