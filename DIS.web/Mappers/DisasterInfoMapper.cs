@@ -1,8 +1,10 @@
 ﻿using DIS.DataAccess.Entity;
 using DIS.DataAccess.Entity.Settings;
+using DIS.DataAccess.Interfaces;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
+using System.Collections.Immutable;
 
 namespace DIS.Web.Mappers
 {
@@ -76,10 +78,14 @@ namespace DIS.Web.Mappers
             {
 
                 data.title = vm.title;
-
-                if (vm.country_type_id > 0)
+                data.time = vm.time;
+                if (vm.disaster_category_id > 0)
                 {
-                    data.country_type_id = vm.country_type_id;
+                    data.disasterCategory_id = vm.disaster_category_id;
+                }
+                if (vm.subcategory_id > 0)
+                {
+                    data.subCategory_id = vm.subcategory_id;
                 }
                 if (vm.country_id > 0)
                 {
@@ -93,7 +99,19 @@ namespace DIS.Web.Mappers
                 {
                     data.district_id = vm.district_id;
                 }
-
+                if ( vm.country_type_id > 0)
+                {
+                    data.country_type_id = vm.country_type_id;
+                }
+                if (vm.township_id > 0)
+                {
+                    data.township_id = vm.township_id;
+                }
+                if(vm.date != null)
+                {
+                    data.date = vm.date;
+                }
+                data.details = vm.details;
             }
             return data;
         }
@@ -127,14 +145,23 @@ namespace DIS.Web.Mappers
             }
             return vm;
         }
-        public PagedResult<DisasterInfoViewModel> MapModelToListViewModel(PagedResult<DisasterInfo> list)
+        public PagedResult<DisasterInfoViewModel> MapModelToListViewModel(PagedResult<DisasterInfo> list, IDisasterInfoFileRepository _disasterInfoFileRepo)
         {
             PagedResult<DisasterInfoViewModel> vmList = new PagedResult<DisasterInfoViewModel>();
             foreach (var data in list.data)
             {
                 DisasterInfoViewModel vm = new DisasterInfoViewModel();
+                vm.Files_List = new List<FileViewModel>();
                 vm.id = data.id;
                 vm.title = data.title;
+                if(data.DisasterCategory != null)
+                {
+                    vm.disasterCategory_name = data.DisasterCategory.name;
+                }
+                if(data.SubCategory != null)
+                {
+                    vm.subCategory_name = data.SubCategory.name;
+                }
                 if (data.CountryType != null)
                 {
                     vm.country_type_name = data.CountryType.name;
@@ -151,7 +178,34 @@ namespace DIS.Web.Mappers
                 {
                     vm.district_name = data.District.name;
                 }
+                if (data.Township != null)
+                {
+                    vm.township_name = data.Township.name;
+                }
+                vm.date = data.date;
+                vm.time = data.time;
+                vm.details = data.details;
+                List<File_TB> files = _disasterInfoFileRepo.GetDataById(vm.id);
+                if (files.Count > 0)
+                {
+
+                    foreach (var file in files)
+                    {
+                        FileViewModel fileView = new FileViewModel
+                        {
+                            id = file.id,
+                            original_filename = file.originalfile_name,
+                            url = Constants.FilePath,
+                            path = file.path,
+                            filename = file.file_name,
+                            file_type = file.file_type
+
+                        };
+                        vm.Files_List.Add(fileView);
+                    }
+                }
                 vmList.data.Add(vm);
+
             }
             vmList.total = vmList.data.Count;
             return vmList;

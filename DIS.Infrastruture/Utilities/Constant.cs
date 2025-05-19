@@ -39,6 +39,8 @@ namespace DIS.Infrastructure.Utilities
         public const string UpdateReadStatus = "Update Read Status";
         public const string Updatestatus = "UpdateReadStatus";
 
+        public static string FilePath = ConfigManager.AppSetting["FileSettings:FilePath"];
+
         #region duplicate messages
         public const string DuplicateUserName = "Duplicate User Name!";
         #endregion

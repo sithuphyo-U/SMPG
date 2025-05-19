@@ -1,4 +1,8 @@
+using DIS.Application.Service;
+using DIS.Application.Services;
 using DIS.DataAccess;
+using DIS.DataAccess.Interfaces;
+using DIS.DataAccess.Repositories;
 using DIS.Infrastructure.Utilities;
 using DIS.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,6 +37,13 @@ builder.Services.AddSession(opt => { });
 builder.Services.AddControllers();
 //register add scope interface and classes
 builder.Services.AddRepositories(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<FileService>();
+builder.Services.AddScoped<DisasterInfoFileService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
 builder.Services.AddSwaggerGen(c =>

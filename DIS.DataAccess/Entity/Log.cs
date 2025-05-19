@@ -20,5 +20,6 @@ namespace DIS.DataAccess.Entity
         public string? program_code { get; set; }
         public string? action { get; set; }
         public DateTime timeaccessed { get; set; }
+        
     }
 }
