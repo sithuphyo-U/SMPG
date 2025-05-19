@@ -47,6 +47,7 @@ namespace DIS.Web.Controller
             PagedResult<RoleViewModel> vmList = mapper.MapModelToListViewMode(list);
             return vmList;
         }
+
         private RoleViewModel GetRequestParameters()
         {
             RoleViewModel vm = new RoleViewModel();
