@@ -155,7 +155,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name)
+                if (vm.name == data.name && vm.country_type_id == data.country_type_id && vm.country_id == data.country_id  )
                 {
                     duplicate = false;
 
@@ -172,7 +172,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 StateDivision? dc = _repository.FindByName(vm.name);
-                if (dc != null)
+                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id)
                 {
                     duplicate = true;
                 }

@@ -153,7 +153,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name)
+                if (vm.name == data.name && vm.country_type_id == data.country_type_id && vm.country_id == data.country_id && vm.state_division_id == data.state_division_id && vm.district_id == data.district_id)
                 {
                     duplicate = false;
 
@@ -170,7 +170,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 Township? dc = _repository.FindByName(vm.name);
-                if (dc != null)
+                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id && dc.district_id == vm.district_id)
                 {
                     duplicate = true;
                 }

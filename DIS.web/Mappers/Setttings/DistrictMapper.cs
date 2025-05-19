@@ -1,4 +1,5 @@
 ﻿using DIS.DataAccess.Entity.Settings;
+using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 
@@ -27,9 +28,7 @@ namespace DIS.Web.ViewModels
 
 
 
-
-
-            if (options.SortColumnsName != null)
+            if (options.SortColumnName != null)
             {
                 options.SortBy = new List<Func<District, object>>();
                 if (options.SortColumnName == "name")
@@ -49,8 +48,8 @@ namespace DIS.Web.ViewModels
                     options.SortBy.Add((x => x.StateDivision.name));
                 }
                 else
-                {
-                    options.SortOrder = Infrastructure.Enumerations.SortOrder.DESC;
+                        {
+                    options.SortOrder = SortOrder.DESC;
                     options.SortBy.Add((x => x.id));
                 }
             }
@@ -60,6 +59,8 @@ namespace DIS.Web.ViewModels
             }
             return options;
         }
+
+
         public District? MapViewModelToModel(District? data, DistrictViewModel vm)
         {
             if (data != null)

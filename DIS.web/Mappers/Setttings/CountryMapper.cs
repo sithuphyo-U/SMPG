@@ -1,4 +1,5 @@
 ﻿using DIS.DataAccess.Entity.Settings;
+using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
@@ -19,9 +20,7 @@ namespace DIS.Web.Mappers.Setttings
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
             }
 
-
-
-            if (options.SortColumnsName != null)
+            if (options.SortColumnName != null)
             {
                 options.SortBy = new List<Func<Country, object>>();
                 if (options.SortColumnName == "name")
@@ -33,8 +32,8 @@ namespace DIS.Web.Mappers.Setttings
                     options.SortBy.Add((x => x.CountryType.name));
                 }
                 else
-                {
-                    options.SortOrder = Infrastructure.Enumerations.SortOrder.DESC;
+                        {
+                    options.SortOrder = SortOrder.DESC;
                     options.SortBy.Add((x => x.id));
                 }
             }
@@ -44,6 +43,8 @@ namespace DIS.Web.Mappers.Setttings
             }
             return options;
         }
+
+      
         public Country? MapViewModelToModel(Country? data, CountryViewModel vm)
         {
             if (data != null)

@@ -14,6 +14,7 @@ namespace DIS.Web.Mappers
             {
                 queryOption.FilterBy = (x => x.name.Contains(vm.name));
             }
+
             if (queryOption.SortColumnName != null)
             {
                 queryOption.SortBy = new List<Func<Role, object>>();
