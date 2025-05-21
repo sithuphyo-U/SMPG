@@ -120,8 +120,8 @@ namespace DIS.Web.Controllers.Settings
 
                             var cct = new country_countrytype
                             {
-                                country_id = result.id,         // Newly created country's ID
-                                country_type_id = typeId        // One of the selected country types
+                                country_id = result.id,         
+                                country_type_id = typeId       
                             };
 
                             _cctrepo.Save(cct);
