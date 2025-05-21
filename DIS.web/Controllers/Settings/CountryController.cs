@@ -9,6 +9,7 @@ using DIS.Web.ViewModels;
 using DMS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NPOI.OpenXmlFormats.Dml.Diagram;
 
 namespace DIS.Web.Controllers.Settings
 {
@@ -80,18 +81,20 @@ namespace DIS.Web.Controllers.Settings
 
                     if (result.success)
                     {
-                        // ❗ Clear old country-countrytype links
-                        _cctrepo.DeletebyCountryId(result.id);
-
-                        // 🔁 Save new selections
+                        List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
+                        foreach(var cct in cctlist)
+                        {
+                            _cctrepo.Remove(cct);
+                        }
+                        
                         foreach (var typeId in vm.CountryTypeListId)
                         {
-                            var cct = new country_countrytype
-                            {
-                                country_id = result.id,
-                                country_type_id = typeId
-                            };
-                            _cctrepo.Save(cct);
+                            country_countrytype cctli = new country_countrytype();
+
+                           cctli.country_id = result.id;
+                            cctli.country_type_id = typeId;
+                          
+                            _cctrepo.Save(cctli);
                         }
                         //}
                         //else
