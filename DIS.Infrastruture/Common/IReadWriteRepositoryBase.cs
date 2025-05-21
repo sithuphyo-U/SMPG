@@ -14,6 +14,7 @@ namespace DIS.Infrastructure.Common
         List<TEntity> GetReport();
         PagedResult<TEntity> GetPagedResults(QueryOptions<TEntity> option);
         CommandResult<TEntity> Save(TEntity entity);
+        CommandResult<List<TEntity>> SaveList(List<TEntity> entity);
         CommandResult<TEntity> Remove(TEntity entity);
     }
 }

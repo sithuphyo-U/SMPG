@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Interfaces.Settings
 {
-    public interface ICountryRepository :IReadWriteRepositoryBase<Country> 
+    public interface Icountry_countrytypeRepository :IReadWriteRepositoryBase<country_countrytype>
     {
-        Country? FindByName(string name);
-       // List<Country>? GetCountrybyCountryType(int id);
+        List<country_countrytype> GetByCountryId(int countryId);
+       List<country_countrytype> DeletebyCountryId(int countryId);
     }
 }

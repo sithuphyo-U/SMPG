@@ -171,7 +171,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 District? dc = districtRepository.FindByName(vm.name);
-                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id ==vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_type_id ==vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id)
                 {
                     duplicate = true;
                 }

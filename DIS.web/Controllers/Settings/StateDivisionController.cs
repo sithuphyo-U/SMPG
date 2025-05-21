@@ -172,7 +172,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 StateDivision? dc = _repository.FindByName(vm.name);
-                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id)
                 {
                     duplicate = true;
                 }

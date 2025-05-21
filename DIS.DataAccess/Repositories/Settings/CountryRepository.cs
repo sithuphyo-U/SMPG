@@ -20,9 +20,9 @@ namespace DIS.DataAccess.Repositories.Settings
 
         }
 
-        public List<Country>? GetCountrybyCountryType(int id)
-        {
-            return CustomQuery().Where(x => x.country_type_id == id).ToList();
-        }
+        //public List<Country>? GetCountrybyCountryType(int id)
+        //{
+        //    return CustomQuery().Where(x => x.country_type_id == id).ToList();
+        //}
     }
 }

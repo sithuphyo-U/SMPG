@@ -1,8 +1,10 @@
 ﻿using DIS.DataAccess.Entity.Settings;
+using DIS.DataAccess.Interfaces.Settings;
 using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
+using NPOI.Util;
 
 namespace DIS.Web.Mappers.Setttings
 {
@@ -11,10 +13,10 @@ namespace DIS.Web.Mappers.Setttings
 
         public QueryOptions<Country> PrepareQueryOptionForRepository(QueryOptions<Country> options, CountryViewModel vm)
         {
-            if (vm.country_type_id > 0)
-            {
-                options.FilterBy = (x => x.country_type_id == vm.country_type_id);
-            }
+            //if (vm.country_type_id > 0)
+            //{
+            //    options.FilterBy = (x => x.country_type_id == vm.country_type_id);
+            //}
             if (!string.IsNullOrEmpty(vm.name))
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
@@ -27,10 +29,10 @@ namespace DIS.Web.Mappers.Setttings
                 {
                     options.SortBy.Add((x => x.name));
                 }
-                else if (options.SortColumnName == "country_type_name")
-                {
-                    options.SortBy.Add((x => x.CountryType.name));
-                }
+                //else if (options.SortColumnName == "country_type_name")
+                //{
+                //    options.SortBy.Add((x => x.CountryType.name));
+                //}
                 else
                         {
                     options.SortOrder = SortOrder.DESC;
@@ -44,38 +46,82 @@ namespace DIS.Web.Mappers.Setttings
             return options;
         }
 
-      
+
+        //public Country? MapViewModelToModel(Country? data, CountryViewModel vm)
+        //{
+        //    if (data != null)
+        //    {
+        //        data.name = vm.name;
+
+        //        if (vm.country_typeList_id != null)
+        //        {
+        //            foreach (var c in vm.country_typeList_id)
+        //            {
+        //                data.country_type_id = c;
+
+        //            }
+        //        }
+        //        //if (vm.country_type_id > 0)
+        //        //{
+        //        //    data.country_type_id = vm.country_type_id;
+        //        //}
+
+
+        //    }
+        //    return data;
+        //}
+
+
+
         public Country? MapViewModelToModel(Country? data, CountryViewModel vm)
         {
             if (data != null)
             {
-
                 data.name = vm.name;
-                if (vm.country_type_id > 0)
-                {
-                    data.country_type_id = vm.country_type_id;
-                }
-
 
             }
+
             return data;
         }
-        public CountryViewModel? MapModelToViewModel(Country data, CountryViewModel vm)
+
+        public CountryViewModel? MapModelToViewModel(Country data, CountryViewModel vm, Icountry_countrytypeRepository _cctrepo)
         {
             if (data != null)
             {
                 vm.id = data.id;
                 vm.name = data.name;
-                if (data.CountryType != null)
-                {
-                    vm.country_type_id = data.country_type_id;
-                    vm.country_type_name = data.CountryType.name;
-                }
+                vm.CountryTypeListId = _cctrepo.GetByCountryId(data.id).Select(m => m.country_type_id).ToList();
+                vm.country_type_name = _cctrepo.GetByCountryId(data.id).Select(m => m.CountryType.name).ToList();
+
+
+
+                //List<country_countrytype> cctid = _cctrepo.GetByCountryId(data.id);
+                //foreach (var cct in cctid)
+                //{
+                //    if (cct.CountryType != null)
+                //    {
+
+
+                //        vm.CountryTypeListId.Add(cct.CountryType.id);
+                //        vm.CountryType.Add(new CountryTypeViewModel
+                //        {
+                //            id = cct.CountryType.id,
+                //            name = cct.CountryType.name
+                //        });
+                //    }
+                //}
+
             }
             return vm;
         }
 
-        public PagedResult<CountryViewModel> MapModelToListViewModel(PagedResult<Country> list)
+
+
+
+
+
+
+        public PagedResult<CountryViewModel> MapModelToListViewModel(PagedResult<Country> list, Icountry_countrytypeRepository _cctrepo)
         {
             PagedResult<CountryViewModel> vmList = new PagedResult<CountryViewModel>();
             foreach (var data in list.data)
@@ -83,10 +129,24 @@ namespace DIS.Web.Mappers.Setttings
                 CountryViewModel vm = new CountryViewModel();
                 vm.id = data.id;
                 vm.name = data.name;
-                if (data.CountryType != null)
+               
+                List<country_countrytype> cctlist = _cctrepo.GetByCountryId(data.id);
+                string cctlists = string.Empty;
+                int count = 0;
+                foreach(var cct in cctlist)
                 {
-                    vm.country_type_name = data.CountryType.name;
+                    count++;
+                    if(count == 1)
+                    {
+                        cctlists = cct.CountryType.name;
+                    }
+                    else
+                    {
+                        cctlists = cctlists + " , " + cct.CountryType.name;
+                    }
                 }
+                vm.countryType_name = cctlists;
+                
                 vmList.data.Add(vm);
             }
             vmList.total = vmList.data.Count;

@@ -170,7 +170,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 Township? dc = _repository.FindByName(vm.name);
-                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id && dc.district_id == vm.district_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id && dc.district_id == vm.district_id)
                 {
                     duplicate = true;
                 }

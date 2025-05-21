@@ -235,5 +235,50 @@ namespace DIS.DataAccess
             return _context.Set<TEntity>().AsQueryable();
         }
 
+        public CommandResult<List<TEntity>> SaveList(List<TEntity> entityList)
+        {
+            CommandResult<List<TEntity>> result = new CommandResult<List<TEntity>>();
+            result.entity = new List<TEntity>();
+
+            try
+            {
+                foreach (var entity in entityList)
+                {
+                    entity.deleted = false;
+
+                    if ((int)entity.GetType().GetProperty("id").GetValue(entity) > 0)
+                    {
+                        entity.modified_date = DateTime.Now;
+                        _context.Set<TEntity>().Add(entity);
+                        _context.SetModifedState(entity);
+                    }
+                    else
+                    {
+                        entity.created_date = DateTime.Now;
+                        entity.modified_date = DateTime.Now;
+                        _context.Set<TEntity>().Add(entity);
+                        _context.SetAddedState(entity);
+                    }
+
+                    result.entity.Add(entity);
+                }
+
+                SaveChanges();
+                result.success = true;
+                result.messages.Add(Constants.SaveSucessMessage);
+                result.id = result.entity.Count > 0
+                    ? (int)result.entity[0].GetType().GetProperty("id").GetValue(result.entity[0])
+                    : 0;
+            }
+            catch (Exception ex)
+            {
+                result.success = false;
+                result.messages.Add(ex.Message);
+            }
+
+            return result;
+        }
+
+       
     }
 }
