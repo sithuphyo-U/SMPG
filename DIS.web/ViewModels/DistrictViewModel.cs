@@ -1,4 +1,6 @@
-﻿namespace DIS.Web.ViewModels
+﻿using DIS.DataAccess.Entity.Settings;
+
+namespace DIS.Web.ViewModels
 {
     public class DistrictViewModel
     {
@@ -12,6 +14,8 @@
         public string? countryType_name { get; set; }
         public List<string>? country_type_name { get; set; } = new();
         public List<int> CountryTypeListId { get; set; } = new();
+        public List<country_countrytype> cc_type { get; set; } = new();
+        public int? country_type_id { get; set; }
         public DistrictViewModel()
         {
             CountryTypeListId = new List<int>();

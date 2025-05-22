@@ -10,6 +10,7 @@ namespace DIS.Web.ViewModels
         public int? country_type_id { get; set; }
         public List<string>? country_type_name { get; set; } = new();
         public List<int> CountryTypeListId { get; set; } = new();
+        public List<country_countrytype> cc_type {  get; set; } = new();
        
 
 
