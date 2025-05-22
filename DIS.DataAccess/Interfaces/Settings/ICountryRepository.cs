@@ -12,5 +12,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     {
         Country? FindByName(string name);
         Country? GetCountrybyDivisionId(int id);
+        List<Country>? GetCountrybyCountryType(int id);
     }
 }

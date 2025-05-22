@@ -21,6 +21,11 @@ namespace DIS.DataAccess.Repositories.Settings
 
         }
 
+        public List<Country>? GetCountrybyCountryType(int id)
+        {
+           return CustomQuery().Where(x => x.id == id).ToList();
+        }
+
         public Country? GetCountrybyDivisionId(int id)
         {
            return CustomQuery().Where( x => x.id == id && x.deleted == false).FirstOrDefault();

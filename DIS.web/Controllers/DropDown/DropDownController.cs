@@ -171,13 +171,13 @@ namespace DIS.Web.Controllers.DropDown
             return Json(subdata);
         }
 
-        //[HttpGet]
-        //[Route("GetCountryById")]
-        //public JsonResult GetCountryById(int id)
-        //{
-        //    List<Country> subdata = _countryRepository.GetCountrybyCountryType(id);
-        //    return Json(subdata);
-        //}
+        [HttpGet]
+        [Route("GetCountryById")]
+        public JsonResult GetCountryById(int id)
+        {
+            List<Country> subdata = _countryRepository.GetCountrybyCountryType(id);
+            return Json(subdata);
+        }
 
 
         [HttpGet]
