@@ -4,6 +4,7 @@ using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
+using System.Linq.Expressions;
 
 namespace DIS.Web.Mappers.Setttings
 {
@@ -11,10 +12,33 @@ namespace DIS.Web.Mappers.Setttings
     {
         public QueryOptions<StateDivision> PrepareQueryOptionForRepository(QueryOptions<StateDivision> options, StateDivisionViewModel vm)
         {
-            //if (vm.country_type_id > 0)
-            //{
-            //    options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_type_id == vm.country_type_id);
-            //}
+            if (vm.cc_type != null && vm.cc_type.Count > 0)
+            {
+                List<int> countryIds = vm.cc_type.Select(c => c.country_id).ToList();
+
+                Expression<Func<StateDivision, bool>> combinedFilter = null;
+
+                foreach (var cid in countryIds)
+                {
+                    Expression<Func<StateDivision, bool>> singleFilter = x => x.id == cid;
+
+                    if (combinedFilter == null)
+                    {
+                        combinedFilter = singleFilter;
+                    }
+                    else
+                    {
+                        combinedFilter = LinqExpressionHelper.AppendOr(combinedFilter, singleFilter);
+                    }
+                }
+
+                if (combinedFilter != null)
+                {
+                    options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, combinedFilter);
+                }
+            }
+
+
             if (vm.country_id > 0)
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_id == vm.country_id);

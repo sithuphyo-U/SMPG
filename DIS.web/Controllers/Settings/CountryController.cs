@@ -10,6 +10,7 @@ using DMS.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NPOI.OpenXmlFormats.Dml.Diagram;
+using System.Collections.Immutable;
 
 namespace DIS.Web.Controllers.Settings
 {
@@ -62,10 +63,11 @@ namespace DIS.Web.Controllers.Settings
             vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             if (vm.country_type_id>0)
             {
-                country_countrytype cc = new country_countrytype();
-                var country_type = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
-                vm.id = country_type.country_id;
-                
+                List<country_countrytype> cc = new List<country_countrytype>();
+                 cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
+                vm.cc_type = cc;
+                           
+
 
             }
             return vm;
