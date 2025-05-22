@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
+using NPOI.SS.Formula.PTG;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,16 @@ namespace DIS.DataAccess.Repositories.Settings
 
         }
 
-        //public List<Country>? GetCountrybyCountryType(int id)
-        //{
-        //    return CustomQuery().Where(x => x.country_type_id == id).ToList();
-        //}
+        public List<Country>? GetCountrybyCountryType(int id)
+        {
+           return CustomQuery().Where(x => x.id == id).ToList();
+        }
+
+        public Country? GetCountrybyDivisionId(int id)
+        {
+           return CustomQuery().Where( x => x.id == id && x.deleted == false).FirstOrDefault();
+        }
+
+       
     }
 }

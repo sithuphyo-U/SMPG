@@ -18,12 +18,15 @@ namespace DIS.Web.Controllers.Settings
     public class StateDivisionController : BaseController
     {
         IStateDivisionRepository _repository;
-        
+        Icountry_countrytypeRepository _cctrepo;
+      
         StateDivisionMapper _mapper;
-        public StateDivisionController(IStateDivisionRepository repository) : base(typeof(StateDivisionController))
+        public StateDivisionController(IStateDivisionRepository repository,Icountry_countrytypeRepository icountry_CountrytypeRepository) : base(typeof(StateDivisionController))
         {
             _repository = repository;
+            _cctrepo = icountry_CountrytypeRepository;
             _mapper = new StateDivisionMapper();
+          
         }
         [HttpGet]
         public JsonResult Get()
@@ -48,7 +51,7 @@ namespace DIS.Web.Controllers.Settings
             StateDivisionViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
             PagedResult<StateDivision> list = _repository.GetPagedResults(queryOptions);
-            PagedResult<StateDivisionViewModel> vmList = _mapper.MapModelToListViewModel(list);
+            PagedResult<StateDivisionViewModel> vmList = _mapper.MapModelToListViewModel(list,_cctrepo, _repository);
             return vmList;
 
         }
@@ -57,6 +60,15 @@ namespace DIS.Web.Controllers.Settings
             StateDivisionViewModel vm = new StateDivisionViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
             vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            if (vm.country_type_id > 0)
+            {
+                List<country_countrytype> cc = new List<country_countrytype>();
+                cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
+                vm.cc_type = cc;
+
+
+
+            }
             vm.country_id = GetRequestParameter<int>("search[country_id]");
           
             return vm;
@@ -78,8 +90,9 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
+                       
+                    }
 
-                        }
                     }
                     else
                     {
@@ -90,8 +103,9 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     StateDivision? data = new StateDivision();
-                    if(!isDuplicate(data, vm))
-                   { data = _mapper.MapViewModelToModel(data, vm);
+                    if (!isDuplicate(data, vm))
+                    {
+                        data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                     }
                     else
@@ -155,7 +169,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name && vm.country_type_id == data.country_type_id && vm.country_id == data.country_id  )
+                if (vm.name == data.name &&  vm.country_id == data.country_id  )
                 {
                     duplicate = false;
 
@@ -172,7 +186,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 StateDivision? dc = _repository.FindByName(vm.name);
-                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_id == vm.country_id)
                 {
                     duplicate = true;
                 }

@@ -12,5 +12,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     {
         Township? FindByName(string name);
         List<Township>? GetTownshipByDistrict(int id);
+        Township? GetCountryByTownship (int id);
     }
 }

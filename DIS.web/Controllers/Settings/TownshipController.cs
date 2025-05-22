@@ -16,10 +16,14 @@ namespace DIS.Web.Controllers.Settings
     public class TownshipController : BaseController
     {
         ITownshipRepository _repository;
+        Icountry_countrytypeRepository _cctrepo;
+        ITownshipRepository _townshiprepo;
         TownshipMapper _mapper;
-        public TownshipController(ITownshipRepository townshipRepository) : base(typeof(TownshipController))
+        public TownshipController(ITownshipRepository townshipRepository,Icountry_countrytypeRepository icountry_CountrytypeRepository, ITownshipRepository townshiprepository) : base(typeof(TownshipController))
         {
             _repository = townshipRepository;
+            _cctrepo = icountry_CountrytypeRepository;
+            _townshiprepo = townshipRepository;
             _mapper = new TownshipMapper();
         }
         [HttpGet]
@@ -45,7 +49,7 @@ namespace DIS.Web.Controllers.Settings
             TownshipViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
             PagedResult<Township> list = _repository.GetPagedResults(queryOptions);
-            PagedResult<TownshipViewModel> vmList = _mapper.MapModelToListViewModel(list);
+            PagedResult<TownshipViewModel> vmList = _mapper.MapModelToListViewModel(list,_cctrepo, _townshiprepo);
             return vmList;
 
         }
@@ -53,7 +57,15 @@ namespace DIS.Web.Controllers.Settings
         {
             TownshipViewModel vm = new TownshipViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
-            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            if (vm.country_type_id > 0)
+            {
+                List<country_countrytype> cc = new List<country_countrytype>();
+                cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
+                vm.cc_type = cc;
+
+
+
+            }
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
             vm.district_id = GetRequestParameter<int>("search[district_id]");
@@ -88,8 +100,9 @@ namespace DIS.Web.Controllers.Settings
                 else
                 {
                     Township? data = new Township();
-                    if(!isDuplicate(data,vm))
-                    {data = _mapper.MapViewModelToModel(data, vm);
+                    if (!isDuplicate(data, vm))
+                    {
+                        data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                     }
                     else
@@ -153,7 +166,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name && vm.country_type_id == data.country_type_id && vm.country_id == data.country_id && vm.state_division_id == data.state_division_id && vm.district_id == data.district_id)
+                if (vm.name == data.name  && vm.country_id == data.country_id && vm.state_division_id == data.state_division_id && vm.district_id == data.district_id)
                 {
                     duplicate = false;
 
@@ -170,7 +183,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 Township? dc = _repository.FindByName(vm.name);
-                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_type_id == vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id && dc.district_id == vm.district_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id && dc.district_id == vm.district_id)
                 {
                     duplicate = true;
                 }

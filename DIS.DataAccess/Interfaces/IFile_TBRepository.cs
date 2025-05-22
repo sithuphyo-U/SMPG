@@ -10,5 +10,6 @@ namespace DIS.DataAccess.Interfaces
 {
     public interface IFile_TBRepository:IReadWriteRepositoryBase<File_TB>
     {
+        List<File_TB> GetFilebyDisasterInfoId(int id);
     }
 }

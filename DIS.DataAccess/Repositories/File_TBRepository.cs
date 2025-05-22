@@ -15,5 +15,10 @@ namespace DIS.DataAccess.Repositories
         {
         }
 
+        public List<File_TB> GetFilebyDisasterInfoId(int id)
+        {
+            return CustomQuery().Where(x => x.disastercategory_id == id && x.deleted == false).ToList();
+        }           
+
     }
 }

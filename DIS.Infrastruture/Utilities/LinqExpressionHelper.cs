@@ -80,5 +80,39 @@ namespace DIS.Infrastruture.Utilities
                 return base.VisitParameter(p);
             }
         }
+        public static Expression<Func<T, bool>> AppendOr<T>(
+        Expression<Func<T, bool>> expr1,
+        Expression<Func<T, bool>> expr2)
+        {
+            var parameter = Expression.Parameter(typeof(T));
+
+            var left = ReplaceParameter(expr1.Body, expr1.Parameters[0], parameter);
+            var right = ReplaceParameter(expr2.Body, expr2.Parameters[0], parameter);
+
+            var orElse = Expression.OrElse(left, right);
+            return Expression.Lambda<Func<T, bool>>(orElse, parameter);
+        }
+
+        private static Expression ReplaceParameter(Expression expr, ParameterExpression oldParam, ParameterExpression newParam)
+        {
+            return new ParameterReplacer(oldParam, newParam).Visit(expr);
+        }
+
+        private class ParameterReplacer : ExpressionVisitor
+        {
+            private readonly ParameterExpression _oldParam;
+            private readonly ParameterExpression _newParam;
+
+            public ParameterReplacer(ParameterExpression oldParam, ParameterExpression newParam)
+            {
+                _oldParam = oldParam;
+                _newParam = newParam;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                return node == _oldParam ? _newParam : base.VisitParameter(node);
+            }
+        }
     }
 }
