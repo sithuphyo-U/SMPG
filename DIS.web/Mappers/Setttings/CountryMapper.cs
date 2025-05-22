@@ -13,10 +13,10 @@ namespace DIS.Web.Mappers.Setttings
 
         public QueryOptions<Country> PrepareQueryOptionForRepository(QueryOptions<Country> options, CountryViewModel vm)
         {
-            //if (vm.CountryTypeListId > 0)
-            //{
-            //    options.FilterBy = (x => x.CountryTypeListId == vm.CountryTypeListId);
-            //}
+            if (vm.id > 0)
+            {
+                options.FilterBy = (x => x.id == vm.id);
+            }
             if (!string.IsNullOrEmpty(vm.name))
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));

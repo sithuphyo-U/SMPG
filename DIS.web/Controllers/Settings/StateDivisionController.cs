@@ -75,55 +75,34 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     StateDivision? data = _repository.Get(vm.id);
-                    //if (!isDuplicate(data, vm))
-                    //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                         if (result.success)
                         {
-                        //List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
-                        //foreach (var cct in cctlist)
-                        //{
-                        //    _cctrepo.Remove(cct);
-                        //}
-
-                      
-                        //string cctlists = string.Empty;
-                        //int count = 0;
-                        //foreach (var cct in cctlist)
-                        //{
-                        //    count++;
-                        //    if (count == 1)
-                        //    {
-                        //        cctlists = cct.CountryType.name;
-                        //    }
-                        //    else
-                        //    {
-                        //        cctlists = cctlists + " , " + cct.CountryType.name;
-                        //    }
-                        //}
-                        
+                       
                     }
-                  
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
 
                 }
                 else
                 {
                     StateDivision? data = new StateDivision();
-                   // if(!isDuplicate(data, vm))
-                   //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }

@@ -50,5 +50,10 @@ namespace DIS.DataAccess.Repositories.Settings
 
             return items;
         }
+
+        public country_countrytype GetByCountryTypeByCountryId(int? countryTypeId)
+        {
+            return CustomQuery().Where(x => x.country_type_id == countryTypeId && x.deleted == false).FirstOrDefault();
+        }
     }
 }

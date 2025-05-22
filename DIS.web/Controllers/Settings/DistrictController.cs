@@ -75,33 +75,33 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     District? data = districtRepository.Get(vm.id);
-                    //if (!isDuplicate(data, vm))
-                    //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = districtRepository.Save(data);
                         if (result.success)
                         {
 
                         }
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
 
                 }
                 else
                 {
                     District? data = new District();
-                    //if(!isDuplicate(data, vm))
-                    //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = districtRepository.Save(data);
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }
