@@ -11,6 +11,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     public interface ICountryRepository :IReadWriteRepositoryBase<Country> 
     {
         Country? FindByName(string name);
-       // List<Country>? GetCountrybyCountryType(int id);
+        Country? GetCountrybyDivisionId(int id);
     }
 }

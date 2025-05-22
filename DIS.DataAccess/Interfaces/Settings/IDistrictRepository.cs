@@ -12,5 +12,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     {
         District? FindByName(string name);
         List<District>? GetDistrictByStateDivision(int id);
+        District GetCountryByDistrict(int id);
     }
 }

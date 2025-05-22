@@ -13,9 +13,9 @@ namespace DIS.Web.Mappers.Setttings
 
         public QueryOptions<Country> PrepareQueryOptionForRepository(QueryOptions<Country> options, CountryViewModel vm)
         {
-            //if (vm.country_type_id > 0)
+            //if (vm.CountryTypeListId > 0)
             //{
-            //    options.FilterBy = (x => x.country_type_id == vm.country_type_id);
+            //    options.FilterBy = (x => x.CountryTypeListId == vm.CountryTypeListId);
             //}
             if (!string.IsNullOrEmpty(vm.name))
             {
@@ -47,30 +47,6 @@ namespace DIS.Web.Mappers.Setttings
         }
 
 
-        //public Country? MapViewModelToModel(Country? data, CountryViewModel vm)
-        //{
-        //    if (data != null)
-        //    {
-        //        data.name = vm.name;
-
-        //        if (vm.country_typeList_id != null)
-        //        {
-        //            foreach (var c in vm.country_typeList_id)
-        //            {
-        //                data.country_type_id = c;
-
-        //            }
-        //        }
-        //        //if (vm.country_type_id > 0)
-        //        //{
-        //        //    data.country_type_id = vm.country_type_id;
-        //        //}
-
-
-        //    }
-        //    return data;
-        //}
-
 
 
         public Country? MapViewModelToModel(Country? data, CountryViewModel vm)
@@ -95,29 +71,9 @@ namespace DIS.Web.Mappers.Setttings
 
 
 
-                //List<country_countrytype> cctid = _cctrepo.GetByCountryId(data.id);
-                //foreach (var cct in cctid)
-                //{
-                //    if (cct.CountryType != null)
-                //    {
-
-
-                //        vm.CountryTypeListId.Add(cct.CountryType.id);
-                //        vm.CountryType.Add(new CountryTypeViewModel
-                //        {
-                //            id = cct.CountryType.id,
-                //            name = cct.CountryType.name
-                //        });
-                //    }
-                //}
-
             }
             return vm;
         }
-
-
-
-
 
 
 

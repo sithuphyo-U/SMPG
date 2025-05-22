@@ -59,7 +59,7 @@ namespace DIS.Web.Controllers.Settings
             CountryViewModel vm = new CountryViewModel();
 
             vm.name = GetRequestParameter<string>("search[name]");
-            // vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            // vm.CountryTypeListId = GetRequestParameter<int>("search[CountryTypeListId]");
             return vm;
         }
 
@@ -74,68 +74,69 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     Country? data = countryRepository.Get(vm.id);
-                    //if (!isDuplicate(data, vm))
-                    //{
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = countryRepository.Save(data);
-
-                    if (result.success)
+                    if (!isDuplicate(data, vm))
                     {
-                        List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
-                        foreach(var cct in cctlist)
-                        {
-                            _cctrepo.Remove(cct);
-                        }
-                        
-                        foreach (var typeId in vm.CountryTypeListId)
-                        {
-                            country_countrytype cctli = new country_countrytype();
+                        data = _mapper.MapViewModelToModel(data, vm);
+                        result = countryRepository.Save(data);
 
-                           cctli.country_id = result.id;
-                            cctli.country_type_id = typeId;
-                          
-                            _cctrepo.Save(cctli);
+                        if (result.success)
+                        {
+                            List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
+                            foreach (var cct in cctlist)
+                            {
+                                _cctrepo.Remove(cct);
+                            }
+
+                            foreach (var typeId in vm.CountryTypeListId)
+                            {
+                                country_countrytype cctli = new country_countrytype();
+
+                                cctli.country_id = result.id;
+                                cctli.country_type_id = typeId;
+
+                                _cctrepo.Save(cctli);
+                            }
                         }
-                        //}
-                        //else
-                        //{
-                        //    result.messages.Add(Constants.DuplicateMessage);
-                        //}
+                        else
+                        {
+                            result.messages.Add(Constants.DuplicateMessage);
+                        }
                     }
                 }
                 else
                 {
                     Country? data = new Country();
-                    //if (!isDuplicate(data, vm))
-                    //{
-                    data = _mapper.MapViewModelToModel(data, vm);
-                    result = countryRepository.Save(data);
-
-                    if (result.success)
+                    if (!isDuplicate(data, vm))
                     {
+                        data = _mapper.MapViewModelToModel(data, vm);
+                        result = countryRepository.Save(data);
 
-
-                        foreach (var typeId in vm.CountryTypeListId)
+                        if (result.success)
                         {
 
-                            var cct = new country_countrytype
-                            {
-                                country_id = result.id,         
-                                country_type_id = typeId       
-                            };
 
-                            _cctrepo.Save(cct);
+                            foreach (var typeId in vm.CountryTypeListId)
+                            {
+
+                                var cct = new country_countrytype
+                                {
+                                    country_id = result.id,
+                                    country_type_id = typeId
+                                };
+
+                                _cctrepo.Save(cct);
+                            }
+
                         }
 
                     }
 
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
+
                 }
-                //}
-                //else
-                //{
-                //    result.messages.Add(Constants.DuplicateMessage);
-                //}
-            
             }
             catch (Exception ex)
             {
@@ -146,59 +147,6 @@ namespace DIS.Web.Controllers.Settings
 
             return Json(result);
 }
-
-//public IActionResult SaveOrUpdate(CountryViewModel vm)
-//{
-//    CommandResult<Country> result = new CommandResult<Country>();
-//    try
-//    {
-//        if (vm.id > 0)
-//        {
-//            Country? data = countryRepository.Get(vm.id);
-//            if (!isDuplicate(data,vm))
-//            {
-//                data = _mapper.MapViewModelToModel(data, vm);
-//                result = countryRepository.Save(data);
-//                if (result.success)
-//                {
-//                    List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
-//                    foreach(var c in cctlist)
-//                    {
-//                        _cctrepo.Remove(c);
-//                    }
-
-//                }
-//            }
-//            else
-//            {
-//                result.messages.Add(Constants.DuplicateMessage);
-//            }
-
-//        }
-//        else
-//        {
-//            Country? data = new Country();
-//            if(!isDuplicate(data,vm))
-//           { data = _mapper.MapViewModelToModel(data, vm);
-//                result = countryRepository.Save(data);
-//            }
-//            else
-//            {
-//                result.messages.Add(Constants.DuplicateMessage);
-//            }
-
-//        }
-
-//    }
-//    catch (Exception ex)
-//    {
-//        result.success = false;
-//        result.messages.Add(ex.Message);
-//        logger.LogError(ex.Message);
-
-//    }
-//    return Json(result);
-//}
 
 [HttpDelete]
 [Route("delete/")]
@@ -250,7 +198,7 @@ protected bool isDuplicate(Country data, CountryViewModel vm)
     bool duplicate = false;
     if (data.id > 0)
     {
-        if (vm.name == data.name)
+        if (vm.name == data.name )
         {
             duplicate = false;
 
