@@ -12,5 +12,7 @@ namespace DIS.DataAccess.Interfaces.Settings
     {
         StateDivision? FindByName(string name);
          List<StateDivision>? GetStateDivisionbyCountry(int id);
+        StateDivision GetCountryByStateDivision (int id);
+       
     }
 }

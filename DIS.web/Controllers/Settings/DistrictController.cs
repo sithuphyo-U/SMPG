@@ -15,11 +15,15 @@ namespace DIS.Web.Controllers.Settings
     public class DistrictController : BaseController
     {
         IDistrictRepository districtRepository;
+        Icountry_countrytypeRepository _cctrepo;
+      
         DistrictMapper _mapper;
-        public DistrictController(IDistrictRepository type) : base(typeof(DistrictController))
+        public DistrictController(IDistrictRepository type, Icountry_countrytypeRepository cctrepo) : base(typeof(DistrictController))
         {
             districtRepository = type;
             _mapper = new DistrictMapper();
+            _cctrepo = cctrepo;
+
         }
 
         [HttpGet]
@@ -45,7 +49,7 @@ namespace DIS.Web.Controllers.Settings
             DistrictViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
             PagedResult<District> list = districtRepository.GetPagedResults(queryOptions);
-            PagedResult<DistrictViewModel> vmList = _mapper.MapModelToListViewModel(list);
+            PagedResult<DistrictViewModel> vmList = _mapper.MapModelToListViewModel(list,_cctrepo, districtRepository);
             return vmList;
 
         }
@@ -53,7 +57,7 @@ namespace DIS.Web.Controllers.Settings
         {
             DistrictViewModel vm = new DistrictViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
-            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            //vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
 
@@ -71,32 +75,33 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     District? data = districtRepository.Get(vm.id);
-                    if (!isDuplicate(data, vm))
-                    {
+                    //if (!isDuplicate(data, vm))
+                    //{
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = districtRepository.Save(data);
                         if (result.success)
                         {
 
                         }
-                    }
-                    else
-                    {
-                        result.messages.Add(Constants.DuplicateMessage);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    result.messages.Add(Constants.DuplicateMessage);
+                    //}
 
                 }
                 else
                 {
                     District? data = new District();
-                    if(!isDuplicate(data, vm))
-                    {data = _mapper.MapViewModelToModel(data, vm);
+                    //if(!isDuplicate(data, vm))
+                    //{
+                        data = _mapper.MapViewModelToModel(data, vm);
                         result = districtRepository.Save(data);
-                    }
-                    else
-                    {
-                        result.messages.Add(Constants.DuplicateMessage);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    result.messages.Add(Constants.DuplicateMessage);
+                    //}
                 }
 
             }
@@ -154,7 +159,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name && vm.country_type_id == data.country_type_id && vm.country_id ==data.country_id && vm.state_division_id==data.state_division_id)
+                if (vm.name == data.name && vm.country_id ==data.country_id && vm.state_division_id==data.state_division_id)
                 {
                     duplicate = false;
 
@@ -171,7 +176,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 District? dc = districtRepository.FindByName(vm.name);
-                if (dc.name.Trim() == vm.name.Trim() && dc.country_type_id ==vm.country_type_id && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.country_id == vm.country_id && dc.state_division_id == vm.state_division_id)
                 {
                     duplicate = true;
                 }

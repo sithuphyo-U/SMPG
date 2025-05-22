@@ -15,9 +15,9 @@ namespace DIS.DataAccess.Entity.Settings
         public int country_id { get; set; }
         [ForeignKey("country_id")]
         public virtual Country Country { get; set; }
-        public int country_type_id { get; set; }
-        [ForeignKey("country_type_id")]
-        public virtual CountryType CountryType { get; set; }
+        //public int country_type_id { get; set; }
+        //[ForeignKey("country_type_id")]
+        //public virtual CountryType CountryType { get; set; }
       
     }
 }
