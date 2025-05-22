@@ -14,6 +14,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using DIS.Application.Services;
+using NPOI.HPSF;
+using Microsoft.IdentityModel.Tokens;
+using DocumentFormat.OpenXml.Packaging;
+using System.Text;
+using UglyToad.PdfPig;
+using System.Text.RegularExpressions;
 
 namespace DIS.Web.Controllers
 {
@@ -55,7 +61,7 @@ namespace DIS.Web.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            PagedResult <DisasterInfoViewModel> list = new PagedResult<DisasterInfoViewModel>();
+            PagedResult<DisasterInfoViewModel> list = new PagedResult<DisasterInfoViewModel>();
             try
             {
                 list = GetAllData();
@@ -77,8 +83,26 @@ namespace DIS.Web.Controllers
             DisasterInfoViewModel vm = GetRequestParameter();
             queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
             PagedResult<DisasterInfo> list = _repository.GetPagedResults(queryOptions);
-            PagedResult<DisasterInfoViewModel> vmList = _mapper.MapModelToListViewModel(list, _disasterInfoFileRepo);
-          
+            PagedResult<DisasterInfoViewModel> vmList;
+
+            // Apply filter and remap
+            if (!vm.word.IsNullOrEmpty())
+            {
+                var filteredList = FilterByWord(list.data, vm.word);
+
+                vmList = new PagedResult<DisasterInfoViewModel>
+                {
+                    data = filteredList,
+                    total = filteredList.Count,
+
+                };
+            }
+            else
+            {
+                // No filter applied, use normal mapping
+                vmList = _mapper.MapModelToListViewModel(list, _disasterInfoFileRepo);
+            }
+
             return vmList;
 
 
@@ -95,10 +119,144 @@ namespace DIS.Web.Controllers
             vm.district_id = GetRequestParameter<int>("search[district_id]");
             vm.disaster_category_id = GetRequestParameter<int>("search[disasterCategory_id]");
             vm.subcategory_id = GetRequestParameter<int>("search[subCategory_id]");
+            vm.word = GetRequestParameter<string>("search[word]");
+
             return vm;
         }
-     
-    [HttpPost]
+        //[HttpGet]
+        //[Route("filter")]
+        //public List<DisasterInfoViewModel> FilterByWord(List<DisasterInfo> list, string word)
+        //{
+        //    var filtered = new List<DisasterInfoViewModel>();
+        //    string orderedInput = string.Concat(word.OrderBy(c => c));
+
+        //    foreach (var item in list)
+        //    {
+        //        int wordCount = 0;
+        //        var matchedFiles = new List<File_TB>();
+
+        //        // Fetch both .docx and .pdf files
+        //        var files = _disasterInfoFileRepo.GetDataById(item.id)
+        //                      .Where(f => f.file_type == ".docx" || f.file_type == ".pdf");
+
+        //        foreach (var file in files)
+        //        {
+        //            string fullPath = Path.Combine(Constants.FilePath, "DisasterInfoFile", file.file_name);
+
+        //            if (System.IO.File.Exists(fullPath))
+        //            {
+        //                string content = string.Empty;
+
+
+        //                if (file.file_type == ".docx")
+        //                {
+        //                    using (WordprocessingDocument doc = WordprocessingDocument.Open(fullPath, false))
+        //                    {
+        //                        content = doc.MainDocumentPart.Document.Body.InnerText;
+        //                    }
+        //                }
+        //                else if (file.file_type == ".pdf")
+        //                {
+        //                    // Extract PDF text here
+        //                    var result = ExtractTextFromPdf(fullPath, word);
+
+        //                    content = result.filedata;
+        //                    wordCount = result.count;
+
+        //                }
+
+        //                if (!string.IsNullOrEmpty(content))
+        //                {
+        //                    if (content.Contains(word, StringComparison.OrdinalIgnoreCase) ||
+        //                        string.Concat(content.Where(char.IsLetter).OrderBy(c => c)).Contains(orderedInput))
+        //                    {
+        //                        matchedFiles.Add(file);
+
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        if (matchedFiles.Any())
+        //        {
+        //            var vm = _mapper.MapModelToViewModel(item, new DisasterInfoViewModel());
+        //            vm.FilteredFiles = matchedFiles;
+        //            vm.count=wordCount;  
+        //            filtered.Add(vm);
+        //        }
+        //    }
+
+        //    return filtered;
+        //}
+
+        [HttpGet]
+        [Route("filter")]
+        public List<DisasterInfoViewModel> FilterByWord(List<DisasterInfo> list, string word)
+        {
+            var filtered = new List<DisasterInfoViewModel>();
+            string orderedInput = string.Concat(word.OrderBy(c => c));
+
+            foreach (var item in list)
+            {
+                var matchedFiles = new List<FilteredFileViewModel>();
+
+                var files = _disasterInfoFileRepo.GetDataById(item.id)
+                              .Where(f => f.file_type == ".docx" || f.file_type == ".pdf");
+
+                foreach (var file in files)
+                {
+                    string fullPath = Path.Combine(Constants.FilePath, "DisasterInfoFile", file.file_name);
+
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        string content = string.Empty;
+                        int wordCount = 0;
+
+                        if (file.file_type == ".docx")
+                        {
+                            using (WordprocessingDocument doc = WordprocessingDocument.Open(fullPath, false))
+                            {
+                                content = doc.MainDocumentPart.Document.Body.InnerText;
+                                wordCount = Regex.Matches(content, Regex.Escape(word), RegexOptions.IgnoreCase).Count;
+                            }
+                        }
+                        else if (file.file_type == ".pdf")
+                        {
+                            var result = ExtractTextFromPdf(fullPath, word);
+                            content = result.filedata;
+                            wordCount = result.count;
+                        }
+
+                        if (!string.IsNullOrEmpty(content))
+                        {
+                            if (content.Contains(word, StringComparison.OrdinalIgnoreCase) ||
+                                string.Concat(content.Where(char.IsLetter).OrderBy(c => c)).Contains(orderedInput))
+                            {
+                                matchedFiles.Add(new FilteredFileViewModel
+                                {
+                                    File = file,
+                                    WordCount = wordCount
+                                });
+                            }
+                        }
+                    }
+                }
+
+                if (matchedFiles.Any())
+                {
+                    var vm = _mapper.MapModelToViewModel(item, new DisasterInfoViewModel(), _TBRepository);
+                    vm.FilteredFiles = matchedFiles;
+                    filtered.Add(vm);
+                }
+            }
+
+            return filtered;
+        }
+
+
+
+
+        [HttpPost]
         [Route("SaveOrUpdate")]
         public IActionResult SaveOrUpdate([FromForm] DisasterInfoViewModel vm)
         {
@@ -114,7 +272,7 @@ namespace DIS.Web.Controllers
                         result = _repository.Save(data);
                         if (result.success)
                         {
-                            
+
 
                         }
                     }
@@ -127,26 +285,29 @@ namespace DIS.Web.Controllers
                 else
                 {
                     DisasterInfo? data = new DisasterInfo();
-                    
-                        data = _mapper.MapViewModelToModel(data, vm);
-                        result = _repository.Save(data);
-                        if (result.success)
+
+                    data = _mapper.MapViewModelToModel(data, vm);
+                    result = _repository.Save(data);
+                    if (result.success)
+                    {
+                        if (vm.file_list != null && vm.file_list.Count > 0)
                         {
-                            if (vm.file_list != null && vm.file_list.Count > 0)
+
+                            foreach (var f in vm.file_list)
+
                             {
-                                foreach (var f in vm.file_list)
+                                string extension = Path.GetExtension(f.FileName).ToLower();
+                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg")
                                 {
-                                    if (f.ContentType == "application/pdf")
-                                    {
                                     Guid guId = Guid.NewGuid();
                                     File_TB entity = new File_TB();
                                     entity.file_name = guId.ToString();
-                                    entity.file_type = f.ContentType;
+                                    entity.file_type = extension;
                                     entity.originalfile_name = f.FileName;
                                     entity.disastercategory_id = data.id;
-                                   
+
                                     entity.path = "/DisasterInfoFile";
-                                    
+
                                     var returndata = _dsInfoFileService.SaveorUpdate(entity);
                                     if (returndata != null)
                                     {
@@ -157,10 +318,10 @@ namespace DIS.Web.Controllers
 
 
                                 }
-                                }
                             }
                         }
-                    
+                    }
+
                     else
                     {
                         result.messages.Add(Constants.DuplicateMessage);
@@ -178,6 +339,31 @@ namespace DIS.Web.Controllers
             return Json(result);
 
         }
+
+        [HttpDelete]
+        [Route("delete/")]
+        public JsonResult Delete(int id)
+        {
+            CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
+            try
+            {
+                DisasterInfo? data = _repository.Get(id);
+                if (data != null)
+                {
+                    result = _repository.Remove(data);
+                    if (result.success)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+            return Json(result);
+        }
+
         [HttpGet("view-pdf/{fileName}")]
         public IActionResult ViewPdf(string fileName)
         {
@@ -189,6 +375,37 @@ namespace DIS.Web.Controllers
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/pdf");
         }
+
+        [HttpGet("view-image/{fileName}")]
+        public IActionResult ViewImage(string fileName)
+        {
+            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var contentType = "image/jpeg";
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, contentType);
+        }
+
+        [HttpGet("download-doc/{filename}")]
+        public IActionResult DownloadFile(string filename)
+        {
+            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", filename);
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(new { success = false, message = "File not found" });
+            }
+
+            var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"; 
+            
+
+            var bytes = System.IO.File.ReadAllBytes(filePath);
+            return File(bytes, contentType);
+        }
+
 
 
         protected bool isDuplicate(DisasterInfo data, DisasterInfoViewModel vm)
@@ -223,29 +440,7 @@ namespace DIS.Web.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("delete/")]
-        public JsonResult Delete(int id)
-        {
-            CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
-            try
-            {
-                DisasterInfo? data = _repository.Get(id);
-                if (data != null)
-                {
-                    result = _repository.Remove(data);
-                    if (result.success)
-                    {
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-            }
-            return Json(result);
-        }
+       
         [HttpGet]
         [Route("getbyid/")]
         public JsonResult GetById(int id)
@@ -254,7 +449,7 @@ namespace DIS.Web.Controllers
             try
             {
                 DisasterInfo? data = _repository.Get(id);
-                vm = _mapper.MapModelToViewModel(data, vm);
+                vm = _mapper.MapModelToViewModel(data, vm, _TBRepository);
             }
             catch (Exception ex)
             {
@@ -310,6 +505,36 @@ namespace DIS.Web.Controllers
             };
             return fileContentResult;
         }
+        private class Data
+        {
+            public string filedata { get; set; }
+            public int count { get; set; }
+        }
+        private Data ExtractTextFromPdf(string fullPath,  string searchWord)
+        {
+            Data data = new Data();
+            int totalWordCount = 0;
+            var sb = new StringBuilder();
+
+            using (PdfDocument document = PdfDocument.Open(fullPath))
+            {
+                foreach (UglyToad.PdfPig.Content.Page page in document.GetPages())
+
+                {
+                    if (!string.IsNullOrEmpty(searchWord))
+                    {
+                        int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
+                        totalWordCount += count;
+                    }
+                   
+                    sb.AppendLine(page.Text);
+                }
+            }
+            data.filedata = sb.ToString();
+            data.count = totalWordCount;
+            return data;
+        }
+
 
 
 
