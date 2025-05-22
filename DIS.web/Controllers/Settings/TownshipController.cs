@@ -74,33 +74,33 @@ namespace DIS.Web.Controllers.Settings
                 if (vm.id > 0)
                 {
                     Township? data = _repository.Get(vm.id);
-                    //if (!isDuplicate(data, vm))
-                    //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
                         if (result.success)
                         {
 
                         }
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
 
                 }
                 else
                 {
                     Township? data = new Township();
-                    //if(!isDuplicate(data,vm))
-                    //{
+                    if (!isDuplicate(data, vm))
+                    {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
-                    //}
-                    //else
-                    //{
-                    //    result.messages.Add(Constants.DuplicateMessage);
-                    //}
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateMessage);
+                    }
                 }
 
             }

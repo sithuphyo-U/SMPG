@@ -59,7 +59,15 @@ namespace DIS.Web.Controllers.Settings
             CountryViewModel vm = new CountryViewModel();
 
             vm.name = GetRequestParameter<string>("search[name]");
-            // vm.CountryTypeListId = GetRequestParameter<int>("search[CountryTypeListId]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
+            if (vm.country_type_id>0)
+            {
+                country_countrytype cc = new country_countrytype();
+                var country_type = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
+                vm.id = country_type.country_id;
+                
+
+            }
             return vm;
         }
 
