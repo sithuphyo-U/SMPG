@@ -5,6 +5,7 @@ using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 using System.Collections.Immutable;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DIS.Web.Mappers
 {
@@ -227,6 +228,14 @@ namespace DIS.Web.Mappers
                 }
                 vm.date = data.date;
                 vm.time = data.time;
+
+                if (data.created_date != null)
+                {
+                    vm.created_date = data.created_date.Value.AddHours(24);
+                }
+
+
+
                 vm.totalCountofNews = data.details;
                 List<File_TB> files = _disasterInfoFileRepo.GetDataById(vm.id);
                 if (files.Count > 0)

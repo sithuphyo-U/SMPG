@@ -39,7 +39,7 @@ namespace DIS.Web.Mappers
                 {
                     queryOption.SortBy.Add((x => x.username));
                 }
-                else if (queryOption.SortColumnName == "role")
+                else if (queryOption.SortColumnName == "role_name")
                 {
                     queryOption.SortBy.Add((x => x.role.name));
                 }

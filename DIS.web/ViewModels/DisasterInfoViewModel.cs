@@ -28,6 +28,7 @@ namespace DIS.Web.ViewModels
         public int? subcategory_id { get; set; }
         public string? subCategory_name { get; set; }
 
+        public DateTime? created_date { get; set; }
         public IFormFileCollection? file_list {  get; set; }
         public List<FileViewModel> Files_List { get; set; } = new List<FileViewModel>();
 
