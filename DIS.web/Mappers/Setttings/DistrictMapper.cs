@@ -19,7 +19,7 @@ namespace DIS.Web.ViewModels
 
                 foreach (var cid in countryIds)
                 {
-                    Expression<Func<District, bool>> singleFilter = x => x.id == cid;
+                    Expression<Func<District, bool>> singleFilter = x => x.country_id == cid;
 
                     if (combinedFilter == null)
                     {

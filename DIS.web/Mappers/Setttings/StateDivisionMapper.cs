@@ -20,7 +20,7 @@ namespace DIS.Web.Mappers.Setttings
 
                 foreach (var cid in countryIds)
                 {
-                    Expression<Func<StateDivision, bool>> singleFilter = x => x.id == cid;
+                    Expression<Func<StateDivision, bool>> singleFilter = x => x.country_id == cid;
 
                     if (combinedFilter == null)
                     {
