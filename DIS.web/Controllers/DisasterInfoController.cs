@@ -297,7 +297,7 @@ namespace DIS.Web.Controllers
 
                             {
                                 string extension = Path.GetExtension(f.FileName).ToLower();
-                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3")
+                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4")
                                 {
                                     Guid guId = Guid.NewGuid();
                                     File_TB entity = new File_TB();
