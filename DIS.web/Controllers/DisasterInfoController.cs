@@ -297,7 +297,7 @@ namespace DIS.Web.Controllers
 
                             {
                                 string extension = Path.GetExtension(f.FileName).ToLower();
-                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg")
+                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3")
                                 {
                                     Guid guId = Guid.NewGuid();
                                     File_TB entity = new File_TB();
@@ -389,6 +389,32 @@ namespace DIS.Web.Controllers
             return File(fileBytes, contentType);
         }
 
+        [HttpGet("view-audio/{fileName}")]
+        public IActionResult ViewAudio(string fileName)
+        {
+            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var contentType = "audio/mpeg"; // MIME type for MP3
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, contentType);
+        }
+
+        [HttpGet("view-video/{fileName}")]
+        public IActionResult ViewVideo(string fileName)
+        {
+            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var contentType = "video/mp4"; // MIME type for MP4
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, contentType);
+        }
+
         [HttpGet("download-doc/{filename}")]
         public IActionResult DownloadFile(string filename)
         {
@@ -439,6 +465,8 @@ namespace DIS.Web.Controllers
 
 
         }
+
+
 
        
         [HttpGet]
