@@ -73,6 +73,8 @@ namespace DIS.Web.Mappers
                 vmList.data.Add(vm);
             }
             vmList.total = userList.total;
+            vmList.success = userList.success;
+            vmList.messages = new List<string>(userList.messages);
             return vmList;
         }
         public User? MapViewModelToModel(User? user, UserViewModel vm)
