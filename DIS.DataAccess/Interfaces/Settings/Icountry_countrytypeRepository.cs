@@ -13,5 +13,7 @@ namespace DIS.DataAccess.Interfaces.Settings
         List<country_countrytype> GetByCountryId(int countryId);
        List<country_countrytype> DeletebyCountryId(int countryId);
         List<country_countrytype> GetByCountryTypeByCountryId(int? countryId);
+        bool Exists(int countryId, int? countryTypeId);
+
     }
 }
