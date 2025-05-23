@@ -171,6 +171,8 @@ public JsonResult Delete(int id)
             result = countryRepository.Remove(data);
             if (result.success)
             {
+                        country_countrytype cc = _cctrepo.GetDatabyCountryId(data.id);
+                        _cctrepo.Remove(cc);
 
             }
         }

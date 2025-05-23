@@ -1,6 +1,7 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
 using Microsoft.EntityFrameworkCore;
+using NPOI.OpenXmlFormats.Dml;
 using NPOI.SS.Formula.PTG;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,9 @@ namespace DIS.DataAccess.Repositories.Settings
 
         }
 
-
+        public country_countrytype GetDatabyCountryId(int countryId)
+        {
+            return CustomQuery().Where(c => c.country_id == countryId && c.deleted == false).FirstOrDefault();
+        }
     }
 }

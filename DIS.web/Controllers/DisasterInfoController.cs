@@ -291,38 +291,38 @@ namespace DIS.Web.Controllers
                                     }
                                 }
                             }
-                                if (vm.file_list !=null)
+                            if (vm.file_list != null)
+                            {
+                                foreach (var f in vm.file_list)
+
                                 {
-                                    foreach (var f in vm.file_list)
-
+                                    string extension = Path.GetExtension(f.FileName).ToLower();
+                                    if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                     {
-                                        string extension = Path.GetExtension(f.FileName).ToLower();
-                                        if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
+                                        Guid guId = Guid.NewGuid();
+                                        File_TB entity = new File_TB();
+                                        entity.file_name = guId.ToString();
+                                        entity.file_type = extension;
+                                        entity.originalfile_name = f.FileName;
+                                        entity.disastercategory_id = data.id;
+
+                                        entity.path = "/DisasterInfoFile";
+
+                                        var returndata = _dsInfoFileService.SaveorUpdate(entity);
+                                        if (returndata != null)
                                         {
-                                            Guid guId = Guid.NewGuid();
-                                            File_TB entity = new File_TB();
-                                            entity.file_name = guId.ToString();
-                                            entity.file_type = extension;
-                                            entity.originalfile_name = f.FileName;
-                                            entity.disastercategory_id = data.id;
-
-                                            entity.path = "/DisasterInfoFile";
-
-                                            var returndata = _dsInfoFileService.SaveorUpdate(entity);
-                                            if (returndata != null)
-                                            {
-                                                fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
-                                            }
-
-
-
-
+                                            fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
                                         }
+
+
+
+
                                     }
                                 }
                             }
                         }
-                    
+                    }
+
                 }
                 else
                 {
@@ -419,6 +419,7 @@ namespace DIS.Web.Controllers
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/pdf");
         }
+
 
         [HttpGet("view-image/{fileName}")]
         public IActionResult ViewImage(string fileName)
