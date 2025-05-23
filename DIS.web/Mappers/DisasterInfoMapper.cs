@@ -5,6 +5,7 @@ using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
 using System.Collections.Immutable;
+using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DIS.Web.Mappers
@@ -17,6 +18,10 @@ namespace DIS.Web.Mappers
             if (vm.disaster_category_id > 0)
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.disasterCategory_id == vm.disaster_category_id);
+            }
+            if (vm.subcategory_id > 0)
+            {
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.subCategory_id == vm.subcategory_id);
             }
             if (vm.country_type_id > 0)
             {
@@ -38,11 +43,29 @@ namespace DIS.Web.Mappers
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.title.Contains(vm.title));
             }
-            if (!string.IsNullOrEmpty(vm.word))
+            if (!string.IsNullOrEmpty(vm.from_date) && string.IsNullOrEmpty(vm.to_date))
+            {
+                DateTime fromdt = DateTime.ParseExact(vm.from_date.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => (x.date >= fromdt));
+            }
+            if (string.IsNullOrEmpty(vm.from_date) && !string.IsNullOrEmpty(vm.to_date))
+            {
+                DateTime todt = DateTime.ParseExact(vm.to_date.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => (x.date <= todt));
+            }
+            if (!string.IsNullOrEmpty(vm.from_date) && !string.IsNullOrEmpty(vm.to_date))
             {
 
-            }
+                DateTime fdate = DateTime.ParseExact(vm.from_date.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+                DateTime tdate = DateTime.ParseExact(vm.to_date.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy,
+                    (a => a.date >= fdate && a.date <= tdate));
+
+            }
 
 
 
@@ -131,6 +154,7 @@ namespace DIS.Web.Mappers
             {
                 vm.id = data.id;
                 vm.title = data.title;
+                vm.date = data.date;
                 if (data.DisasterCategory != null)
                 {
                     vm.disaster_category_id = data.disasterCategory_id;
