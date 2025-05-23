@@ -45,22 +45,18 @@ namespace DIS.Web.Controllers.Common
             protected QueryOptions<TEntity> GetQueryOptions<TEntity>() where TEntity : BaseEntity
             {
                 QueryOptions<TEntity> queryOptions = new QueryOptions<TEntity>();
-                string length = Request.Query["length"].ToString();
+                string length = Request.Query["itemsPerPage"].FirstOrDefault();
                 if (!string.IsNullOrEmpty(length))
                 {
                     queryOptions.legth = Convert.ToInt32(length);
                     queryOptions.RecordPerPage = Convert.ToInt32(length);
                 }
-                string page = Request.Query["start"].ToString();
+                string page = Request.Query["page"].ToString();
                 if (!string.IsNullOrEmpty(page))
                 {
                     queryOptions.Page = Convert.ToInt32(page);
                 }
-                //string record = Request.Query["record"].ToString();
-                //if (!string.IsNullOrEmpty(record))
-                //{
-                //   ;
-                //}
+               
                 var SortColumn = Request.Query["sortBy"].FirstOrDefault();
                 if (!string.IsNullOrEmpty(SortColumn))
                 {

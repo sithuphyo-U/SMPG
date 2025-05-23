@@ -27,13 +27,16 @@ namespace DIS.Web.ViewModels
         public string? disasterCategory_name { get; set; }
         public int? subcategory_id { get; set; }
         public string? subCategory_name { get; set; }
+        public string? from_date { get; set; }
+        public string? to_date { get; set; }
 
         public DateTime? created_date { get; set; }
-        public IFormFileCollection? file_list {  get; set; }
+        public IFormFileCollection? file_list { get; set; } 
+          
         public List<FileViewModel> Files_List { get; set; } = new List<FileViewModel>();
 
         public DisasterInfo? DisasterInfo { get; set; }           // <-- new
-        //public List<File_TB>? FilteredFiles { get; set; }
+        public List<File_TB>? ExsitingFiles { get; set; }
         public List<FilteredFileViewModel> FilteredFiles { get; set; } = new List<FilteredFileViewModel>();
       
 
