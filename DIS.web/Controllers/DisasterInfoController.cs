@@ -609,7 +609,12 @@ namespace DIS.Web.Controllers
                 {
                     if (!string.IsNullOrEmpty(searchWord))
                     {
-                        int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
+                        string normalizedText = page.Text.Normalize(NormalizationForm.FormKC);
+                        string normalizedSearch = searchWord.Normalize(NormalizationForm.FormKC);
+
+                        int count = Regex.Matches(normalizedText, Regex.Escape(normalizedSearch), RegexOptions.IgnoreCase).Count;
+
+                        //int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
                         totalWordCount += count;
                     }
 
