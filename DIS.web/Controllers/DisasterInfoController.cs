@@ -20,6 +20,8 @@ using DocumentFormat.OpenXml.Packaging;
 using System.Text;
 using UglyToad.PdfPig;
 using System.Text.RegularExpressions;
+using DIS.Application.Service.Common;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 
 namespace DIS.Web.Controllers
 {
@@ -112,13 +114,15 @@ namespace DIS.Web.Controllers
         private DisasterInfoViewModel GetRequestParameter()
         {
             DisasterInfoViewModel vm = new DisasterInfoViewModel();
+            vm.from_date = GetRequestParameter<string>("search[from_date]");
+            vm.to_date = GetRequestParameter<string>("search[to_date]");
             vm.title = GetRequestParameter<string>("search[title]");
             vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
             vm.district_id = GetRequestParameter<int>("search[district_id]");
             vm.disaster_category_id = GetRequestParameter<int>("search[disasterCategory_id]");
-            vm.subcategory_id = GetRequestParameter<int>("search[subCategory_id]");
+            vm.subcategory_id = GetRequestParameter<int>("search[subcategories_id]");
             vm.word = GetRequestParameter<string>("search[word]");
 
             return vm;
@@ -272,15 +276,67 @@ namespace DIS.Web.Controllers
                         result = _repository.Save(data);
                         if (result.success)
                         {
+                            string filesListJson = Request.Form["Files_List"];
+                            var oldFiles = _TBRepository.GetFilebyDisasterInfoId(vm.id); // Get existing from DB
+                            List<FileViewModel> existingFiles = new(); // This will store what user kept
+
+                            if (!string.IsNullOrEmpty(filesListJson))
+                            {
+                                existingFiles = JsonConvert.DeserializeObject<List<FileViewModel>>(filesListJson);
+                            }
+
+                            
+                            var keptFileNames = existingFiles.Select(f => f.file_name).ToList(); 
+
+                          
+                            var deletedFiles = oldFiles.Where(f => !keptFileNames.Contains(f.file_name)).ToList();
+
+                            
+                            foreach (var deleted in deletedFiles)
+                            {
+                                var path = Path.Combine(Constants.FilePath + deleted.path, deleted.file_name);
+                                if (System.IO.File.Exists(path))
+                                {
+                                    System.IO.File.Delete(path);
+                                }
+
+                                _dsInfoFileService.Delete(deleted);
+                            }
 
 
+                            if (vm.file_list != null && vm.file_list.Count > 0)
+                            {
+                                foreach (var f in vm.file_list)
+                                {
+                                    string extension = Path.GetExtension(f.FileName).ToLower();
+                                    if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension==".png")
+                                    {
+                                        Guid guId = Guid.NewGuid();
+
+                                        File_TB entity = new File_TB
+                                        {
+                                            file_name = guId.ToString(),
+                                            file_type = extension,
+                                            originalfile_name = f.FileName,
+                                            disastercategory_id = data.id,
+                                            path = "/DisasterInfoFile"
+                                        };
+
+                                        var returndata = _dsInfoFileService.SaveorUpdate(entity);
+                                        if (returndata != null)
+                                        {
+                                            fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-                    else
-                    {
-                        result.messages.Add(Constants.DuplicateMessage);
-                    }
+                        else
+                        {
+                            result.messages.Add(Constants.DuplicateMessage);
+                        }
 
+                    }
                 }
                 else
                 {
@@ -297,7 +353,7 @@ namespace DIS.Web.Controllers
 
                             {
                                 string extension = Path.GetExtension(f.FileName).ToLower();
-                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4")
+                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension==".png" || extension == ".mp3" || extension == ".mp4")
                                 {
                                     Guid guId = Guid.NewGuid();
                                     File_TB entity = new File_TB();
@@ -327,8 +383,9 @@ namespace DIS.Web.Controllers
                         result.messages.Add(Constants.DuplicateMessage);
                     }
                 }
-
             }
+
+
             catch (Exception ex)
             {
                 result.success = false;
@@ -425,8 +482,8 @@ namespace DIS.Web.Controllers
                 return NotFound(new { success = false, message = "File not found" });
             }
 
-            var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"; 
-            
+            var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
 
             var bytes = System.IO.File.ReadAllBytes(filePath);
             return File(bytes, contentType);
@@ -468,7 +525,7 @@ namespace DIS.Web.Controllers
 
 
 
-       
+
         [HttpGet]
         [Route("getbyid/")]
         public JsonResult GetById(int id)
@@ -538,7 +595,7 @@ namespace DIS.Web.Controllers
             public string filedata { get; set; }
             public int count { get; set; }
         }
-        private Data ExtractTextFromPdf(string fullPath,  string searchWord)
+        private Data ExtractTextFromPdf(string fullPath, string searchWord)
         {
             Data data = new Data();
             int totalWordCount = 0;
@@ -551,10 +608,15 @@ namespace DIS.Web.Controllers
                 {
                     if (!string.IsNullOrEmpty(searchWord))
                     {
-                        int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
+                        string normalizedText = page.Text.Normalize(NormalizationForm.FormKC);
+                        string normalizedSearch = searchWord.Normalize(NormalizationForm.FormKC);
+
+                        int count = Regex.Matches(normalizedText, Regex.Escape(normalizedSearch), RegexOptions.IgnoreCase).Count;
+
+                        //int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
                         totalWordCount += count;
                     }
-                   
+
                     sb.AppendLine(page.Text);
                 }
             }

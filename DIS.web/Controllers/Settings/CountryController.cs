@@ -203,40 +203,46 @@ public JsonResult GetById(int id)
     return Json(vm);
 }
 
-protected bool isDuplicate(Country data, CountryViewModel vm)
-{
-    bool duplicate = false;
-    if (data.id > 0)
-    {
-        if (vm.name == data.name )
+        protected bool isDuplicate(Country data, CountryViewModel vm)
         {
-            duplicate = false;
-
-        }
-        else
-        {
-            Country? dc = countryRepository.FindByName(vm.name);
-            if (dc != null)
+            bool duplicate = false;
+            if (data.id > 0)
             {
-                duplicate = true;
+                if (vm.name == data.name )
+                {
+                    duplicate = false;
+
+                }
+                else
+                {
+                    Country? dc = countryRepository.FindByName(vm.name);
+                    if (dc != null)
+                    {
+                        duplicate = true;
+                    }
+                }
             }
+            else
+            {
+                Country? dc = countryRepository.FindByName(vm.name);
+
+                if (dc != null && dc.name.Trim() == vm.name.Trim())
+                {
+                    duplicate = true;
+                }
+            }
+            return duplicate;
+
+
         }
-    }
-    else
-    {
-        Country? dc = countryRepository.FindByName(vm.name);
-
-        if (dc != null && dc.name.Trim() == vm.name.Trim())
-        {
-            duplicate = true;
-        }
-    }
-    return duplicate;
 
 
-}
+       
 
-[HttpGet]
+
+
+
+        [HttpGet]
 [Route("ExportExcel")]
 public IActionResult ExportExcel()
 {
