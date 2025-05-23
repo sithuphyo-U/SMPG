@@ -45,7 +45,10 @@ namespace DIS.Web.Mappers
                 vm.description = data.description;
                 vmList.data.Add(vm);
             }
-            vmList.total = vmList.data.Count;
+            //vmList.total = vmList.data.Count;
+            vmList.total = list.total;
+            vmList.success = list.success;
+            vmList.messages = new List<string>(list.messages);
             return vmList;
         }
         public Role? MapViewModelToModel(Role? data, RoleViewModel vm)

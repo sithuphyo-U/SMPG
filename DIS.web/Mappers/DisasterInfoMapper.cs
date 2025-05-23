@@ -283,7 +283,10 @@ namespace DIS.Web.Mappers
                 vmList.data.Add(vm);
 
             }
-            vmList.total = vmList.data.Count;
+            //vmList.total = vmList.data.Count;
+            vmList.total = list.total;
+            vmList.success = list.success;
+            vmList.messages = new List<string>(list.messages);
             return vmList;
         }
 
