@@ -1,5 +1,6 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
+using Microsoft.EntityFrameworkCore;
 using NPOI.SS.Formula.PTG;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,13 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             return CustomQuery().Where(x => x.country_type_id == countryTypeId && x.deleted == false).ToList();
         }
+
+        public bool Exists(int countryId, int? countryTypeId)
+        {
+            return CustomQuery().Any(c => c.country_id == countryId && c.country_type_id == countryTypeId && c.deleted == false);
+
+        }
+
 
     }
 }

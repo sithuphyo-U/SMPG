@@ -155,7 +155,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name)
+                if (vm.name == data.name && vm.category_id == data.id)
                 {
                     duplicate = false;
 
@@ -172,7 +172,7 @@ namespace DIS.Web.Controllers.Settings
             else
             {
                 DisasterSubCategory? dc = _repository.FindByName(vm.name);
-                if (dc != null)
+                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.disaster_category_id == vm.category_id)
                 {
                     duplicate = true;
                 }

@@ -203,40 +203,100 @@ public JsonResult GetById(int id)
     return Json(vm);
 }
 
-protected bool isDuplicate(Country data, CountryViewModel vm)
-{
-    bool duplicate = false;
-    if (data.id > 0)
-    {
-        if (vm.name == data.name )
+        protected bool isDuplicate(Country data, CountryViewModel vm)
         {
-            duplicate = false;
-
-        }
-        else
-        {
-            Country? dc = countryRepository.FindByName(vm.name);
-            if (dc != null)
+            bool duplicate = false;
+            if (data.id > 0)
             {
-                duplicate = true;
+                if (vm.name == data.name)
+                {
+                    foreach (var typeId in vm.CountryTypeListId)
+                    {
+                        List<country_countrytype> cct = _cctrepo.GetByCountryTypeByCountryId(typeId);
+                        if (cct != null)
+                        {
+                            duplicate = true;
+                        }
+
+                    }
+                    duplicate = false;
+
+                }
+                else
+                {
+                    Country? dc = countryRepository.FindByName(vm.name);
+                    if (dc != null)
+                    {
+                        duplicate = true;
+                    }
+                }
             }
+            else
+            {
+                Country? dc = countryRepository.FindByName(vm.name);
+
+                if (dc != null && dc.name.Trim() == vm.name.Trim())
+                {
+                    foreach (var typeId in vm.CountryTypeListId)
+                    {
+                        List<country_countrytype> cct = _cctrepo.GetByCountryTypeByCountryId(typeId);
+                        if(cct != null  )
+                        {
+                            duplicate = true;
+                        }
+
+                    }
+
+                        duplicate = true;
+                }
+            }
+            return duplicate;
+
+
         }
-    }
-    else
-    {
-        Country? dc = countryRepository.FindByName(vm.name);
-
-        if (dc != null && dc.name.Trim() == vm.name.Trim())
-        {
-            duplicate = true;
-        }
-    }
-    return duplicate;
 
 
-}
+        //protected bool isDuplicate(Country data, CountryViewModel vm)
+        //{
+        //    // Case 1: Editing an existing country (UPDATE)
+        //    if (data.id > 0)
+        //    {
+        //        // Check if any selected type in `vm` is already linked to this country (`data.id`)
+        //        foreach (var typeId in vm.CountryTypeListId)
+        //        {
+        //            if (_cctrepo.Exists(data.id, typeId))
+        //            {
+        //                return true; // Duplicate found
+        //            }
+        //        }
+        //        return false;
+        //    }
+        //    // Case 2: New country (INSERT)
+        //    else
+        //    {
+        //        // Check if the country name in `vm` already exists in the database
+        //        Country? existingCountry = countryRepository.FindByName(vm.name.Trim());
 
-[HttpGet]
+        //        if (existingCountry != null)
+        //        {
+        //            // Check if any selected type in `vm` is already linked to the existing country
+        //            foreach (var typeId in vm.CountryTypeListId)
+        //            {
+        //                if (_cctrepo.Exists(existingCountry.id, typeId))
+        //                {
+        //                    return true; // Duplicate found
+        //                }
+        //            }
+        //        }
+        //        return false;
+        //    }
+        //}
+
+
+
+
+
+        [HttpGet]
 [Route("ExportExcel")]
 public IActionResult ExportExcel()
 {

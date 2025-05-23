@@ -169,7 +169,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name &&  vm.country_id == data.country_id  )
+                if (vm.name == data.name &&   vm.country_id == data.country_id  )
                 {
                     duplicate = false;
 
