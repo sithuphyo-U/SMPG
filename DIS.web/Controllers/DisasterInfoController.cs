@@ -310,7 +310,7 @@ namespace DIS.Web.Controllers
                                 foreach (var f in vm.file_list)
                                 {
                                     string extension = Path.GetExtension(f.FileName).ToLower();
-                                    if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4")
+                                    if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension==".png")
                                     {
                                         Guid guId = Guid.NewGuid();
 
@@ -354,7 +354,7 @@ namespace DIS.Web.Controllers
 
                             {
                                 string extension = Path.GetExtension(f.FileName).ToLower();
-                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4")
+                                if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension==".png" || extension == ".mp3" || extension == ".mp4")
                                 {
                                     Guid guId = Guid.NewGuid();
                                     File_TB entity = new File_TB();
@@ -609,7 +609,12 @@ namespace DIS.Web.Controllers
                 {
                     if (!string.IsNullOrEmpty(searchWord))
                     {
-                        int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
+                        string normalizedText = page.Text.Normalize(NormalizationForm.FormKC);
+                        string normalizedSearch = searchWord.Normalize(NormalizationForm.FormKC);
+
+                        int count = Regex.Matches(normalizedText, Regex.Escape(normalizedSearch), RegexOptions.IgnoreCase).Count;
+
+                        //int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
                         totalWordCount += count;
                     }
 
