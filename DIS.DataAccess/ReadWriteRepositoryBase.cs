@@ -31,125 +31,67 @@ namespace DIS.DataAccess
 
         public PagedResult<TEntity> GetPagedResults(QueryOptions<TEntity> option)
         {
-            PagedResult<TEntity> results = new PagedResult<TEntity>();
+            var results = new PagedResult<TEntity>();
+
             try
             {
-                if (option != null)
+                if (option == null)
                 {
-                    if (option.Page == 0)
-                    {
-                        option.Page = 1;
-                    }
-                    int skip = (option.Page - 1) * option.RecordPerPage;
-                    if (option.FilterBy != null)
-                    {
-                        results.total = _context.Set<TEntity>().Where(option.FilterBy).Where(x => x.deleted == false).Count();
-                    }
-                    else
-                    {
-                        results.total = _context.Set<TEntity>().Where(x => x.deleted == false).Count();
-                    }
-                    if (results.total > 0)
-                    {
-                        var query = _context.Set<TEntity>();
-
-                        if (option.FilterBy != null)
-                        {
-                            // results.filterBy = option.FilterBy.GetType().GetMembers().ToString();
-                            query.Where(option.FilterBy);
-                            if (option.SortOrder == SortOrder.ASC)
-                            {
-                                var q = query.Where(option.FilterBy).Where(x => x.deleted == false).OrderBy(option.SortBy[0]);
-
-                                if (option.SortBy.Count > 1)
-                                {
-                                    for (int i = 1; i < option.SortBy.Count; i++)
-                                    {
-                                        q = q.ThenBy(option.SortBy[i]);
-                                    }
-                                }
-                                if (option.legth < 0)
-                                {
-                                    results.data = q.ToList();
-                                }
-                                else
-                                {
-                                    results.data = q.Skip(skip).Take(option.RecordPerPage).ToList();
-                                }
-
-                            }
-                            else
-                            {
-                                var q = query.Where(option.FilterBy).Where(x => x.deleted == false).OrderByDescending(option.SortBy[0]);
-
-                                if (option.SortBy.Count > 1)
-                                {
-                                    for (int i = 1; i < option.SortBy.Count; i++)
-                                    {
-                                        q = q.ThenByDescending(option.SortBy[i]);
-                                    }
-                                }
-                                if (option.legth < 0)
-                                {
-                                    results.data = q.Skip(skip).ToList();
-                                }
-                                else
-                                {
-                                    results.data = q.Skip(skip).Take(option.RecordPerPage).ToList();
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            if (option.SortOrder == SortOrder.DESC)
-                            {
-                                var q = query.Where(x => x.deleted == false).OrderByDescending(option.SortBy[0]);
-
-                                if (option.SortBy.Count > 1)
-                                {
-                                    for (int i = 1; i < option.SortBy.Count; i++)
-                                    {
-                                        q = q.ThenByDescending(option.SortBy[i]);
-                                    }
-                                }
-                                if (option.legth < 0)
-                                {
-                                    results.data = q.ToList();
-                                }
-                                else
-                                {
-                                    results.data = q.Skip(skip).Take(option.RecordPerPage).ToList();
-                                }
-
-                            }
-                            else
-                            {
-                                IOrderedEnumerable<TEntity> tmp = query.Where(x => x.deleted == false).OrderBy(option.SortBy[0]);
-                                if (option.SortBy.Count > 1)
-                                {
-                                    for (int i = 1; i < option.SortBy.Count; i++)
-                                    {
-                                        tmp = tmp.ThenBy(option.SortBy[i]);
-                                    }
-                                }
-                                if (option.legth < 0)
-                                {
-                                    results.data = tmp.ToList();
-                                }
-                                else
-                                {
-                                    results.data = tmp.Skip(skip).Take(option.RecordPerPage).ToList();
-                                }
-                            }
-                        }
-                    }
+                    results.success = false;
+                    results.messages.Add("Invalid query options.");
+                    return results;
                 }
+
+                if (option.Page <= 0)
+                    option.Page = 1;
+
+                int skip = (option.Page - 1) * option.RecordPerPage;
+
+                // Step 1: Build query with filter
+                IQueryable<TEntity> query = _context.Set<TEntity>().Where(x => !x.deleted);
+
+                if (option.FilterBy != null)
+                    query = query.Where(option.FilterBy);
+
+                // Step 2: Get total before paging
+                results.total = query.Count();
+
+                // Step 3: Pull filtered data into memory for in-memory sort
+                var dataList = query.ToList();
+
+                // Step 4: Apply sort
+                IOrderedEnumerable<TEntity> orderedData;
+                if (option.SortOrder == SortOrder.ASC)
+                {
+                    orderedData = dataList.OrderBy(option.SortBy[0]);
+                    for (int i = 1; i < option.SortBy.Count; i++)
+                        orderedData = orderedData.ThenBy(option.SortBy[i]);
+                }
+                else
+                {
+                    orderedData = dataList.OrderByDescending(option.SortBy[0]);
+                    for (int i = 1; i < option.SortBy.Count; i++)
+                        orderedData = orderedData.ThenByDescending(option.SortBy[i]);
+                }
+
+                // Step 5: Paging
+                if (option.legth < 0)
+                {
+                    results.data = orderedData.ToList();
+                }
+                else
+                {
+                    results.data = orderedData.Skip(skip).Take(option.RecordPerPage).ToList();
+                }
+                results.success = true;
             }
             catch (Exception ex)
             {
-
+                results.success = false;
+                results.messages.Add("Something went wrong while fetching paged data.");
+                results.messages.Add(ex.Message);
             }
+
             return results;
         }
 

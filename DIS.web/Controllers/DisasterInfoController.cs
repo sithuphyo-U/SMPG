@@ -285,13 +285,13 @@ namespace DIS.Web.Controllers
                                 existingFiles = JsonConvert.DeserializeObject<List<FileViewModel>>(filesListJson);
                             }
 
-                            // These are file names the user decided to KEEP
-                            var keptFileNames = existingFiles.Select(f => f.file_name).ToList(); // match using `file_name`, not `originalfile_name`
+                            
+                            var keptFileNames = existingFiles.Select(f => f.file_name).ToList(); 
 
-                            // Determine which files are deleted (i.e., in DB but not in user-kept list)
+                          
                             var deletedFiles = oldFiles.Where(f => !keptFileNames.Contains(f.file_name)).ToList();
 
-                            // Delete physically and from DB
+                            
                             foreach (var deleted in deletedFiles)
                             {
                                 var path = Path.Combine(Constants.FilePath + deleted.path, deleted.file_name);
@@ -300,11 +300,10 @@ namespace DIS.Web.Controllers
                                     System.IO.File.Delete(path);
                                 }
 
-                                _dsInfoFileService.Delete(deleted); // Or Delete(deleted.id)
+                                _dsInfoFileService.Delete(deleted);
                             }
 
 
-                            // Handle new uploads
                             if (vm.file_list != null && vm.file_list.Count > 0)
                             {
                                 foreach (var f in vm.file_list)
