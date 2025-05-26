@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Repositories.Settings
 {
-    public class DIInfoByYearRangeRepository :  IDIInfoByYearRangeDashboardRepository
+    public class DIInfoByYearRangeRepository : IDIInfoByYearRangeDashboardRepository
     {
         private readonly IDbContext _context;
-        public DIInfoByYearRangeRepository(IDbContext context) 
+        public DIInfoByYearRangeRepository(IDbContext context)
         {
             _context = context;
         }

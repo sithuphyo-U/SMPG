@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Interfaces
 {
-    public interface IDIInfoByYearRangeDashboardRepository 
+    public interface IDIInfoByYearRangeDashboardRepository
     {
         List<DIInfoByYearRangeDashboard> GetInfoByYearRange(int year);
     }
