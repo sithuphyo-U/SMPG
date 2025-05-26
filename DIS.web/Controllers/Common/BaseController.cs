@@ -122,9 +122,9 @@ namespace DIS.Web.Controllers.Common
                         logger.LogError(ex.Message);
                     }
 
-                });
-                task.Wait();
-            }
+            });
+            task.Wait();
+        }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
@@ -148,6 +148,7 @@ namespace DIS.Web.Controllers.Common
                         log.date = DateTime.Now;
                         log.ip = remoteIpAddress.ToString();
                         log.url = Request.Path + Request.QueryString;
+                        
                         using (var context = new AuditDbContext())
                         {
                             context.Set<Log>().Add(log);
