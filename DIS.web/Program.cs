@@ -2,7 +2,9 @@ using DIS.Application.Service;
 using DIS.Application.Services;
 using DIS.DataAccess;
 using DIS.DataAccess.Interfaces;
+using DIS.DataAccess.Interfaces.Dashboard;
 using DIS.DataAccess.Repositories;
+using DIS.DataAccess.Repositories.Dashboard;
 using DIS.Infrastructure.Utilities;
 using DIS.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,6 +44,7 @@ builder.Services.AddScoped<DisasterInfoFileService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
+builder.Services.AddScoped<ICategoryCardDashboardRepository, CategoryCardDashboardRepository>();
 
 
 builder.Services.AddEndpointsApiExplorer();
