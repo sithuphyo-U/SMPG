@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Text;
 using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Logging;
+using DIS.DataAccess.Interfaces;
+using DIS.Infrastruture.Enumerations;
 
 namespace DIS.Web.Controllers.Common
 {
@@ -90,7 +92,8 @@ namespace DIS.Web.Controllers.Common
                 }
                 return id;
             }
-        protected void AuditLog(string controller, string table, string action)
+        [NonAction]
+        public void AuditLog(string controller, string table, string action)
         {
             try
             {
@@ -101,11 +104,12 @@ namespace DIS.Web.Controllers.Common
                         var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
                         Log log = new Log();
                         log.user_id = GetLoggedInUserId();
-                        log.program_code = controller;
+                        log.controller = controller;
+                        log.table = table;
                         log.action = action;
-                        log.timeaccessed = DateTime.Now;
-                        log.deleted = false;
-                        log.created_date = DateTime.Now;
+                        log.date = DateTime.Now;
+                        log.ip = remoteIpAddress.ToString();
+                        log.url = Request.Path + Request.QueryString;
                         using (var context = new AuditDbContext())
                         {
                             context.Set<Log>().Add(log);
@@ -125,6 +129,60 @@ namespace DIS.Web.Controllers.Common
             {
                 logger.LogError(ex.Message);
             }
+        }
+        [NonAction]
+        public void LoginAuditLog(string controller, string table, string action, int id)
+        {
+            try
+            {
+                Task task = Task.Run(() =>
+                {
+                    try
+                    {
+                        var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+                        Log log = new Log();
+                        log.user_id = id;
+                        log.controller = controller;
+                        log.table = table;
+                        log.action = action;
+                        log.date = DateTime.Now;
+                        log.ip = remoteIpAddress.ToString();
+                        log.url = Request.Path + Request.QueryString;
+                        using (var context = new AuditDbContext())
+                        {
+                            context.Set<Log>().Add(log);
+                            context.Entry(log).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex.Message);
+                    }
+
+                });
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+        }
+        protected bool hasPermission(IRoleRepository roleRepo, AuditAction action)
+        {
+            bool hasPermission = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var roleClaim = User.FindFirst(ClaimTypes.Role);
+                if (roleClaim != null)
+                {
+                    string? id = roleClaim.Value;
+                    Role? role = roleRepo.Get(Convert.ToInt32(id));
+
+                }
+
+            }
+            return hasPermission;
         }
 
         protected string CreateJWT(User user, string secret)

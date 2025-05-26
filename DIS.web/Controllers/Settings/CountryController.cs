@@ -7,6 +7,7 @@ using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
 using DMS.Infrastructure.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NPOI.OpenXmlFormats.Dml.Diagram;
@@ -17,6 +18,9 @@ namespace DIS.Web.Controllers.Settings
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
+
     public class CountryController : BaseController
     {
         ICountryRepository countryRepository;

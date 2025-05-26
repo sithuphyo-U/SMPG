@@ -6,11 +6,13 @@ using Newtonsoft.Json;
 using DIS.Infrastructure.Utilities;
 using DIS.DataAccess.Entity;
 using DIS.DataAccess.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DIS.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     public class ProgramCodeController : BaseController
     {
         IProgramCodeRepository _proRepo;

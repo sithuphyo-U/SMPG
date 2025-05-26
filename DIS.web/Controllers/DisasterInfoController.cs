@@ -22,11 +22,13 @@ using UglyToad.PdfPig;
 using System.Text.RegularExpressions;
 using DIS.Application.Service.Common;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DIS.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DisasterInfoController : BaseController
     {
         IDisasterInfoRepository _repository;
