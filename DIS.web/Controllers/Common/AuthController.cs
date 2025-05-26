@@ -11,6 +11,7 @@ namespace DIS.Web.Controllers.Common
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthController : BaseController
     {
         IUserRepository _userRepo;

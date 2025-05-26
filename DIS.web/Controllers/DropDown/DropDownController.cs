@@ -5,12 +5,14 @@ using DIS.DataAccess.Interfaces.Settings;
 using DIS.Web.Controllers.Common;
 using DIS.Web.ViewModels;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DIS.Web.Controllers.DropDown
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
 
     public class DropDownController : BaseController
     {

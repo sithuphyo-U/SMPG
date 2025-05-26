@@ -4,12 +4,14 @@ using DIS.Infrastructure.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DIS.Web.Controllers.Settings
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
 
     public class CountryTypeController : BaseController
     {

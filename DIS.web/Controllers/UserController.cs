@@ -8,6 +8,7 @@ using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NPOI.SS.Formula.Functions;
@@ -17,6 +18,7 @@ namespace DIS.Web.Controllers.Settings
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
 
     public class UserController : BaseController
     { 
