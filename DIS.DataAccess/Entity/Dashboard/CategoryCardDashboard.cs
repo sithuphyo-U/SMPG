@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Entity.Dashboard
 {
-   
-    public class CategoryCardDashboard 
+
+    public class CategoryCardDashboard
     {
         public int disasterCategory_id { get; set; }
         public int count { get; set; }

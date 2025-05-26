@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Interfaces.Dashboard
 {
-    public interface ICategoryCardDashboardRepository 
+    public interface ICategoryCardDashboardRepository
     {
 
         Task<List<CategoryCardDashboard>> GetDisasterCountAsync();

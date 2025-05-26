@@ -8,9 +8,9 @@ namespace DIS.Web.Dashboard
     [Route("api/[controller]")]
     [ApiController]
     public class DashboardController : BaseController
-    {   
+    {
         IDIInfoByYearRangeDashboardRepository _yearRangeRepository;
-        
+
         public DashboardController(IDIInfoByYearRangeDashboardRepository yearRangeRepository) : base(typeof(DashboardController))
         {
             _yearRangeRepository = yearRangeRepository;

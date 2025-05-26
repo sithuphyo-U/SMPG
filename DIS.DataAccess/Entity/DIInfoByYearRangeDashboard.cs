@@ -12,6 +12,6 @@ namespace DIS.DataAccess.Entity
     public class DIInfoByYearRangeDashboard
     {
         public string name { get; set; }
-        public int count {  get; set; }
+        public int count { get; set; }
     }
 }

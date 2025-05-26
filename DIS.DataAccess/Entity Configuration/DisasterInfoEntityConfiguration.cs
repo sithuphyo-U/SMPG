@@ -14,7 +14,7 @@ namespace DIS.DataAccess.Entity_Configuration
     {
         public void Configure(EntityTypeBuilder<DisasterInfo> builder)
         {
-            builder.HasNoKey();
+          
 
         }
     }

@@ -13,7 +13,7 @@ namespace DIS.DataAccess.Entity_Configuration
     {
         public void Configure(EntityTypeBuilder<DIInfoByYearRangeDashboard> builder)
         {
-
+             builder.HasNoKey();
         }
     }
 }
