@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Repositories.Dashboard
 {
-    public class RecentDisasterLogDashboardRepository : IRecentDisasterLogDashboardRepository
-    {
+   public class RecentDisasterLogDashboardRepository : IRecentDisasterLogDashboardRepository
+   {
      
         private readonly DbContext _dbContext;
         public RecentDisasterLogDashboardRepository(IDbContext dbContext)
