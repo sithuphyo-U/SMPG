@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace DIS.DataAccess.Entity_Configuration
 {
-    public class DisasterInfoEntityConfiguration : IEntityTypeConfiguration<DisasterInfo>
-
+    public class DIInfoByYearRangeDashboardEntityConfiguration : IEntityTypeConfiguration<DIInfoByYearRangeDashboard>
     {
-        public void Configure(EntityTypeBuilder<DisasterInfo> builder)
+        public void Configure(EntityTypeBuilder<DIInfoByYearRangeDashboard> builder)
         {
-          
-
+             builder.HasNoKey();
         }
     }
-
-
 }
