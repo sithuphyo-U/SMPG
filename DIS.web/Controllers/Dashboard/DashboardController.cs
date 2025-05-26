@@ -25,6 +25,8 @@ namespace DIS.Web.Controllers.Dashboard
         }
 
 
+
+
         [HttpGet]
         [Route("GetRecentDisasterLogs")]
         public async Task<IActionResult> GetRecentDisasterLogs()

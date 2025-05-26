@@ -21,5 +21,6 @@ namespace DIS.DataAccess.Repositories.Dashboard
         {
             return await _dbContext.Set<RecentDisasterLogDashboard>() .FromSqlRaw("EXEC GetLatestDisastersByCategory").ToListAsync();
         }
+
     }
 }
