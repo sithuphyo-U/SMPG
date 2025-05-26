@@ -121,6 +121,43 @@ namespace DIS.Web.Controllers.Settings
         }
         return Json(result);
     }
+
+        [HttpPost]
+        [Route("ManageAccount")]
+        public IActionResult GetManageAccount(UserViewModel vm)
+        {
+            CommandResult<User> result = new CommandResult<User>();
+            try
+            {
+                if (vm.id > 0)
+                {
+                    User? user = _userRepo.Get(vm.id);
+                    if (!isDuplicate(user, vm))
+                    {
+                        user = mapper.MapViewModelToModel(user, vm);
+                        result = _userRepo.Save(user);
+                        if (result.success)
+                        {
+                            AuditLog(nameof(UserController), nameof(User), Constants.UpdateAction);
+                        }
+                    }
+                    else
+                    {
+                        result.messages.Add(Constants.DuplicateUserName);
+                    }
+                }               
+            }
+            catch (Exception ex)
+            {
+                result.success = false;
+                result.messages.Add(ex.Message);
+                logger.LogError(ex.Message);
+            }
+            return Json(result);
+        }
+
+
+
     [HttpGet]
     [Route("getbyid")]
     public JsonResult GetById(int id)
@@ -188,7 +225,8 @@ namespace DIS.Web.Controllers.Settings
         }
         return Json(result);
     }
-    protected bool isDuplicate(User user, UserViewModel vm)
+
+        protected bool isDuplicate(User user, UserViewModel vm)
     {
         bool duplicate = false;
         if (user.id > 0)
