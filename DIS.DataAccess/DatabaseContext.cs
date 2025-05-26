@@ -12,7 +12,7 @@ namespace DIS.DataAccess
     public class DatabaseContext : DbContext, IDbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-        
+        public DbSet<Log> Logs { get; set; }
 
         public DatabaseFacade GetDatabase()
         {
