@@ -29,6 +29,7 @@ namespace DIS.Web.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+
     public class DisasterInfoController : BaseController
     {
         IDisasterInfoRepository _repository;

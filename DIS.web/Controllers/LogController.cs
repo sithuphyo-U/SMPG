@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DIS.Web.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LogController : BaseController
