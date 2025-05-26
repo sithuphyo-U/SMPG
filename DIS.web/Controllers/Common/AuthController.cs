@@ -41,6 +41,7 @@ namespace DIS.Web.Controllers.Common
                             loginUser.id = user.id;
                             loginUser.username = user.username;
                             loginUser.role = user.role;
+                            loginUser.name = user.name;
                         }
                         else
                         {
