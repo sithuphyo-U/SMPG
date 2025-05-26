@@ -1,4 +1,5 @@
-﻿using DIS.Infrastructure.Utilities;
+﻿using DIS.DataAccess.Entity;
+using DIS.Infrastructure.Utilities;
 using DMS.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,6 +32,7 @@ namespace DIS.DataAccess
             //configure model from Assembly
             //using EntityConfiguratuion.IEntityTypeConfiguration<TEntity>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+            modelBuilder.Entity<Log>();
             base.OnModelCreating(modelBuilder);
         }
     }

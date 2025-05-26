@@ -12,8 +12,7 @@ namespace DIS.DataAccess
     public class DatabaseContext : DbContext, IDbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-        //public DbSet<DIInfoByYearRangeDashboard> DIInfoByYearRangeDashboard { get; set; }
-        //public DbSet<DisasterInfo> DisasterInfo { get; set; }
+        
 
         public DatabaseFacade GetDatabase()
         {
@@ -49,7 +48,7 @@ namespace DIS.DataAccess
             //configure model from Assembly
             //using EntityConfiguratuion.IEntityTypeConfiguration<TEntity>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
-           //modelBuilder.Entity<DIInfoByYearRangeDashboard>().HasNoKey();
+
             base.OnModelCreating(modelBuilder);
         }
     }
