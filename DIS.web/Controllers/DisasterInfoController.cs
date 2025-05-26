@@ -78,6 +78,7 @@ namespace DIS.Web.Controllers
             return Json(list);
         }
 
+
         private PagedResult<DisasterInfoViewModel> GetAllData()
         {
 
