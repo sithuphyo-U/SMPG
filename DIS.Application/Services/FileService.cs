@@ -49,10 +49,35 @@ namespace DIS.Application.Service
             return base64Str;
         }
 
+        //public bool CreatedPhysicalFile(string filepath, string fileName, IFormFile file)
+        //{
+        //    bool sucess = false;
+
+        //    try
+        //    {
+        //        if (!Directory.Exists(filepath))
+        //        {
+        //            Directory.CreateDirectory(filepath);
+        //        }
+
+        //        var path = Path.Combine(filepath, fileName);
+        //        using (FileStream fs = System.IO.File.Create(path))
+        //        {
+        //            file.CopyTo(fs);
+        //        }
+
+        //        sucess = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //logger.Log(ex);
+        //    }
+
+        //    return sucess;
+        //}
         public bool CreatedPhysicalFile(string filepath, string fileName, IFormFile file)
         {
-            bool sucess = false;
-
+            bool success = false;
             try
             {
                 if (!Directory.Exists(filepath))
@@ -61,22 +86,30 @@ namespace DIS.Application.Service
                 }
 
                 var path = Path.Combine(filepath, fileName);
-                using (FileStream fs = System.IO.File.Create(path))
+
+                using (var memoryStream = new MemoryStream())
                 {
-                    file.CopyTo(fs);
+                    file.CopyTo(memoryStream);
+                    memoryStream.Position = 0;
+
+                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                    {
+                        memoryStream.CopyTo(fs);
+                    }
                 }
 
-                sucess = true;
+                success = true;
             }
             catch (Exception ex)
             {
-                //logger.Log(ex);
+                // logger.Log(ex.Message);
             }
 
-            return sucess;
+            return success;
         }
 
+
     }
-        
+
 
 }

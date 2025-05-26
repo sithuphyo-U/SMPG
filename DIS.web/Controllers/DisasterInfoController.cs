@@ -276,51 +276,56 @@ namespace DIS.Web.Controllers
                         result = _repository.Save(data);
                         if (result.success)
                         {
+                            
+                            List<File_TB> oldFiles = _TBRepository.GetFilebyDisasterInfoId(vm.id);
 
-                            List<File_TB> oldFiles = _TBRepository.GetFilebyDisasterInfoId(vm.id); // Already a list
+                           
+                            List<string> incomingFileNames = vm.file_list?.Select(f => f.FileName).ToList() ?? new List<string>();
 
-                            if (oldFiles != null && oldFiles.Count > 0)
+                        
+                            foreach (var oldFile in oldFiles)
                             {
-                                foreach (var f in oldFiles)
+                                if (!incomingFileNames.Contains(oldFile.originalfile_name))
                                 {
-                                    var path = Path.Combine(Constants.FilePath + "/DisasterInfoFile", f.file_name);
+                                    var path = Path.Combine(Constants.FilePath + "/DisasterInfoFile", oldFile.file_name);
                                     if (System.IO.File.Exists(path))
                                     {
                                         System.IO.File.Delete(path);
-                                        _dsInfoFileService.Delete(f);
                                     }
+                                    _dsInfoFileService.Delete(oldFile);
                                 }
                             }
-                            if (vm.file_list != null)
-                            {
-                                foreach (var f in vm.file_list)
 
+                            // 4. Save only new files
+                            foreach (var f in vm.file_list)
+                            {
+                               
+                                bool exists = oldFiles.Any(of => of.originalfile_name == f.FileName);
+                                if (!exists)
                                 {
                                     string extension = Path.GetExtension(f.FileName).ToLower();
                                     if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                     {
                                         Guid guId = Guid.NewGuid();
-                                        File_TB entity = new File_TB();
-                                        entity.file_name = guId.ToString();
-                                        entity.file_type = extension;
-                                        entity.originalfile_name = f.FileName;
-                                        entity.disastercategory_id = data.id;
-
-                                        entity.path = "/DisasterInfoFile";
+                                        File_TB entity = new File_TB
+                                        {
+                                            file_name = guId.ToString(),
+                                            file_type = extension,
+                                            originalfile_name = f.FileName,
+                                            disastercategory_id = data.id,
+                                            path = "/DisasterInfoFile"
+                                        };
 
                                         var returndata = _dsInfoFileService.SaveorUpdate(entity);
                                         if (returndata != null)
                                         {
                                             fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
                                         }
-
-
-
-
                                     }
                                 }
                             }
                         }
+
                     }
 
                 }
