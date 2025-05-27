@@ -12,6 +12,7 @@ namespace DIS.DataAccess
 {
     public class AuditDbContext : DbContext
     {
+        public DbSet<Log> Logs { get; set; }
         public AuditDbContext()
         {
         }
