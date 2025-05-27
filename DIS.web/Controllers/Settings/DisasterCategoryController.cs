@@ -78,7 +78,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
-                            //AuditLog(nameof(PositionController), nameof(Position), Constants.UpdateAction);
+                           // AuditLog(nameof(DisasterCategory), nameof(Position), Constants.UpdateAction);
                         }
                     }
                     else

@@ -2,6 +2,7 @@
 using DIS.DataAccess.Entity;
 using DIS.DataAccess.Interfaces;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -67,6 +68,10 @@ namespace DIS.Web.Controllers.Common
                 loginUser.messages.Clear();
                 loginUser.messages.Add(ex.Message);
                 logger.LogError(ex.Message);
+            }
+            if (loginUser.success)
+            {
+                LoginAuditLog(nameof(AuthController), "User", AuditAction.LOGIN.ToString(), loginUser.id);
             }
             return Json(loginUser);
         }
