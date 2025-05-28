@@ -155,6 +155,7 @@ namespace DIS.Web.Mappers
                 vm.id = data.id;
                 vm.title = data.title;
                 vm.date = data.date;
+                vm.totalCountofNews = data.details;
                 if (data.DisasterCategory != null)
                 {
                     vm.disaster_category_id = data.disasterCategory_id;

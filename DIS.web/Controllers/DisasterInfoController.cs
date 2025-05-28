@@ -299,31 +299,34 @@ namespace DIS.Web.Controllers
                                     _dsInfoFileService.Delete(oldFile);
                                 }
                             }
-
-                            // 4. Save only new files
-                            foreach (var f in vm.file_list)
+                            if (vm.file_list != null)
                             {
-                               
-                                bool exists = oldFiles.Any(of => of.originalfile_name == f.FileName);
-                                if (!exists)
-                                {
-                                    string extension = Path.GetExtension(f.FileName).ToLower();
-                                    if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
-                                    {
-                                        Guid guId = Guid.NewGuid();
-                                        File_TB entity = new File_TB
-                                        {
-                                            file_name = guId.ToString(),
-                                            file_type = extension,
-                                            originalfile_name = f.FileName,
-                                            disastercategory_id = data.id,
-                                            path = "/DisasterInfoFile"
-                                        };
 
-                                        var returndata = _dsInfoFileService.SaveorUpdate(entity);
-                                        if (returndata != null)
+                                // 4. Save only new files
+                                foreach (var f in vm.file_list)
+                                {
+
+                                    bool exists = oldFiles.Any(of => of.originalfile_name == f.FileName);
+                                    if (!exists)
+                                    {
+                                        string extension = Path.GetExtension(f.FileName).ToLower();
+                                        if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                         {
-                                            fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
+                                            Guid guId = Guid.NewGuid();
+                                            File_TB entity = new File_TB
+                                            {
+                                                file_name = guId.ToString(),
+                                                file_type = extension,
+                                                originalfile_name = f.FileName,
+                                                disastercategory_id = data.id,
+                                                path = "/DisasterInfoFile"
+                                            };
+
+                                            var returndata = _dsInfoFileService.SaveorUpdate(entity);
+                                            if (returndata != null)
+                                            {
+                                                fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.file_name, f);
+                                            }
                                         }
                                     }
                                 }
