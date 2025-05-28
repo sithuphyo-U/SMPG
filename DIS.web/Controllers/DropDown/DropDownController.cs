@@ -68,6 +68,25 @@ namespace DIS.Web.Controllers.DropDown
             return Json(disasterCategoryList);
         }
 
+        [HttpGet]
+        [Route("GetSubDisasterCategoryList")]
+
+        public JsonResult GetSubDisasterCategoryList()
+        {
+            List<DisasterSubCategory> subdisasterCategoryList = new List<DisasterSubCategory>();
+            try
+            {
+                subdisasterCategoryList = _subCategoryRepository.Get();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(subdisasterCategoryList);
+        }
+
+
+
 
         [HttpGet]
         [Route("GetCountryTypeList")]

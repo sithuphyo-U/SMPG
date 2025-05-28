@@ -39,6 +39,7 @@ namespace DIS.Web.Controllers
             }
             return Json(list);
         }
+
         private PagedResult<LogViewModel> GetAllData()
         {
             QueryOptions<Log> queryoption = GetQueryOptions<Log>();
