@@ -12,7 +12,7 @@ namespace DIS.Web.Controllers.Common
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AuthController : BaseController
     {
         IUserRepository _userRepo;
@@ -21,6 +21,16 @@ namespace DIS.Web.Controllers.Common
         {
             _userRepo = userRepo;
         }
+
+
+         [HttpPost]
+        [Route("logout")]
+        public JsonResult Logout(int id)
+        {
+            LoginAuditLog(nameof(AuthController), "User", AuditAction.LOGOUT.ToString(), id);
+            return Json(new { success = true });
+        }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]

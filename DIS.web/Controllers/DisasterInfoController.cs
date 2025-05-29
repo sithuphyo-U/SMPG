@@ -24,6 +24,7 @@ using DIS.Application.Service.Common;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Microsoft.AspNetCore.Authorization;
 using System.Reflection.Metadata;
+using DIS.Infrastruture.Enumerations;
 
 namespace DIS.Web.Controllers
 {
@@ -410,7 +411,7 @@ namespace DIS.Web.Controllers
                     result = _repository.Remove(data);
                     if (result.success)
                     {
-
+                        AuditLog(nameof(DisasterInfoController),nameof(DisasterInfo), AuditAction.DELETE.ToString());
                     }
                 }
             }

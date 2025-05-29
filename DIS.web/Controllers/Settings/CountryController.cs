@@ -18,7 +18,7 @@ namespace DIS.Web.Controllers.Settings
 
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    [Authorize]
 
 
     public class CountryController : BaseController
