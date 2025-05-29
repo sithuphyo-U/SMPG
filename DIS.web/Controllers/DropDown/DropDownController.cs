@@ -12,7 +12,7 @@ namespace DIS.Web.Controllers.DropDown
 {
     [Route("api/[controller]")]
     [ApiController]
-   
+    [Authorize]
 
     public class DropDownController : BaseController
     {

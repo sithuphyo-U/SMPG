@@ -2,6 +2,7 @@
 using DIS.DataAccess.Interfaces.Dashboard;
 using DIS.Web.Controllers.Common;
 using DocumentFormat.OpenXml.Bibliography;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@ namespace DIS.Web.Controllers.Dashboard
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DashboardController : BaseController
     {
         ICategoryCardDashboardRepository _ccdrepo;
