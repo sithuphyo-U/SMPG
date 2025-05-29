@@ -72,9 +72,18 @@ namespace DIS.Web.Mappers
             if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<DisasterInfo, object>>();
-                if (options.SortColumnName == "title")
+                foreach (var SortColumnName in options.SortColumnsName)
+                    if (options.SortColumnName == "title")
                 {
                     options.SortBy.Add((x => x.title));
+                }
+                else if (SortColumnName == "disasterCategory_name")
+                {
+                    options.SortBy.Add((x => x.DisasterCategory.name));
+                }
+                else if (SortColumnName == "subCategory_name")
+                {
+                    options.SortBy.Add((x => x.DisasterCategory.name));
                 }
                 else if (options.SortColumnName == "country_type_name")
                 {

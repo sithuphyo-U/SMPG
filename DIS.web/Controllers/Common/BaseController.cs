@@ -59,12 +59,22 @@ namespace DIS.Web.Controllers.Common
                     queryOptions.Page = Convert.ToInt32(page);
                 }
                
-                var SortColumn = Request.Query["sortBy"].FirstOrDefault();
-                if (!string.IsNullOrEmpty(SortColumn))
-                {
-                    queryOptions.SortColumnName = SortColumn;
-                }
-                var SortColumnDirection = Request.Query["sortOrder"].FirstOrDefault();
+                //var SortColumn = Request.Query["sortBy"].FirstOrDefault();
+                //if (!string.IsNullOrEmpty(SortColumn))
+                //{
+                //    queryOptions.SortColumnName = SortColumn;
+                //}
+            var SortColumn = Request.Query["sortBy[0][key]"].FirstOrDefault();
+            queryOptions.SortColumnsName = new List<string>();
+            if (!string.IsNullOrEmpty(SortColumn))
+            {
+                queryOptions.SortColumnsName.Add(SortColumn);
+            }
+            else
+            {
+                queryOptions.SortColumnsName.Add("id");
+            }
+            var SortColumnDirection = Request.Query["sortOrder"].FirstOrDefault();
                 if (!string.IsNullOrEmpty(SortColumnDirection))
                 {
                     if (SortColumnDirection == "desc" || SortColumnDirection == "DESC")
