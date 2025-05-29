@@ -16,7 +16,7 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public Township? FindByName(string name)
         {
-            return CustomQuery().Where(x => x.name == name).FirstOrDefault();
+            return CustomQuery().Where(x => x.name == name && x.deleted == false).FirstOrDefault();
         }
 
         public Township? GetCountryByTownship(int id)
@@ -26,7 +26,7 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public List<Township>? GetTownshipByDistrict(int id)
         {
-            return CustomQuery().Where(x => x.district_id == id).ToList();
+            return CustomQuery().Where(x => x.district_id == id && x.deleted == false).ToList();
         }
     }
 }
