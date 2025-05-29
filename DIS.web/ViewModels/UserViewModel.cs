@@ -7,6 +7,7 @@
         public string? username { get; set; } = string.Empty;
         public string? password { get; set; } = string.Empty;
         public bool? status { get; set; }
+        public string status_name { get; set; } = string.Empty;
         public int? role_id { get; set; } = 0;
         public string? role_name { get; set; }
     }

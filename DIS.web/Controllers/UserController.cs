@@ -3,6 +3,7 @@ using DIS.DataAccess.Entity;
 using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
+using DIS.DataAccess.Repositories;
 using DIS.Infrastructure.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers;
@@ -124,6 +125,20 @@ namespace DIS.Web.Controllers.Settings
         return Json(result);
     }
 
+        [HttpPost]
+        [Route("changeUserStatus")]
+        public JsonResult ChangeUserStatus(UserViewModel vm)
+        {
+            CommandResult<User> result = new CommandResult<User>();
+            User user = new User();
+            if (vm.id > 0)
+            {
+                user = _userRepo.Get(vm.id);
+                user.status =(bool) vm.status;
+                result = _userRepo.Save(user);
+            }
+            return Json(result);
+        }
         [HttpPost]
         [Route("ManageAccount")]
         public IActionResult GetManageAccount(UserViewModel vm)
