@@ -107,6 +107,7 @@ namespace DIS.Web.Mappers
                 if (item != null)
                 {
 
+
                     if (!string.IsNullOrEmpty(item.permission))
                     {
                         List<PermissionViewModel>? pVm = JsonConvert.DeserializeObject<List<PermissionViewModel>>(item.permission);
