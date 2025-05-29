@@ -16,7 +16,7 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public District? FindByName(string name)
         {
-            return CustomQuery().Where(x => x.name == name).FirstOrDefault();
+            return CustomQuery().Where(x => x.name == name && x.deleted == false).FirstOrDefault();
         }
 
         public District GetCountryByDistrict(int id)
@@ -26,7 +26,7 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public List<District>? GetDistrictByStateDivision(int id)
         {
-           return CustomQuery().Where(x => x.state_division_id == id).ToList();
+           return CustomQuery().Where(x => x.state_division_id == id && x.deleted == false).ToList();
         }
     }
 }

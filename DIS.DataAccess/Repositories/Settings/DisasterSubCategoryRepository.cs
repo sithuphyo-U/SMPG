@@ -16,12 +16,12 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public DisasterSubCategory? FindByName(string name)
         {
-            return CustomQuery().Where(x => x.name == name).FirstOrDefault();
+            return CustomQuery().Where(x => x.name == name && x.deleted == false).FirstOrDefault();
         }
 
         public List<DisasterSubCategory>? GetSubCategorybyCategory(int id)
         {
-            return CustomQuery().Where(x => x.disaster_category_id == id).ToList();
+            return CustomQuery().Where(x => x.disaster_category_id == id && x.deleted == false).ToList();
         }
     }
 }
