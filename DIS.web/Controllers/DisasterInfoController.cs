@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using DIS.Application.Service.Common;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Microsoft.AspNetCore.Authorization;
+using System.Reflection.Metadata;
 
 namespace DIS.Web.Controllers
 {
@@ -555,14 +556,16 @@ namespace DIS.Web.Controllers
             NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
             excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
             excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
+            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစားခွဲအမည်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("နိုင်ငံအမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("နိုင်ငံ", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("တိုင်းဒေသကြီး/ပြည်နယ်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစားခွဲအမည်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("‌ေသတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
+            
             //excel.AddColumn("အကြောင်းအရာ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("အချိန်", typeof(string), NPOIExcelColumnWidth.M1);
@@ -572,13 +575,15 @@ namespace DIS.Web.Controllers
                 count++;
                 excel.AddRow();
                 excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
-                excel.SetData(1, item.country_type_name);
-                excel.SetData(2, item.country_name);
-                excel.SetData(3, item.state_division_name);
-                excel.SetData(4, item.district_name);
-                excel.SetData(5, item.disasterCategory_name);
-                excel.SetData(6, item.subCategory_name);
-                excel.SetData(7, item.title);
+                excel.SetData(1, item.disasterCategory_name);
+                excel.SetData(2, item.subCategory_name);
+                excel.SetData(3, item.country_type_name);
+                excel.SetData(4, item.country_name);
+                excel.SetData(5, item.state_division_name);
+                excel.SetData(6, item.district_name);
+                excel.SetData(7, item.township_name);
+                excel.SetData(8, item.date);
+                excel.SetData(9, item.title);
 
 
 

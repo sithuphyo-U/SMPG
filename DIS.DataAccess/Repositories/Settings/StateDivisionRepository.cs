@@ -16,17 +16,17 @@ namespace DIS.DataAccess.Repositories.Settings
 
         public StateDivision? FindByName(string name)
         {
-            return CustomQuery().Where(x => x.name == name).FirstOrDefault();
+            return CustomQuery().Where(x => x.name == name && x.deleted==false).FirstOrDefault();
         }
 
         public StateDivision GetCountryByStateDivision(int id)
         {
-            return CustomQuery().Where(x => x.id == id).FirstOrDefault();
+            return CustomQuery().Where(x => x.id == id && x.deleted==false).FirstOrDefault();
         }
 
         public List<StateDivision>? GetStateDivisionbyCountry(int id)
         {
-            return CustomQuery().Where(x => x.country_id == id).ToList();
+            return CustomQuery().Where(x => x.country_id == id && x.deleted==false).ToList();
         }
 
        

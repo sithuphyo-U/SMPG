@@ -21,7 +21,7 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             // return RawSQL<DIInfoByYearRangeDashboard>("exec GetDisasterDataByYearRange {0}", new object[] { year }).ToList();
             return _context.Set<DIInfoByYearRangeDashboard>()
-                    .FromSqlRaw("EXEC GetDisasterDataByYearRange {0}", year)
+                    .FromSqlRaw("EXEC GetDisasterTotalsByYearAndCategory {0}", year)
                     .ToList();
         }
     }

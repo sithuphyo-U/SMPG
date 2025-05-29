@@ -11,6 +11,7 @@ namespace DIS.DataAccess.Entity
     [Table("GetDisasterDataByYearRange")]
     public class DIInfoByYearRangeDashboard
     {
+        public int year { get; set; }
         public string name { get; set; }
         public int count { get; set; }
     }
