@@ -268,6 +268,7 @@ namespace DIS.Web.Controllers
 
         [HttpPost]
         [Route("SaveOrUpdate")]
+        [RequestSizeLimit(1073741824)]
         public IActionResult SaveOrUpdate([FromForm] DisasterInfoViewModel vm)
         {
             CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
