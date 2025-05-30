@@ -16,11 +16,12 @@ namespace DIS.Web.Mappers.Setttings
             if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<DisasterCategory, object>>();
-                if (options.SortColumnName == "name")
-                {
-                    options.SortBy.Add((x => x.name));
-                }
-                else
+                foreach (var SortColumnName in options.SortColumnsName)
+                    if (SortColumnName == "name")
+                    {
+                        options.SortBy.Add((x => x.name));
+                    }
+                    else
                 {
                     options.SortOrder = Infrastructure.Enumerations.SortOrder.DESC;
                     options.SortBy.Add((x => x.id));
