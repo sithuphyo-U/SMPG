@@ -268,6 +268,7 @@ namespace DIS.Web.Controllers
 
         [HttpPost]
         [Route("SaveOrUpdate")]
+        [RequestSizeLimit(1073741824)]
         public IActionResult SaveOrUpdate([FromForm] DisasterInfoViewModel vm)
         {
             CommandResult<DisasterInfo> result = new CommandResult<DisasterInfo>();
@@ -282,7 +283,7 @@ namespace DIS.Web.Controllers
                         result = _repository.Save(data);
                         if (result.success)
                         {
-                            
+                            AuditLog(nameof(DisasterInfoController), nameof(DisasterInfo), AuditAction.UPDATE.ToString());
                             List<File_TB> oldFiles = _TBRepository.GetFilebyDisasterInfoId(vm.id);
 
                            
@@ -345,7 +346,7 @@ namespace DIS.Web.Controllers
                     data = _mapper.MapViewModelToModel(data, vm);
                     result = _repository.Save(data);
                     if (result.success)
-                    {
+                    {   AuditLog(nameof(DisasterInfoController), nameof(DisasterInfo), AuditAction.CREATE.ToString());
                         if (vm.file_list != null && vm.file_list.Count > 0)
                         {
 
@@ -450,7 +451,7 @@ namespace DIS.Web.Controllers
 
         [HttpGet("view-audio/{fileName}")]
         public IActionResult ViewAudio(string fileName)
-        {
+        {   
             var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
 
             if (!System.IO.File.Exists(filePath))
@@ -488,6 +489,7 @@ namespace DIS.Web.Controllers
 
 
             var bytes = System.IO.File.ReadAllBytes(filePath);
+            AuditLog(nameof(DisasterInfoController), filename, AuditAction.DOWNLOAD.ToString());
             return File(bytes, contentType);
         }
 

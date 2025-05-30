@@ -2,6 +2,7 @@
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.DataAccess.Repositories.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
@@ -59,13 +60,12 @@ namespace DIS.Web.Controllers.Settings
         {
             TownshipViewModel vm = new TownshipViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             if (vm.country_type_id > 0)
             {
                 List<country_countrytype> cc = new List<country_countrytype>();
                 cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
                 vm.cc_type = cc;
-
-
 
             }
             vm.country_id = GetRequestParameter<int>("search[country_id]");
@@ -90,7 +90,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
-
+                            AuditLog(nameof(TownshipController), nameof(Township), AuditAction.UPDATE.ToString());
                         }
                     }
                     else
@@ -106,6 +106,10 @@ namespace DIS.Web.Controllers.Settings
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
+                    }
+                    if (result.success)
+                    {
+                        AuditLog(nameof(TownshipController), nameof(Township), AuditAction.CREATE.ToString());
                     }
                     else
                     {
@@ -136,7 +140,7 @@ namespace DIS.Web.Controllers.Settings
                     result = _repository.Remove(data);
                     if (result.success)
                     {
-
+                        AuditLog(nameof(TownshipController), nameof(Township), AuditAction.DELETE.ToString());
                     }
                 }
             }
@@ -218,7 +222,7 @@ namespace DIS.Web.Controllers.Settings
                 count++;
                 excel.AddRow();
                 excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
-                excel.SetData(1, item.country_type_name);
+                excel.SetData(1, item.countryType_name);
                 excel.SetData(2, item.country_name);
                 excel.SetData(3, item.state_division_name);
                 excel.SetData(4, item.district_name);

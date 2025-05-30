@@ -2,6 +2,7 @@
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.DataAccess.Repositories.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
@@ -93,8 +94,10 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
+                            AuditLog(nameof(StateDivisionController), nameof(StateDivision), AuditAction.UPDATE.ToString());
+                        }
                        
-                    }
+                    
 
                     }
                     else
@@ -110,6 +113,10 @@ namespace DIS.Web.Controllers.Settings
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
+                        
+                    } if(result.success)
+                    {
+                        AuditLog(nameof(StateDivisionController), nameof(StateDivision), AuditAction.CREATE.ToString());
                     }
                     else
                     {
@@ -140,7 +147,7 @@ namespace DIS.Web.Controllers.Settings
                     result = _repository.Remove(data);
                     if (result.success)
                     {
-
+                        AuditLog(nameof(StateDivisionController), nameof(StateDivision), AuditAction.DELETE.ToString());
                     }
                 }
             }
@@ -218,9 +225,10 @@ namespace DIS.Web.Controllers.Settings
             {
 
                 count++;
+      
                 excel.AddRow();
                 excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
-                excel.SetData(1, item.country_type_name);
+                excel.SetData(1, item.countryType_name);
                 excel.SetData(2, item.country_name);
                 excel.SetData(3, item.name);
 

@@ -2,6 +2,7 @@
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.DataAccess.Repositories.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
@@ -95,6 +96,7 @@ namespace DIS.Web.Controllers.Settings
 
                         if (result.success)
                         {
+                            AuditLog(nameof(CountryController), nameof(Country), AuditAction.UPDATE.ToString());
                             List<country_countrytype> cctlist = _cctrepo.GetByCountryId(result.id);
                             foreach (var cct in cctlist)
                             {
@@ -127,7 +129,10 @@ namespace DIS.Web.Controllers.Settings
 
                         if (result.success)
                         {
-
+                            {
+                                AuditLog(nameof(CountryController), nameof(Country), AuditAction.CREATE.ToString());
+                            }
+                         
 
                             foreach (var typeId in vm.CountryTypeListId)
                             {
@@ -174,7 +179,8 @@ public JsonResult Delete(int id)
         {
             result = countryRepository.Remove(data);
             if (result.success)
-            {
+                    {
+                        AuditLog(nameof(CountryController), nameof(Country), AuditAction.CREATE.ToString());
                         country_countrytype cc = _cctrepo.GetDatabyCountryId(data.id);
                         _cctrepo.Remove(cc);
 
@@ -267,7 +273,7 @@ public IActionResult ExportExcel()
         count++;
         excel.AddRow();
         excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
-        excel.SetData(1, item.country_type_name);
+        excel.SetData(1, item.countryType_name);
         excel.SetData(2, item.name);
 
 
