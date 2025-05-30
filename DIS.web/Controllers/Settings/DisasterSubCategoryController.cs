@@ -14,7 +14,7 @@ namespace DIS.Web.Controllers.Settings
 {
     [Route("api/[controller]")]
     [ApiController]
-   [Authorize]
+    [Authorize]
     public class DisasterSubCategoryController : BaseController
     {
         IDisasterSubCategoryRepository _repository;
@@ -157,7 +157,7 @@ namespace DIS.Web.Controllers.Settings
             bool duplicate = false;
             if (data.id > 0)
             {
-                if (vm.name == data.name && vm.category_id == data.id)
+                if (vm.name.Trim() == data.name.Trim() && vm.category_id != data.disaster_category_id)
                 {
                     duplicate = false;
 

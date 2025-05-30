@@ -218,7 +218,7 @@ namespace DIS.Web.Controllers.Settings
                 count++;
                 excel.AddRow();
                 excel.SetData(0, MyanmarEnglishConverter.ToMyanmarNumber(count.ToString()));
-                excel.SetData(1, item.country_type_name);
+                excel.SetData(1, item.countryType_name);
                 excel.SetData(2, item.country_name);
                 excel.SetData(3, item.state_division_name);
                 excel.SetData(4, item.name);
