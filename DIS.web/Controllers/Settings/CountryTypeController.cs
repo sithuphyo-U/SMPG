@@ -1,6 +1,7 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
@@ -74,7 +75,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _countryTypeRepository.Save(data);
                         if (result.success)
                         {
-
+                            AuditLog(nameof(CountryTypeController), nameof(CountryType), AuditAction.UPDATE.ToString());
                         }
                     }
                     else
@@ -87,16 +88,21 @@ namespace DIS.Web.Controllers.Settings
                 {
                     CountryType? data = new CountryType();
                     if (!isDuplicate(data, vm))
-                     {   data = _mapper.MapViewModelToModel(data, vm);
-                        result = _countryTypeRepository.Save(data);
-}
-                    else
                     {
-                        result.messages.Add(Constants.DuplicateMessage);
+                        data = _mapper.MapViewModelToModel(data, vm);
+                        result = _countryTypeRepository.Save(data);
+                        if (result.success)
+                        {
+                            AuditLog(nameof(CountryTypeController), nameof(CountryType), AuditAction.CREATE.ToString());
+                        }
+                        else
+                        {
+                            result.messages.Add(Constants.DuplicateMessage);
+                        }
                     }
                 }
-
             }
+
             catch (Exception ex)
             {
                 result.success = false;
@@ -115,11 +121,11 @@ namespace DIS.Web.Controllers.Settings
             {
                 CountryType? data = _countryTypeRepository.Get(id);
                 if (data != null)
-                {
+                {   
                     result = _countryTypeRepository.Remove(data);
                     if (result.success)
                     {
-
+                        AuditLog(nameof(CountryTypeController), nameof(CountryType), AuditAction.DELETE.ToString());
                     }
                 }
             }

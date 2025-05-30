@@ -5,6 +5,7 @@ using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.DataAccess.Repositories;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers;
 using DIS.Web.Mappers.Setttings;
@@ -89,7 +90,7 @@ namespace DIS.Web.Controllers.Settings
                     result = _userRepo.Save(user);
                     if (result.success)
                     {
-                        AuditLog(nameof(UserController), nameof(User), Constants.UpdateAction);
+                        AuditLog(nameof(UserController), nameof(User), AuditAction.UPDATE.ToString());
                     }
                 }
                 else
@@ -107,7 +108,8 @@ namespace DIS.Web.Controllers.Settings
                     result = _userRepo.Save(user);
                     if (result.success)
                     {
-                        AuditLog(nameof(UserController), nameof(User), Constants.CreateAction);
+                        AuditLog(nameof(UserController), nameof(User), AuditAction.CREATE.ToString());
+
                     }
                 }
                 else
@@ -155,7 +157,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _userRepo.Save(user);
                         if (result.success)
                         {
-                            AuditLog(nameof(UserController), nameof(User), Constants.UpdateAction);
+                            AuditLog(nameof(UserController), nameof(User), AuditAction.UPDATE.ToString());
                         }
                     }
                     else
@@ -204,7 +206,7 @@ namespace DIS.Web.Controllers.Settings
                 result = _userRepo.Remove(user);
                 if (result.success)
                 {
-                    AuditLog(nameof(UserController), nameof(User), Constants.DeleteAction);
+                    AuditLog(nameof(UserController), nameof(User), AuditAction.DELETE.ToString());
                 }
             }
         }
