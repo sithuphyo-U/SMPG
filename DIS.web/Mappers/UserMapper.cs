@@ -28,18 +28,20 @@ namespace DIS.Web.Mappers
                 queryOption.FilterBy = LinqExpressionHelper.AppendAnd(queryOption.FilterBy, (a => a.role_id == vm.role_id));
             }
 
-            if (queryOption.SortColumnName != null)
+            if (queryOption.SortColumnsName != null)
             {
                 queryOption.SortBy = new List<Func<User, object>>();
-                if (queryOption.SortColumnName == "name")
+                foreach(var SortColumnName in queryOption.SortColumnsName)
+                
+                if (SortColumnName == "name")
                 {
                     queryOption.SortBy.Add((x => x.name));
                 }
-                else if (queryOption.SortColumnName == "username")
+                else if (SortColumnName == "username")
                 {
                     queryOption.SortBy.Add((x => x.username));
                 }
-                else if (queryOption.SortColumnName == "role_name")
+                else if (SortColumnName == "role_name")
                 {
                     queryOption.SortBy.Add((x => x.role.name));
                 }

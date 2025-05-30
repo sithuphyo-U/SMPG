@@ -15,7 +15,7 @@ namespace DIS.Infrastructure.Utilities
 
         public const string SaveSucessMessage = "Successfully Saved! ";
         public const string PrintTicketSuccessMessage = "Successfully Printed! ";
-        public const string DeleteSuccessMessage = "Delete Success";
+        public const string DeleteSuccessMessage = "Successfully Deleted!";
         public const string IncorrectPasswordMessage = "Incorrect Password";
         public const string IncorrectUserNameMessage = "Incorrect User Name";
         public const string RoleNotFoundMessage = "Role Not Found!";
