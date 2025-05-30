@@ -14,6 +14,7 @@ namespace DIS.Infrastruture.Enumerations
         DELETE,
         PRINT,
         LOGIN,
+        DOWNLOAD,
         LOGOUT
     }
 }

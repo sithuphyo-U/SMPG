@@ -1,6 +1,7 @@
 ﻿using DIS.DataAccess.Entity;
 using DIS.DataAccess.Interfaces;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers;
 using DIS.Web.ViewModels;
@@ -72,7 +73,7 @@ namespace DIS.Web.Controller
                         result = _roleRepo.Save(data);
                         if (result.success)
                         {
-                            //AuditLog(nameof(RoleController), nameof(Role), Constants.UpdateAction);
+                            AuditLog(nameof(RoleController), nameof(Role), AuditAction.UPDATE.ToString());
                         }
                     }
                     else
@@ -90,7 +91,7 @@ namespace DIS.Web.Controller
                         result = _roleRepo.Save(data);
                         if (result.success)
                         {
-                            //AuditLog(nameof(RoleController), nameof(Role), Constants.CreateAction);
+                            AuditLog(nameof(RoleController), nameof(Role), AuditAction.CREATE.ToString());
                         }
                     }
                     else
@@ -136,7 +137,7 @@ namespace DIS.Web.Controller
                     result = _roleRepo.Remove(data);
                     if (result.success)
                     {
-                        //AuditLog(nameof(RoleController), nameof(Role), Constants.DeleteAction);
+                        AuditLog(nameof(RoleController), nameof(Role), AuditAction.DELETE.ToString());
                     }
                 }
             }
