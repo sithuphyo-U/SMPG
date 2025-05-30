@@ -66,8 +66,6 @@ namespace DIS.Web.Controllers.Settings
                 cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
                 vm.cc_type = cc;
 
-
-
             }
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");

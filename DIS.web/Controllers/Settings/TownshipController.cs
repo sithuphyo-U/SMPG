@@ -59,13 +59,12 @@ namespace DIS.Web.Controllers.Settings
         {
             TownshipViewModel vm = new TownshipViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
+            vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");
             if (vm.country_type_id > 0)
             {
                 List<country_countrytype> cc = new List<country_countrytype>();
                 cc = _cctrepo.GetByCountryTypeByCountryId(vm.country_type_id);
                 vm.cc_type = cc;
-
-
 
             }
             vm.country_id = GetRequestParameter<int>("search[country_id]");
