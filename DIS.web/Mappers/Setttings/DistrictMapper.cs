@@ -52,22 +52,23 @@ namespace DIS.Web.ViewModels
 
 
 
-            if (options.SortColumnName != null)
+            if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<District, object>>();
-                if (options.SortColumnName == "name")
-                {
-                    options.SortBy.Add((x => x.name));
-                }
-                //else if (options.SortColumnName == "country_type_name")
-                //{
-                //    options.SortBy.Add((x => x.CountryType.name));
-                //}
-                else if (options.SortColumnName == "country_name")
+                foreach (var SortColumnName in options.SortColumnsName)
+                    if (SortColumnName == "name")
+                    {
+                        options.SortBy.Add((x => x.name));
+                    }
+                    //else if (options.SortColumnName == "country_type_name")
+                    //{
+                    //    options.SortBy.Add((x => x.CountryType.name));
+                    //}
+                    else if (SortColumnName == "country_name")
                 {
                     options.SortBy.Add((x => x.Country.name));
                 }
-                else if (options.SortColumnName == "state_division_name")
+                else if (SortColumnName == "state_division_name")
                 {
                     options.SortBy.Add((x => x.StateDivision.name));
                 }

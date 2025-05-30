@@ -1,4 +1,5 @@
-﻿using DIS.DataAccess.Entity.Settings;
+﻿using DIS.DataAccess.Entity;
+using DIS.DataAccess.Entity.Settings;
 using DIS.Infrastructure.Enumerations;
 using DIS.Infrastructure.Utilities;
 using DIS.Web.ViewModels;
@@ -14,10 +15,11 @@ namespace DIS.Web.Mappers.Setttings
             {
                 options.FilterBy = (x => x.name.Contains(vm.name));
             }
-            if (options.SortColumnName != null)
+            if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<CountryType, object>>();
-                if (options.SortColumnName == "name")
+                foreach (var SortColumnName in options.SortColumnsName)
+                    if (SortColumnName == "name")
                 {
                     options.SortBy.Add((x => x.name));
                 }

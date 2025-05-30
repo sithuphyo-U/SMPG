@@ -50,18 +50,19 @@ namespace DIS.Web.Mappers.Setttings
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, (x => x.name.Contains(vm.name)));
             }
 
-            if (options.SortColumnName != null)
+            if (options.SortColumnsName != null)
             {
                 options.SortBy = new List<Func<Country, object>>();
-                if (options.SortColumnName == "name")
-                {
-                    options.SortBy.Add((x => x.name));
-                }
-                //else if (options.SortColumnName == "country_type_name")
-                //{
-                //    options.SortBy.Add((x => x.CountryType.name));
-                //}
-                else
+                foreach (var SortColumnName in options.SortColumnsName)
+                    if (SortColumnName == "name")
+                    {
+                        options.SortBy.Add((x => x.name));
+                    }
+                    //else if (options.SortColumnName == "country_type_name")
+                    //{
+                    //    options.SortBy.Add((x => x.CountryType.name));
+                    //}
+                    else
                         {
                     options.SortOrder = SortOrder.DESC;
                     options.SortBy.Add((x => x.id));
