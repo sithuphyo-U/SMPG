@@ -1,6 +1,7 @@
 ﻿using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces.Settings;
 using DIS.Infrastructure.Utilities;
+using DIS.Infrastruture.Enumerations;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
 using DIS.Web.ViewModels;
@@ -78,7 +79,7 @@ namespace DIS.Web.Controllers.Settings
                         result = _repository.Save(data);
                         if (result.success)
                         {
-                           // AuditLog(nameof(DisasterCategory), nameof(Position), Constants.UpdateAction);
+                           AuditLog(nameof(DisasterCategoryController), nameof(DisasterCategory),AuditAction.UPDATE.ToString());
                         }
                     }
                     else
@@ -94,9 +95,13 @@ namespace DIS.Web.Controllers.Settings
                     {
                         data = _mapper.MapViewModelToModel(data, vm);
                         result = _repository.Save(data);
+                        if(result.success)
+                        {
+                            AuditLog(nameof(DisasterCategoryController), nameof(DisasterCategory), AuditAction.CREATE.ToString());
+                        }
                     }
                     else
-                    {
+                    {   result.success = false;
                         result.messages.Add(Constants.DuplicateMessage);
                     }
 
@@ -141,7 +146,7 @@ namespace DIS.Web.Controllers.Settings
                     result = _repository.Remove(data);
                     if (result.success)
                     {
-
+                        AuditLog(nameof(DisasterCategoryController),nameof(DisasterCategory),AuditAction.DELETE.ToString());
                     }
                 }
             }
