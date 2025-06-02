@@ -19,6 +19,11 @@ namespace DIS.DataAccess.Repositories.Settings
             return CustomQuery().Where(x => x.name == name && x.deleted == false).FirstOrDefault();
         }
 
+        public DisasterSubCategory Getbyid(int? id)
+        {
+            return CustomQuery().Where(x => x.id == id && x.deleted == false).FirstOrDefault();
+        }
+
         public List<DisasterSubCategory>? GetByName(string name)
         {
             return CustomQuery().Where(x => x.name == name && x.deleted == false).ToList();
@@ -28,5 +33,6 @@ namespace DIS.DataAccess.Repositories.Settings
         {
             return CustomQuery().Where(x => x.disaster_category_id == id && x.deleted == false).ToList();
         }
+       
     }
 }

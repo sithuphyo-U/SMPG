@@ -44,6 +44,7 @@ namespace DIS.Web.Controllers
         IDisasterSubCategoryRepository _disastersubcategoryrepo;
         IFile_TBRepository _TBRepository;
         IDisasterInfoFileRepository _disasterInfoFileRepo;
+        
         DisasterInfoFileService _dsInfoFileService;
         DisasterInfoMapper _mapper;
         FileService fileService;
@@ -89,7 +90,7 @@ namespace DIS.Web.Controllers
 
             QueryOptions<DisasterInfo> queryOptions = GetQueryOptions<DisasterInfo>();
             DisasterInfoViewModel vm = GetRequestParameter();
-            queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm);
+            queryOptions = _mapper.PrepareQueryOptionForRepository(queryOptions, vm, _disastersubcategoryrepo);
             PagedResult<DisasterInfo> list = _repository.GetPagedResults(queryOptions);
             PagedResult<DisasterInfoViewModel> vmList;
 

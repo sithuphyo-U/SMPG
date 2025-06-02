@@ -1,6 +1,7 @@
 ﻿using DIS.DataAccess.Entity;
 using DIS.DataAccess.Entity.Settings;
 using DIS.DataAccess.Interfaces;
+using DIS.DataAccess.Interfaces.Settings;
 using DIS.Infrastructure.Utilities;
 using DIS.Infrastruture.Utilities;
 using DIS.Web.ViewModels;
@@ -13,7 +14,7 @@ namespace DIS.Web.Mappers
     public class DisasterInfoMapper
     {
 
-        public QueryOptions<DisasterInfo> PrepareQueryOptionForRepository(QueryOptions<DisasterInfo> options, DisasterInfoViewModel vm)
+        public QueryOptions<DisasterInfo> PrepareQueryOptionForRepository(QueryOptions<DisasterInfo> options, DisasterInfoViewModel vm,IDisasterSubCategoryRepository repo)
         {
             if (vm.disaster_category_id > 0)
             {
@@ -23,7 +24,27 @@ namespace DIS.Web.Mappers
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.subCategory_id == vm.subcategory_id);
             }
-            if (vm.country_type_id > 0)
+            if ((vm.disaster_category_id==0) && vm.subcategory_id > 0)
+            {
+                DisasterSubCategory Data = repo.Getbyid(vm.subcategory_id);
+
+                List<DisasterSubCategory> sub = repo.GetByName(Data.name);
+                foreach (var s in sub)
+                {
+                    if (options.FilterBy == null)
+                    {
+                        options.FilterBy = x => x.subCategory_id == s.id;
+                    }
+                    else
+                    {
+                        options.FilterBy = LinqExpressionHelper.AppendOr(options.FilterBy, x => x.subCategory_id == s.id);
+                    }
+
+                }
+
+            }
+
+                if (vm.country_type_id > 0)
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_type_id == vm.country_type_id);
             }
