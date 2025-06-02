@@ -22,11 +22,13 @@ namespace DIS.Web.Controllers.Settings
         Icountry_countrytypeRepository _cctrepo;
         ITownshipRepository _townshiprepo;
         TownshipMapper _mapper;
-        public TownshipController(ITownshipRepository townshipRepository,Icountry_countrytypeRepository icountry_CountrytypeRepository, ITownshipRepository townshiprepository) : base(typeof(TownshipController))
-        {
+        ILabelRepository _labelrepo;
+        public TownshipController(ITownshipRepository townshipRepository,Icountry_countrytypeRepository icountry_CountrytypeRepository, ITownshipRepository townshiprepository,ILabelRepository labelRepository) : base(typeof(TownshipController))
+        {   
             _repository = townshipRepository;
             _cctrepo = icountry_CountrytypeRepository;
             _townshiprepo = townshipRepository;
+            _labelrepo = labelRepository;
             _mapper = new TownshipMapper();
         }
         [HttpGet]
@@ -209,13 +211,14 @@ namespace DIS.Web.Controllers.Settings
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
             NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            List<Label> la = _labelrepo.Get();
             excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
             excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
-            excel.AddColumn("နိုင်ငံအမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("နိုင်ငံ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("တိုင်းဒေသကြီး/ပြည်နယ်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country_type, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].statedivison, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].district, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].township, typeof(string), NPOIExcelColumnWidth.M1);
             int count = 0;
             foreach (var item in list.data)
             {

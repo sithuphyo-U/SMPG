@@ -27,11 +27,13 @@ namespace DIS.Web.Controllers.Settings
         ICountryRepository countryRepository;
         CountryMapper _mapper;
         Icountry_countrytypeRepository _cctrepo;
-        public CountryController(ICountryRepository repository, Icountry_countrytypeRepository countrycountrytyperepo) : base(typeof(CountryController))
+        ILabelRepository _labelRepo;
+        public CountryController(ICountryRepository repository, Icountry_countrytypeRepository countrycountrytyperepo, ILabelRepository labelRepo) : base(typeof(CountryController))
         {
             countryRepository = repository;
             _cctrepo = countrycountrytyperepo;
             _mapper = new CountryMapper();
+            _labelRepo = labelRepo;
         }
         [HttpGet]
         public JsonResult Get()
@@ -263,10 +265,11 @@ public IActionResult ExportExcel()
     HttpContext.Response.ContentType = contentType;
     HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
     NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            List<Label> la = _labelRepo.Get();
     excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
     excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
-    excel.AddColumn("နိုင်ငံအမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-    excel.AddColumn("နိုင်ငံ", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country_type, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country, typeof(string), NPOIExcelColumnWidth.M1);
     int count = 0;
     foreach (var item in list.data)
     {

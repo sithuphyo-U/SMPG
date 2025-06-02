@@ -23,14 +23,15 @@ namespace DIS.Web.Controllers.Settings
     {
         IStateDivisionRepository _repository;
         Icountry_countrytypeRepository _cctrepo;
+        ILabelRepository _labelrepo;
       
         StateDivisionMapper _mapper;
-        public StateDivisionController(IStateDivisionRepository repository,Icountry_countrytypeRepository icountry_CountrytypeRepository) : base(typeof(StateDivisionController))
+        public StateDivisionController(IStateDivisionRepository repository,Icountry_countrytypeRepository icountry_CountrytypeRepository,ILabelRepository labelrepo) : base(typeof(StateDivisionController))
         {
             _repository = repository;
             _cctrepo = icountry_CountrytypeRepository;
             _mapper = new StateDivisionMapper();
-          
+            _labelrepo = labelrepo;
         }
         [HttpGet]
         public JsonResult Get()
@@ -215,11 +216,12 @@ namespace DIS.Web.Controllers.Settings
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
             NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            List<Label> la = _labelrepo.Get();
             excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
             excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
-            excel.AddColumn("နိုင်ငံအမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("နိုင်ငံ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("တိုင်းဒေသကြီး/ပြည်နယ်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country_type, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].statedivison, typeof(string), NPOIExcelColumnWidth.M1);
             int count = 0;
             foreach (var item in list.data)
             {

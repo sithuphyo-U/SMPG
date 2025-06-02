@@ -20,11 +20,13 @@ namespace DIS.Web.Controllers.Settings
     {
         IDisasterSubCategoryRepository _repository;
         DisasterSubCategoryMapper _mapper;
+        ILabelRepository _labelRepo;
 
-        public DisasterSubCategoryController(IDisasterSubCategoryRepository repository) : base(typeof(DisasterSubCategoryController))
+        public DisasterSubCategoryController(IDisasterSubCategoryRepository repository, ILabelRepository labelRepo) : base(typeof(DisasterSubCategoryController))
         {
             _repository = repository;
             _mapper = new DisasterSubCategoryMapper();
+            _labelRepo = labelRepo;
 
 
         }
@@ -207,10 +209,11 @@ namespace DIS.Web.Controllers.Settings
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
             NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            List<Label> la = _labelRepo.Get();
             excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
             excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
-            excel.AddColumn("အမျိူးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("အမျိူးအစားခွဲ", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].category_name, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].sub_category, typeof(string), NPOIExcelColumnWidth.M1);
             int count = 0;
             foreach (var item in list.data)
             {
