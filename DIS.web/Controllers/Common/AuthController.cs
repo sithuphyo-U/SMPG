@@ -23,7 +23,7 @@ namespace DIS.Web.Controllers.Common
         }
 
 
-         [HttpPost]
+        [HttpPost]
         [Route("logout")]
         public JsonResult Logout(int id)
         {
@@ -42,30 +42,26 @@ namespace DIS.Web.Controllers.Common
                 User? user = _userRepo.FindByUserName(vm.username);
                 if (user != null)
                 {
-                    if (user.status)
+                    if (!user.status)
                     {
-                        if (PasswordService.VerifyPassword(vm.password, user.password))
-                        {
-
-                            var token = CreateJWT(user, ConfigManager.GetSecretKey());
-                            loginUser.token = token;
-                            loginUser.success = true;
-                            loginUser.id = user.id;
-                            loginUser.username = user.username;
-                            loginUser.role = user.role;
-                            loginUser.name = user.name;
-                        }
-                        else
-                        {
-                            loginUser.success = false;
-                            loginUser.messages.Add(Constants.IncorrectPasswordMessage);
-                        }
+                        loginUser.success = false;
+                        loginUser.messages.Add(Constants.InactiveUser);
+                    }
+                    else if (PasswordService.VerifyPassword(vm.password, user.password))
+                    {
+                        var token = CreateJWT(user, ConfigManager.GetSecretKey());
+                        loginUser.token = token;
+                        loginUser.success = true;
+                        loginUser.id = user.id;
+                        loginUser.username = user.username;
+                        loginUser.role = user.role;
+                        loginUser.name = user.name;
                     }
                     else
                     {
-                        user.status = false;
+                        loginUser.success = false;
+                        loginUser.messages.Add(Constants.IncorrectPasswordMessage);
                     }
-                    
                 }
                 else
                 {
@@ -79,10 +75,12 @@ namespace DIS.Web.Controllers.Common
                 loginUser.messages.Add(ex.Message);
                 logger.LogError(ex.Message);
             }
+
             if (loginUser.success)
             {
                 LoginAuditLog(nameof(AuthController), "User", AuditAction.LOGIN.ToString(), loginUser.id);
             }
+
             return Json(loginUser);
         }
     }

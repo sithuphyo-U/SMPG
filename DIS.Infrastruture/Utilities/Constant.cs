@@ -32,7 +32,7 @@ namespace DIS.Infrastructure.Utilities
         public const string LogoutAction = "Logout";
         public const string UnassignCardAction = "Unassign";
         public const string PermissionDenied = "Permission denied!";
-        public const string InactiveUser = "Inactive user!";
+        public const string InactiveUser = "Your account is inactive. Please contact the Administrator.";
         public const string ExpiredUser = "User is expired";
         public const string InCorrectOldPassword = "Incorrect Old Password!";
         public const string ChangePasswordSuccess = "Successfully Change Password!";
