@@ -39,6 +39,10 @@ namespace DIS.Web.Mappers
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.district_id == vm.district_id);
             }
+            if (vm.township_id > 0)
+            {
+                options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.township_id == vm.township_id);
+            }
             if (!string.IsNullOrEmpty(vm.title))
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.title.Contains(vm.title));

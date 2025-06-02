@@ -27,7 +27,7 @@ namespace DIS.Web.Mappers.Setttings
                 foreach (var SortColumnName in options.SortColumnsName)
                     if (SortColumnName == "name")
                     {
-                        options.SortBy.Add((x => x.name));
+                        options.SortBy.Add((x => x.name)); 
                     }
                     else
                 {
