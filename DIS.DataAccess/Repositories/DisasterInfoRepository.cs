@@ -19,7 +19,7 @@ namespace DIS.DataAccess.Repositories
        
         public DisasterInfo? FindByTitle(string title)
         {
-            return CustomQuery().Where(x => x.title == title).FirstOrDefault();
+            return CustomQuery().Where(x => x.title == title && x.deleted == false ).FirstOrDefault();
         }
     }
 }

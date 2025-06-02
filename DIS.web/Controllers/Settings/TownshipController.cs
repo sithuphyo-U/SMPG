@@ -57,7 +57,7 @@ namespace DIS.Web.Controllers.Settings
 
         }
         private TownshipViewModel GetRequestParameter()
-        {
+              {
             TownshipViewModel vm = new TownshipViewModel();
             vm.name = GetRequestParameter<string>("search[name]");
             vm.country_type_id = GetRequestParameter<int>("search[country_type_id]");

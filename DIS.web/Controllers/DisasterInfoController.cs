@@ -127,6 +127,7 @@ namespace DIS.Web.Controllers
             vm.country_id = GetRequestParameter<int>("search[country_id]");
             vm.state_division_id = GetRequestParameter<int>("search[state_division_id]");
             vm.district_id = GetRequestParameter<int>("search[district_id]");
+            vm.township_id = GetRequestParameter<int>("search[township_id]");
             vm.disaster_category_id = GetRequestParameter<int>("search[disasterCategory_id]");
             vm.subcategory_id = GetRequestParameter<int>("search[subcategories_id]");
             vm.word = GetRequestParameter<string>("search[word]");
@@ -567,7 +568,7 @@ namespace DIS.Web.Controllers
             excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("‌ေသတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("သတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
             
             //excel.AddColumn("အကြောင်းအရာ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
