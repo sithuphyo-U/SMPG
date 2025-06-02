@@ -13,5 +13,6 @@ namespace DIS.DataAccess.Interfaces.Settings
     {
         DisasterSubCategory? FindByName(string name);
         List<DisasterSubCategory>? GetSubCategorybyCategory(int id);
+        List<DisasterSubCategory>? GetByName(string name);
     }
 }

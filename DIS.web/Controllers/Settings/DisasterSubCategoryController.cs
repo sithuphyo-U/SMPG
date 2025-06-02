@@ -178,10 +178,20 @@ namespace DIS.Web.Controllers.Settings
             }
             else
             {
-                DisasterSubCategory? dc = _repository.FindByName(vm.name);
-                if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.disaster_category_id == vm.category_id)
+                List<DisasterSubCategory>? dc = _repository.GetByName(vm.name);
+                //if (dc != null && dc.name.Trim() == vm.name.Trim() && dc.disaster_category_id == vm.category_id)
+                //{
+                //    duplicate = true;
+                //}
+                if(dc != null)
                 {
-                    duplicate = true;
+                    foreach(var sub in dc)
+                    {
+                        if(sub.name.Trim() == vm.name.Trim() && sub.disaster_category_id == vm.category_id)
+                        {
+                            duplicate = true;
+                        }
+                    }
                 }
             }
             return duplicate;
