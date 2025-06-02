@@ -567,7 +567,7 @@ namespace DIS.Web.Controllers
             excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
             excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("‌ေသတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn("သတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
             
             //excel.AddColumn("အကြောင်းအရာ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
