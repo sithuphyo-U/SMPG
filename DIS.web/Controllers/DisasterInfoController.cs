@@ -44,12 +44,13 @@ namespace DIS.Web.Controllers
         IDisasterSubCategoryRepository _disastersubcategoryrepo;
         IFile_TBRepository _TBRepository;
         IDisasterInfoFileRepository _disasterInfoFileRepo;
+        ILabelRepository _labelrepo;
         
         DisasterInfoFileService _dsInfoFileService;
         DisasterInfoMapper _mapper;
         FileService fileService;
 
-        public DisasterInfoController(ICountryTypeRepository countryTypeRepository, IDisasterInfoFileRepository disasterInfoFileRepo, FileService _fileService, IFile_TBRepository TBRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository disasterSubCategoryRepository, IDisasterInfoRepository disasterInfoRepository, DisasterInfoFileService dsInfoFileService) : base(typeof(DisasterInfoController))
+        public DisasterInfoController(ICountryTypeRepository countryTypeRepository,ILabelRepository labelrepo,IDisasterInfoFileRepository disasterInfoFileRepo, FileService _fileService, IFile_TBRepository TBRepository, ICountryRepository countryRepository, IStateDivisionRepository stateDivisionRepository, IDistrictRepository districtRepository, ITownshipRepository townshipRepository, IDisasterCategoryRepository disasterCategoryRepository, IDisasterSubCategoryRepository disasterSubCategoryRepository, IDisasterInfoRepository disasterInfoRepository, DisasterInfoFileService dsInfoFileService) : base(typeof(DisasterInfoController))
         {
             _repository = disasterInfoRepository;
             _countrytyperepo = countryTypeRepository;
@@ -61,6 +62,7 @@ namespace DIS.Web.Controllers
             _disastersubcategoryrepo = disasterSubCategoryRepository;
             _TBRepository = TBRepository;
             _disasterInfoFileRepo = disasterInfoFileRepo;
+            _labelrepo = labelrepo;
             _mapper = new DisasterInfoMapper();
             _dsInfoFileService = dsInfoFileService;
             fileService = _fileService;
@@ -559,18 +561,20 @@ namespace DIS.Web.Controllers
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("attachment", "Content-Disposition");
             NPOISimpleExcelTable excel = new NPOISimpleExcelTable("Pyidaungsu", 13);
+            List<Label> la = _labelrepo.Get();
             excel.AddHeader("သဘာဝဘေးအန္တရာယ်စာရင်း");
             excel.AddColumn("စဉ်", typeof(string), NPOIExcelColumnWidth.S2);
-            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("သဘာဝဘေးအန္တရာယ်အမျိုးအစားခွဲအမည်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("နိုင်ငံအမျိုးအစား", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("နိုင်ငံ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("တိုင်းဒေသကြီး/ပြည်နယ်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("ခရိုင်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("မြို့နယ်", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
-            excel.AddColumn("သတင်းခေါင်းစဉ်", typeof(string), NPOIExcelColumnWidth.M1);
-            
+            excel.AddColumn(la[0].category_name, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].sub_category, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country_type, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].country, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].statedivison, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].district, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].township, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].casedate, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].headline, typeof(string), NPOIExcelColumnWidth.M1);
+            excel.AddColumn(la[0].totalNews, typeof(string), NPOIExcelColumnWidth.M1);
+
             //excel.AddColumn("အကြောင်းအရာ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("ရက်စွဲ", typeof(string), NPOIExcelColumnWidth.M1);
             //excel.AddColumn("အချိန်", typeof(string), NPOIExcelColumnWidth.M1);
@@ -589,6 +593,7 @@ namespace DIS.Web.Controllers
                 excel.SetData(7, item.township_name);
                 excel.SetData(8, item.date);
                 excel.SetData(9, item.title);
+                excel.SetData(10, item.totalCountofNews);
 
 
 

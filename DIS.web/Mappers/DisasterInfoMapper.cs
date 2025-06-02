@@ -43,7 +43,6 @@ namespace DIS.Web.Mappers
                 }
 
             }
-
                 if (vm.country_type_id > 0)
             {
                 options.FilterBy = LinqExpressionHelper.AppendAnd(options.FilterBy, x => x.country_type_id == vm.country_type_id);
