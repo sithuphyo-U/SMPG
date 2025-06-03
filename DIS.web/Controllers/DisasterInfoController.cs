@@ -335,23 +335,7 @@ namespace DIS.Web.Controllers
                                         if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension==".jpeg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                         {
                                             Guid guId = Guid.NewGuid();
-                                            string path = "/DisasterInfoFile"; 
-                                            if (vm.disasterCategory_name == "ရေကြီး")
-                                            {
-                                                path = "/DisasterInfoFile/Flood";
-                                            }
-                                            else if (vm.disasterCategory_name == "ငလျင်")
-                                            {
-                                                path = "/DisasterInfoFile/Earthquake";
-                                            }
-                                            else if (vm.disasterCategory_name == "တောမီး")
-                                            {
-                                                path = "/DisasterInfoFile/WildFire";
-                                            }
-                                            else if (vm.disasterCategory_name == "မုန်တိုင်း")
-                                            {
-                                                path = "/DisasterInfoFile/Storm";
-                                            }
+                                            string path = path = "/DisasterInfoFile/" + vm.disasterCategory_name;                                          
                                             File_TB entity = new File_TB
                                             {
                                                 file_name = guId.ToString(),
@@ -401,23 +385,7 @@ namespace DIS.Web.Controllers
                                 {
                                     
                                     Guid guId = Guid.NewGuid();
-                                    string path = "/DisasterInfoFile"; 
-                                    if (vm.disasterCategory_name == "ရေကြီး")
-                                    {
-                                        path = "/DisasterInfoFile/Flood";
-                                    }
-                                    else if (vm.disasterCategory_name == "ငလျင်")
-                                    {
-                                        path = "/DisasterInfoFile/Earthquake";
-                                    }
-                                    else if (vm.disasterCategory_name == "တောမီး")
-                                    {
-                                        path = "/DisasterInfoFile/WildFire";
-                                    }
-                                    else if (vm.disasterCategory_name == "မုန်တိုင်း")
-                                    {
-                                        path = "/DisasterInfoFile/Storm";
-                                    }
+                                    string path = "/DisasterInfoFile/" + vm.disasterCategory_name;                                 
                                     File_TB entity = new File_TB();
                                     entity.file_name = guId.ToString();
                                     entity.file_type = extension;
