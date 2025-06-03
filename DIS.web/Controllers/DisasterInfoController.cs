@@ -219,7 +219,17 @@ namespace DIS.Web.Controllers
 
                 foreach (var file in files)
                 {
-                    string fullPath = Path.Combine(Constants.FilePath, "DisasterInfoFile", file.file_name);
+                    var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
+
+
+                    var fullPath = Directory.GetFiles(rootPath, file.file_name, SearchOption.AllDirectories)
+                                            .FirstOrDefault();
+
+                    //if (filePath == null || !System.IO.File.Exists(filePath))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //string fullPath = Path.Combine(Constants.FilePath, "DisasterInfoFile", file.file_name);
 
                     if (System.IO.File.Exists(fullPath))
                     {
