@@ -316,17 +316,39 @@ namespace DIS.Web.Controllers
                                     bool exists = oldFiles.Any(of => of.originalfile_name == f.FileName);
                                     if (!exists)
                                     {
+                                        var disasterCategory = _disastercategoryrepo.Get(vm.disaster_category_id);
+                                        if (disasterCategory != null)
+                                        {
+                                            vm.disasterCategory_name = disasterCategory.name;
+                                        }
                                         string extension = Path.GetExtension(f.FileName).ToLower();
                                         if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension==".jpeg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                         {
                                             Guid guId = Guid.NewGuid();
+                                            string path = "/DisasterInfoFile"; 
+                                            if (vm.disasterCategory_name == "ရေကြီး")
+                                            {
+                                                path = "/DisasterInfoFile/Flood";
+                                            }
+                                            else if (vm.disasterCategory_name == "ငလျင်")
+                                            {
+                                                path = "/DisasterInfoFile/Earthquake";
+                                            }
+                                            else if (vm.disasterCategory_name == "တောမီး")
+                                            {
+                                                path = "/DisasterInfoFile/WildFire";
+                                            }
+                                            else if (vm.disasterCategory_name == "မုန်တိုင်း")
+                                            {
+                                                path = "/DisasterInfoFile/Storm";
+                                            }
                                             File_TB entity = new File_TB
                                             {
                                                 file_name = guId.ToString(),
                                                 file_type = extension,
                                                 originalfile_name = f.FileName,
                                                 disastercategory_id = data.id,
-                                                path = "/DisasterInfoFile"
+                                                path = path
                                             };
 
                                             var returndata = _dsInfoFileService.SaveorUpdate(entity);
@@ -351,23 +373,48 @@ namespace DIS.Web.Controllers
                     result = _repository.Save(data);
                     if (result.success)
                     {   AuditLog(nameof(DisasterInfoController), nameof(DisasterInfo), AuditAction.CREATE.ToString());
+                        
                         if (vm.file_list != null && vm.file_list.Count > 0)
                         {
 
                             foreach (var f in vm.file_list)
 
                             {
+                                var disasterCategory = _disastercategoryrepo.Get(vm.disaster_category_id);
+                                if(disasterCategory != null)
+                                {
+                                    vm.disasterCategory_name = disasterCategory.name;
+                                }
+
                                 string extension = Path.GetExtension(f.FileName).ToLower();
                                 if (extension == ".pdf" || extension == ".docx" || extension == ".jpg" || extension == ".png" || extension == ".mp3" || extension == ".mp4")
                                 {
+                                    
                                     Guid guId = Guid.NewGuid();
+                                    string path = "/DisasterInfoFile"; 
+                                    if (vm.disasterCategory_name == "ရေကြီး")
+                                    {
+                                        path = "/DisasterInfoFile/Flood";
+                                    }
+                                    else if (vm.disasterCategory_name == "ငလျင်")
+                                    {
+                                        path = "/DisasterInfoFile/Earthquake";
+                                    }
+                                    else if (vm.disasterCategory_name == "တောမီး")
+                                    {
+                                        path = "/DisasterInfoFile/WildFire";
+                                    }
+                                    else if (vm.disasterCategory_name == "မုန်တိုင်း")
+                                    {
+                                        path = "/DisasterInfoFile/Storm";
+                                    }
                                     File_TB entity = new File_TB();
                                     entity.file_name = guId.ToString();
                                     entity.file_type = extension;
                                     entity.originalfile_name = f.FileName;
                                     entity.disastercategory_id = data.id;
 
-                                    entity.path = "/DisasterInfoFile";
+                                    entity.path = path;
 
                                     var returndata = _dsInfoFileService.SaveorUpdate(entity);
                                     if (returndata != null)
@@ -427,13 +474,32 @@ namespace DIS.Web.Controllers
             return Json(result);
         }
 
+        //[HttpGet("view-pdf/{fileName}")]
+        //public IActionResult ViewPdf(string fileName)
+        //{
+
+        //    var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+
+
+        //    if (!System.IO.File.Exists(filePath)) { }
+        //        return NotFound();
+
+        //    var fileBytes = System.IO.File.ReadAllBytes(filePath);
+        //    return File(fileBytes, "application/pdf");
+        //}
         [HttpGet("view-pdf/{fileName}")]
         public IActionResult ViewPdf(string fileName)
         {
-            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+            var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
 
-            if (!System.IO.File.Exists(filePath))
+          
+            var filePath = Directory.GetFiles(rootPath, fileName, SearchOption.AllDirectories)
+                                    .FirstOrDefault();
+
+            if (filePath == null || !System.IO.File.Exists(filePath))
+            {
                 return NotFound();
+            }
 
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/pdf");
@@ -443,10 +509,16 @@ namespace DIS.Web.Controllers
         [HttpGet("view-image/{fileName}")]
         public IActionResult ViewImage(string fileName)
         {
-            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+            var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
 
-            if (!System.IO.File.Exists(filePath))
+          
+            var filePath = Directory.GetFiles(rootPath, fileName, SearchOption.AllDirectories)
+                                    .FirstOrDefault();
+
+            if (filePath == null || !System.IO.File.Exists(filePath))
+            {
                 return NotFound();
+            }
 
             var contentType = "image/jpeg";
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
@@ -455,13 +527,21 @@ namespace DIS.Web.Controllers
 
         [HttpGet("view-audio/{fileName}")]
         public IActionResult ViewAudio(string fileName)
-        {   
-            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
+        {
 
-            if (!System.IO.File.Exists(filePath))
+            var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
+
+         
+            var filePath = Directory.GetFiles(rootPath, fileName, SearchOption.AllDirectories)
+                                    .FirstOrDefault();
+
+            if (filePath == null || !System.IO.File.Exists(filePath))
+            {
                 return NotFound();
+            }
 
-            var contentType = "audio/mpeg"; // MIME type for MP3
+
+            var contentType = "audio/mpeg"; 
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, contentType);
         }
@@ -469,12 +549,19 @@ namespace DIS.Web.Controllers
         [HttpGet("view-video/{fileName}")]
         public IActionResult ViewVideo(string fileName)
         {
-            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", fileName);
 
-            if (!System.IO.File.Exists(filePath))
+            var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
+
+            var filePath = Directory.GetFiles(rootPath, fileName, SearchOption.AllDirectories)
+                                    .FirstOrDefault();
+
+            if (filePath == null || !System.IO.File.Exists(filePath))
+            {
                 return NotFound();
+            }
 
-            var contentType = "video/mp4"; // MIME type for MP4
+
+            var contentType = "video/mp4";
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, contentType);
         }
@@ -482,11 +569,14 @@ namespace DIS.Web.Controllers
         [HttpGet("download-doc/{filename}")]
         public IActionResult DownloadFile(string filename)
         {
-            var filePath = Path.Combine(Constants.FilePath, "DisasterInfoFile", filename);
+            var rootPath = Path.Combine(Constants.FilePath, "DisasterInfoFile");
 
-            if (!System.IO.File.Exists(filePath))
+            var filePath = Directory.GetFiles(rootPath, filename, SearchOption.AllDirectories)
+                                    .FirstOrDefault();
+
+            if (filePath == null || !System.IO.File.Exists(filePath))
             {
-                return NotFound(new { success = false, message = "File not found" });
+                return NotFound();
             }
 
             var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
