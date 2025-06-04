@@ -41,6 +41,7 @@ builder.Services.AddControllers();
 builder.Services.AddRepositories(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<FileService>();
 builder.Services.AddScoped<DisasterInfoFileService>();
+builder.Services.AddScoped<ImageFileService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
