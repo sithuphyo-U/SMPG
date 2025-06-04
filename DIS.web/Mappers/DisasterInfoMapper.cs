@@ -148,10 +148,9 @@ namespace DIS.Web.Mappers
                 {
                     data.disasterCategory_id = vm.disaster_category_id;
                 }
-                if (vm.subcategory_id > 0)
-                {
+               
                     data.subCategory_id = vm.subcategory_id;
-                }
+                
                 if (vm.country_id > 0)
                 {
                     data.country_id = vm.country_id;
