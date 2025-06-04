@@ -67,7 +67,7 @@ namespace DIS.Web.Controllers.Settings
                     if (result.success)
                     {
                       
-                        var parentProgramCode = _programCodeRepository.Get().FirstOrDefault(x => x.program_name == "Settings");
+                        var parentProgramCode = _programCodeRepository.Get().FirstOrDefault(x => x.program_code == "Settings");
                         if (parentProgramCode != null)
                         {
                             var childProgramCodes = _programCodeRepository.Get()
