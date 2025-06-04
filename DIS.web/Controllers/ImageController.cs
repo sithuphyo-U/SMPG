@@ -80,23 +80,25 @@ namespace DIS.Web.Controllers
                         }
                         _imageFileService.Delete(oldFiles);
                     }
-                    if (vm.form_files != null)
+                    IFormFile? file = vm.form_files;
+                    if (file != null)
                     {
-                        Image? entity = new Image();
-                        IFormFile? file = vm.form_files;
                         Guid guId = Guid.NewGuid();
                         string extension = Path.GetExtension(file.FileName).ToLower();
                         string path = "/IconImage/";
-                        entity.image_name = guId.ToString();
-                        entity.image_type = extension;
-                        entity.original_image_name = file.FileName;
-                        entity.path = path;
-                        var returndata = _imageFileService.SaveorUpdate(entity);
+
+                        oldFiles.image_name = guId.ToString();
+                        oldFiles.image_type = extension;
+                        oldFiles.original_image_name = file.FileName;
+                        oldFiles.path = path;
+
+                        var returndata = _imageFileService.SaveorUpdate(oldFiles);
                         if (returndata != null)
                         {
-                            fileService.CreatedPhysicalFile(Constants.FilePath + entity.path, entity.image_name, file);
+                            fileService.CreatedPhysicalFile(Constants.FilePath + oldFiles.path, oldFiles.image_name, file);
                         }
                     }
+
                 }
 
 
