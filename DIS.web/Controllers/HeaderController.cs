@@ -1,93 +1,100 @@
-﻿using DIS.DataAccess.Interfaces.Settings;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-     
+using DIS.DataAccess.Entity;
+using DIS.DataAccess.Interfaces;
 using DIS.DataAccess.Interfaces.Settings;
+using DIS.Infrastructure.Utilities;
 using DIS.Web.Controllers.Common;
 using DIS.Web.Mappers.Setttings;
-using Microsoft.AspNetCore.Mvc;
-using DIS.DataAccess.Entity;
 using DIS.Web.ViewModels;
-using DIS.Infrastructure.Utilities;
-using Microsoft.AspNetCore.Authorization;
-using DIS.DataAccess.Interfaces;
 
 namespace DIS.Web.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    //[Authorize] // Uncomment this line if you want to protect the endpoints
+    public class HeaderController : BaseController
     {
-        [Route("api/[controller]")]
-        [ApiController]
-        //[Authorize]
-        public class HeaderController : BaseController
+        private readonly IHeaderRepository _headerRepository;
+        private readonly HeaderMapper _mapper;
+
+        public HeaderController(IHeaderRepository headerRepository)
+            : base(typeof(HeaderController))
         {
-            private readonly IHeaderRepository _headerRepository;
-            private readonly HeaderMapper _mapper;
+            _headerRepository = headerRepository;
+            _mapper = new HeaderMapper();
+        }
 
-            public HeaderController(IHeaderRepository headerRepository)
-                : base(typeof(HeaderController))
+        /// <summary>
+        /// Get all headers that are not marked as deleted.
+        /// </summary>
+        [HttpGet]
+        public JsonResult Get()
+        {
+            var vmList = new List<HeaderViewModel>();
+
+            try
             {
-                _headerRepository = headerRepository;
-                _mapper = new HeaderMapper();
+                var headers = _headerRepository.Get().Where(x => !x.deleted).ToList();
+                vmList = _mapper.MapModelToListViewModel(headers);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"[HeaderController:Get] {ex.Message}");
             }
 
-            [HttpGet]
-            public JsonResult Get()
-            {
-                var vmList = new List<HeaderViewModel>();
-                try
-                {
-                    var headers = _headerRepository.Get().Where(x => !x.deleted).ToList();
-                    vmList = _mapper.MapModelToListViewModel(headers);
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "Error while fetching header list.");
-                }
+            return Json(vmList);
+        }
 
-                return Json(vmList);
+        /// <summary>
+        /// Save or update a header.
+        /// </summary>
+        /// <param name="vm">Header view model</param>
+        [HttpPost("SaveOrUpdate")]
+        public IActionResult SaveOrUpdate(HeaderViewModel vm)
+        {
+            var result = new CommandResult<Header>();
+
+            if (vm == null || string.IsNullOrWhiteSpace(vm.header_name))
+            {
+                result.success = false;
+                result.messages.Add("Invalid header data.");
+                return Json(result);
             }
 
-            [HttpPost("SaveOrUpdate")]
-            public IActionResult SaveOrUpdate(HeaderViewModel vm)
+            try
             {
-                var result = new CommandResult<Header>();
-
-                try
+                if (vm.id > 0)
                 {
-                    if (vm == null || string.IsNullOrWhiteSpace(vm.header_name))
+                    var existing = _headerRepository.Get(vm.id);
+                    if (existing == null)
                     {
                         result.success = false;
-                        result.messages.Add("Invalid header data.");
+                        result.messages.Add("Header not found.");
                         return Json(result);
                     }
 
-                    if (vm.id > 0)
-                    {
-                        var existing = _headerRepository.Get(vm.id);
-                        if (existing == null)
-                        {
-                            result.success = false;
-                            result.messages.Add("Header not found.");
-                            return Json(result);
-                        }
-
-                        existing = _mapper.MapViewModelToModel(existing, vm);
-                        result = _headerRepository.Save(existing);
-                    }
-                    else
-                    {
-                        var newHeader = new Header();
-                        newHeader = _mapper.MapViewModelToModel(newHeader, vm);
-                        result = _headerRepository.Save(newHeader);
-                    }
+                    existing = _mapper.MapViewModelToModel(existing, vm);
+                    result = _headerRepository.Save(existing);
                 }
-                catch (Exception ex)
+                else
                 {
-                    logger.LogError(ex, "Error while saving header.");
-                    result.success = false;
-                    result.messages.Add(ex.Message);
+                    var newHeader = _mapper.MapViewModelToModel(new Header(), vm);
+                    result = _headerRepository.Save(newHeader);
                 }
-
-                return Json(result);
             }
+            catch (Exception ex)
+            {
+                logger.LogError($"[HeaderController:SaveOrUpdate] {ex.Message}");
+                result.success = false;
+                result.messages.Add("An error occurred while saving the header.");
+            }
+
+            return Json(result);
         }
     }
 }
