@@ -14,7 +14,7 @@ namespace DIS.Infrastructure.Logging
         {
             this.log4NetAdapter = LogManager.GetLogger(type);
         }
-        public void LogError(Exception ex, string message)
+        public void LogError(string message)
         {
             this.log4NetAdapter.Error(message);
         }
