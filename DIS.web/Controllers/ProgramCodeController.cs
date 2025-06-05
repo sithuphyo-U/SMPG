@@ -177,7 +177,7 @@ namespace DIS.Web.Controllers
             List<ProgramCode> parentProgramCode = _proRepo.Get().Where(x => x.parent_id == 0).ToList();
             var SettingParent = _proRepo.Get().FirstOrDefault(x => x.program_code == "Settings");
             parentProgramCode[0].program_name = updatedLabels.Dashboard;
-            parentProgramCode[1].program_name = updatedLabels.DisasterSubCategory;
+            parentProgramCode[1].program_name = updatedLabels.DisasterInfo;
             parentProgramCode[2].program_name = updatedLabels.Settings;
             parentProgramCode[3].program_name = updatedLabels.DataManagement;
             parentProgramCode[4].program_name = updatedLabels.UserManagement;
