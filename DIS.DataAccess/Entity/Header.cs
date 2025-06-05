@@ -11,7 +11,7 @@ namespace DIS.DataAccess.Entity
     [Table("header")]
     public class Header : BaseEntity
     {
-        public string header_name { get; set; }
+        public string ?header_name { get; set; }
        
     }
 }

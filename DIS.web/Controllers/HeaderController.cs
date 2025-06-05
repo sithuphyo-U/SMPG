@@ -16,7 +16,7 @@ namespace DIS.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize] // Uncomment this line if you want to protect the endpoints
+    //[Authorize] 
     public class HeaderController : BaseController
     {
         private readonly IHeaderRepository _headerRepository;
@@ -29,9 +29,7 @@ namespace DIS.Web.Controllers
             _mapper = new HeaderMapper();
         }
 
-        /// <summary>
-        /// Get all headers that are not marked as deleted.
-        /// </summary>
+        
         [HttpGet]
         public JsonResult Get()
         {
@@ -50,10 +48,7 @@ namespace DIS.Web.Controllers
             return Json(vmList);
         }
 
-        /// <summary>
-        /// Save or update a header.
-        /// </summary>
-        /// <param name="vm">Header view model</param>
+        
         [HttpPost("SaveOrUpdate")]
         public IActionResult SaveOrUpdate(HeaderViewModel vm)
         {
