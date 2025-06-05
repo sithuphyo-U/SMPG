@@ -7,23 +7,29 @@ using DIS.Infrastructure.Utilities;
 using DIS.DataAccess.Entity;
 using DIS.DataAccess.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using DIS.DataAccess.Repositories;
+using NPOI.SS.Formula.Functions;
+using DIS.DataAccess.Interfaces.Settings;
+using DIS.DataAccess.Entity.Settings;
 
 namespace DIS.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   
+
     public class ProgramCodeController : BaseController
     {
         IProgramCodeRepository _proRepo;
         ProgramCodeMapper mapper;
         IRoleRepository _roleRepository;
-        public ProgramCodeController(IRoleRepository roleRepository, IProgramCodeRepository programCodeRepository)
+        ILabelRepository _labelRepository;
+        public ProgramCodeController(IRoleRepository roleRepository, IProgramCodeRepository programCodeRepository,ILabelRepository labelRepository)
             : base(typeof(ProgramCodeController))
         {
             _proRepo = programCodeRepository;
             mapper = new ProgramCodeMapper();
             _roleRepository = roleRepository;
+            _labelRepository = labelRepository;
 
         }
         [HttpGet]
@@ -161,5 +167,101 @@ namespace DIS.Web.Controllers
             }
             return Json(result);
         }
+
+        [HttpPost]
+        [Route("SaveOrUpdate")]
+        public IActionResult SaveOrUpdate(ProgramNameViewModel updatedLabels)
+        {
+            var result = new CommandResult<ProgramCode>();
+            // Retrieve parent program code
+            List<ProgramCode> parentProgramCode = _proRepo.Get().Where(x => x.parent_id == 0).ToList();
+            var SettingParent = _proRepo.Get().FirstOrDefault(x => x.program_code == "Settings");
+            parentProgramCode[0].program_name = updatedLabels.Dashboard;
+            parentProgramCode[1].program_name = updatedLabels.DisasterSubCategory;
+            parentProgramCode[2].program_name = updatedLabels.Settings;
+            parentProgramCode[3].program_name = updatedLabels.DataManagement;
+            parentProgramCode[4].program_name = updatedLabels.UserManagement;
+            parentProgramCode[5].program_name = updatedLabels.RoleManagement;
+            parentProgramCode[6].program_name = updatedLabels.Log;
+            if (SettingParent != null)
+            {
+
+                if (SettingParent != null)
+                {
+                    var childProgramCodes = _proRepo.Get()
+                        .Where(x => x.parent_id == SettingParent.id)
+                        .ToList();
+
+                    for (int i = 0; i < childProgramCodes.Count; i++)
+                    {
+                        var program = childProgramCodes[i];
+
+                        switch (i)
+                        {
+                            case 0:
+                                program.program_name = updatedLabels.DisasterCategory;
+                                break;
+                            case 1:
+                                program.program_name = updatedLabels.DisasterSubCategory;
+                                break;
+                            case 2:
+                                program.program_name = updatedLabels.CountryType;
+                                break;
+                            case 3:
+                                program.program_name = updatedLabels.Country;
+                                break;
+                            case 4:
+                                program.program_name = updatedLabels.StateDivision;
+                                break;
+                            case 5:
+                                program.program_name = updatedLabels.District;
+                                break;
+                            case 6:
+                                program.program_name = updatedLabels.Township;
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        
+                         result =_proRepo.Save(program);
+                       
+                       
+                    }
+                    if (result.success)
+                    {
+                        var label = _labelRepository.Get().FirstOrDefault();
+                        if (label != null)
+                        {
+                            label.category_name = updatedLabels.DisasterCategory;
+                            label.sub_category = updatedLabels.DisasterSubCategory;
+                            label.country_type = updatedLabels.CountryType;
+                            label.country = updatedLabels.Country;
+                            label.statedivison = updatedLabels.StateDivision;
+                            label.district = updatedLabels.District;
+                            label.township = updatedLabels.Township;
+
+                            _labelRepository.Save(label);
+                        }
+                    }
+
+                    foreach (var parent in parentProgramCode)
+                    {
+                        _proRepo.Save(parent);
+                    }
+
+                }
+
+               
+            }
+
+            return Json("Labels updated successfully.");
+
+        }
+
+
+
+
     }
 }
