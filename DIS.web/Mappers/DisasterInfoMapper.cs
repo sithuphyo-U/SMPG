@@ -224,6 +224,10 @@ namespace DIS.Web.Mappers
                     vm.township_id = data.township_id;
                     vm.township_name = data.Township.name;
                 }
+                if (data.created_date != null)
+                {
+                    vm.created_date = data.created_date.Value.AddHours(24);
+                }
                 if (data.id>0)
                 {
                     List<File_TB> list = new List<File_TB>();

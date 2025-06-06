@@ -692,15 +692,17 @@ namespace DIS.Web.Controllers
                     if (!string.IsNullOrEmpty(searchWord))
                     {
                         string normalizedText = page.Text;
-                        if (page.Text.Contains(searchWord))
-                        {
-                            totalWordCount ++;
-                        }
-                        //int count = Regex.Matches(normalizedText, Regex.Escape(searchWord), RegexOptions.IgnoreCase).Count;
+                        string normalizedSearch = searchWord.Normalize(NormalizationForm.FormKC);
+                        //if (page.Text.Contains(searchWord))
+                        //{
+                        //    totalWordCount++;
+                        //}
+                        int count = Regex.Matches(normalizedText, Regex.Escape(normalizedSearch), RegexOptions.IgnoreCase).Count;
+                        totalWordCount += count;
                         //int count = Regex.Matches(normalizedText, Regex.Escape(normalizedSearch), RegexOptions.IgnoreCase).Count;
 
                         //int count = Regex.Matches(page.Text, Regex.Escape("Javascript"), RegexOptions.IgnoreCase).Count;
-                       
+
                     }
 
                     sb.AppendLine(page.Text);
@@ -710,10 +712,112 @@ namespace DIS.Web.Controllers
             data.count = totalWordCount;
             return data;
         }
+        //private Data ExtractTextFromPdf(string fullPath, string searchWord)
+        //{
+        //    Data data = new Data();
+        //    int totalWordCount = 0;
+        //    var sb = new StringBuilder();
+
+        //    using (PdfDocument document = PdfDocument.Open(fullPath))
+        //    {
+        //        foreach (UglyToad.PdfPig.Content.Page page in document.GetPages())
+        //        {
+        //            // Normalize and fix Burmese diacritic order
+        //            string fixedText = FixBurmeseClusters(page.Text);
+        //            string normalizedText = fixedText.Normalize(NormalizationForm.FormC);
+
+
+        //            // Search match using normalized text
+        //            if (!string.IsNullOrEmpty(searchWord))
+        //            {
+        //                //string normalizedSearch = NormalizeBurmeseText(searchWord.Normalize(NormalizationForm.FormC));
+
+        //                int count = Regex.Matches(normalizedText, Regex.Escape(searchWord), RegexOptions.IgnoreCase).Count;
+        //                            totalWordCount += count;
+        //            }
+
+        //            sb.AppendLine(normalizedText);
+        //        }
+        //    }
+
+        //    data.filedata = sb.ToString();
+        //    data.count = totalWordCount;
+        //    return data;
+        //}
 
 
 
+        //    private string FixBurmeseClusters(string input)
+        //    {
+        //        const char repha = '\u103C';   // ြ
+        //        const char eVowel = '\u1031';  // ေ
 
+        //        HashSet<char> consonants = new HashSet<char>
+        //{
+        //    'က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည',
+        //    'ဋ', 'ဌ', 'ဍ', 'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န',
+        //    'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', 'ဝ', 'သ',
+        //    'ဟ', 'ဠ', 'အ'
+        //};
+
+        //        // Step 1: Remove invalid characters like null
+        //        input = input.Replace("\0", "");
+
+        //        // Step 2: Dynamically fix broken clusters
+        //        var sb = new StringBuilder();
+        //        for (int i = 0; i < input.Length; i++)
+        //        {
+        //            char current = input[i];
+
+        //            // Fix: Remove incorrect 'ေ' + consonant pattern (rebuild as consonant + 'ေ')
+        //            if (current == eVowel && i + 1 < input.Length && consonants.Contains(input[i + 1]))
+        //            {
+        //                sb.Append(input[i + 1]);
+        //                sb.Append(eVowel); // Adding the 'ေ' back after consonant
+        //                i++; // Skip next character (consonant already processed)
+        //            }
+        //            // Fix: Remove incorrect 'ြ' + consonant pattern (rebuild as consonant + 'ြ')
+        //            else if (current == repha && i + 1 < input.Length && consonants.Contains(input[i + 1]))
+        //            {
+        //                sb.Append(input[i + 1]);
+        //                sb.Append(repha); // Adding 'ြ' back after consonant
+        //                i++; // Skip next character (consonant already processed)
+        //            }
+        //            else
+        //            {
+        //                sb.Append(current); // Append other characters as-is
+        //            }
+        //        }
+
+        //        // Step 3: Dynamically rebuild known broken clusters using regex (advanced pattern matching)
+        //        string fixedInput = sb.ToString();
+
+        //        // Refined Regex Patterns
+        //        string[] clusterPatterns = new string[]
+        //        {
+        //    // Fix "ေ" + consonant + "ာင်း" → "ကြောင်း"
+        //    @"ေ([က-အ])([ာ|င်း])", // fixing clusters like "ေကာင်း" → "ကြောင်း"
+        //    // Fix "ေ" + consonant + "အ" → "အေး" (for "ေအး" cluster)
+        //    @"ေ([က-အ])([အ])", // fixing "ေအး" → "အေး"
+        //                      // Avoid "ကောင်း" (do not replace it)
+        //                      // Add other patterns if required
+        //        };
+
+        //        // Apply each pattern
+        //        foreach (var pattern in clusterPatterns)
+        //        {
+        //            fixedInput = Regex.Replace(fixedInput, pattern, m =>
+        //            {
+        //                // In this case, we match a consonant, then apply specific rules
+        //                // Example: replace "ေကာင်း" with "ကြောင်း"
+        //                return m.Groups[1].Value + m.Groups[2].Value;
+        //            });
+        //        }
+
+        //        return fixedInput.Normalize(NormalizationForm.FormC);
+        //    }
+
+
+        }
     }
-}
 
