@@ -209,14 +209,15 @@ namespace DIS.Web.Controllers.Common
                 new Claim(ClaimTypes.Name, id),
                     // Add additional claims as needed
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),// Token expiration time
+                Expires = DateTime.UtcNow.AddMinutes(60),// Token expiration time
 
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
+                SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }
-    }
+}
 

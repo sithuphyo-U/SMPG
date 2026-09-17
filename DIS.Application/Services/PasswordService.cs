@@ -22,7 +22,7 @@ namespace DIS.Application.Service
                 Array.Copy(hash, 0, hashBytes, 16, 32);
                 return Convert.ToBase64String(hashBytes);
             }
-        }
+         }
         public static bool VerifyPassword(string password, string storedHash)
         {
             var hashBytes = Convert.FromBase64String(storedHash);

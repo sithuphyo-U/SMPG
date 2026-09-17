@@ -12,6 +12,7 @@ namespace DIS.Web.ViewModels
         public DateTime date { get; set; }
         public string? time { get; set; }
         
+        public string? searchfilename { get; set; }
        public string? word { get; set; }
         public int? country_type_id { get; set; }
         public string? country_type_name { get; set; }

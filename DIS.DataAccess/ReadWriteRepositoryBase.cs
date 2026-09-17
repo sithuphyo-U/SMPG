@@ -208,7 +208,7 @@ namespace DIS.DataAccess
                 SaveChanges();
                 result.success = true;
                 result.messages.Add(Constants.SaveSucessMessage);
-                result.id = result.entity.Count > 0
+                result.id = result.entity.Count > 0 
                     ? (int)result.entity[0].GetType().GetProperty("id").GetValue(result.entity[0])
                     : 0;
             }

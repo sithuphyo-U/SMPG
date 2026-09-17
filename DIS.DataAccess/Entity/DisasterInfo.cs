@@ -41,4 +41,5 @@ namespace DIS.DataAccess.Entity
         public virtual DisasterSubCategory SubCategory { get; set; }
       
     }
+
 }

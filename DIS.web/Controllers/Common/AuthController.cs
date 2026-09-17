@@ -42,7 +42,7 @@ namespace DIS.Web.Controllers.Common
                 User? user = _userRepo.FindByUserName(vm.username);
                 if (user != null)
                 {
-                    if (!user.status)
+                    if (!user.status) 
                     {
                         loginUser.success = false;
                         loginUser.messages.Add(Constants.InactiveUser);

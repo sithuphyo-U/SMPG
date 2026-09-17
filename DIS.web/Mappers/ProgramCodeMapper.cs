@@ -78,7 +78,7 @@ namespace DIS.Web.Mappers
                 {
                     int count = 0;
                     foreach (var role in roleList)
-                    {
+                    {  
                         count++;
                         PermissionViewModel permissionView = new PermissionViewModel();
                         permissionView.id = count;
@@ -106,8 +106,6 @@ namespace DIS.Web.Mappers
                 var vm = new PermissionViewModel();
                 if (item != null)
                 {
-
-
                     if (!string.IsNullOrEmpty(item.permission))
                     {
                         List<PermissionViewModel>? pVm = JsonConvert.DeserializeObject<List<PermissionViewModel>>(item.permission);

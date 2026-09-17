@@ -10,6 +10,8 @@ using DIS.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Reflection;
@@ -144,17 +146,19 @@ app.Use(async (context, next) =>
     var logger = app.Services.GetRequiredService<ILogger<Program>>();
     logger.LogInformation($"Memory Usage Before: {memoryBefore / 1024 / 1024} MB, After: {memoryAfter / 1024 / 1024} MB");
 });
-////to create model to database table
+
+//to create model to database table
 //using (var serviceScope = app.Services.CreateScope())
 //{
 //    var context = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
-//    //context.Database.Migrate();
+//    context.Database.Migrate();
 //    context.Database.EnsureCreated();
 //    RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
 //    context.Database.ExecuteSqlRaw("EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'");
 //    databaseCreator.CreateTables();
 //    context.Database.ExecuteSqlRaw("EXEC sp_MSforeachtable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL'");
 //}
+
 // Use CORS
 app.UseCors("AllowAll");
 app.UseSession();
